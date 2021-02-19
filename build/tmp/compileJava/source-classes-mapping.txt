@@ -1,6 +1,0 @@
-com/example/appengine/java8/HelloAppEngine.java
- com.example.appengine.java8.HelloAppEngine
-com/example/appengine/java8/AddBook.java
- com.example.appengine.java8.AddBook
-com/example/appengine/java8/GetUser.java
- com.example.appengine.java8.GetUser
