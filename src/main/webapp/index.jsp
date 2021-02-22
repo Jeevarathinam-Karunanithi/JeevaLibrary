@@ -35,21 +35,20 @@
 </head>
 <body onload="getuser()">
            
-           <h3>JEEVA LIBRARY</h2>
+           <h2>JEEVA LIBRARY</h2>
             
              <div id = "test">
-              <form method="POST">
-              <label for = "n1">Book Name:</label><br><br>
+              
+              <label for = "n1">Book Name:</label><br>
               <input type = "text" id = "n1" name = "v1"/><br><br>
-              <label for = "n1">Author Name:</label><br><br>
+              <label for = "n1">Author Name:</label><br>
               <input type = "text" id = "n2" name = "v2"/><br><br>
-              <label for = "n1">Publisher Name:</label><br><br>
+              <label for = "n1">Publisher Name:</label><br>
               <input type = "text" id = "n3" name = "v3"/><br><br>
-              <label for = "n1">No of Pages:</label><br><br>
+              <label for = "n1">No of Pages:</label><br>
               <input type = "text" id = "n4" name = "v4"/><br><br>
-              <input type="submit" value="Submit" onclick="loadDoc()"/><br><br><br>
-             <!-- <button onclick= "loadDoc()">SUBMIT</button><br><br> !-->
-              </form>
+              <button onclick= "loadDoc()">SUBMIT</button><br><br> 
+            
               </div>
  
               <table>
