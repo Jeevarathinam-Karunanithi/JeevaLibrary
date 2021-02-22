@@ -38,7 +38,7 @@
            <h3>JEEVA LIBRARY</h2>
             
              <div id = "test">
-              <form>
+              <form method="POST">
               <label for = "n1">Book Name:</label><br><br>
               <input type = "text" id = "n1" name = "v1"/><br><br>
               <label for = "n1">Author Name:</label><br><br>
