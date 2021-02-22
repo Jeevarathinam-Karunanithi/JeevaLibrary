@@ -33,34 +33,37 @@
   </style>
        
 </head>
-<body>
+<body onload="getuser()">
            
-           <h2>JeevaLibrary</h2>
+           <h3>JEEVA LIBRARY</h2>
             
              <div id = "test">
-              
-              <label for = "n1">Book Name</label>
+              <form>
+              <label for = "n1">Book Name:</label><br><br>
               <input type = "text" id = "n1" name = "v1"/><br><br>
-              <label for = "n1">Author Name</label>
+              <label for = "n1">Author Name:</label><br><br>
               <input type = "text" id = "n2" name = "v2"/><br><br>
-              <label for = "n1">Publisher Name</label>
+              <label for = "n1">Publisher Name:</label><br><br>
               <input type = "text" id = "n3" name = "v3"/><br><br>
-              <label for = "n1">No of Pages</label>
+              <label for = "n1">No of Pages:</label><br><br>
               <input type = "text" id = "n4" name = "v4"/><br><br>
-              <button onclick= "loadDoc()">SUBMIT</button><br><br>
+              <input type="submit" value="Submit" onclick="loadDoc()"/><br><br><br>
+             <!-- <button onclick= "loadDoc()">SUBMIT</button><br><br> !-->
+              </form>
               </div>
-
+ 
               <table>
+                <h1>Recently Added Books</h1>
                 <tr>
                   <th> BOOK NAME </th>
                    <th> AUTHOR NAME </th>
                      <th> PUBLISHER NAME</th>
                        <th> NO OF PAGES </th>
-                       <th> TIME </th>
+                       <th> DATE </th>
                 </tr>
                          
-               <tbody id = "tableones">
-                 <button onclick="getuser()">GET USER</button><br><br>
+               <tbody  id = "tableones">
+                
                  </tbody>
 
               </table><br><br><br>

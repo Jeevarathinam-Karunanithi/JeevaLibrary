@@ -1,12 +1,34 @@
 
-var obj = {
-  "Book Name": "The New Day 1",
-   "Author Name":"Alex ",
-   "Publisher Name":"Brain",
-   "No of Pages":200,
-   "Time" :Date.now()
-};
+var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+today = dd+'-'+mm+'-'+yyyy;
+
 function loadDoc(){
+       var bookName = document.getElementById("n1").value;
+       var authorName = document.getElementById("n2").value;
+       var publisherName = document.getElementById("n3").value;
+       var noOfPages = document.getElementById("n4").value;
+
+       var obj = {
+        "Book Name": bookName,
+         "Author Name": authorName,
+         "Publisher Name": publisherName,
+         "No of Pages": noOfPages,
+         "Time" : Date.now(),
+         "Date" : today
+      };
   
         const jstr = JSON.stringify(obj)
         const xhttp = new XMLHttpRequest();
@@ -25,7 +47,8 @@ function loadDoc(){
        xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
          var ob = JSON.parse(xhttp.responseText);
-       //  console.log(JSON.stringify(ob))
+
+       console.log(JSON.stringify(ob))
         
           var tableone = document.getElementById("tableones")
          
@@ -39,7 +62,7 @@ function loadDoc(){
                      <td>${ob[i]["properties"]["Publisher Name"]}</td>
                      <td>${ob[i]["properties"]["Author Name"]}</td>
                      <td>${ob[i]["properties"]["No Of Pages"]}</td>
-                     <td>${ob[i]["properties"]["Time"]}</td>
+                     <td>${ob[i]["properties"]["Date"]}</td>
 
                      </tr>`
                      tableone.innerHTML += row;

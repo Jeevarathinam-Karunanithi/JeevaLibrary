@@ -41,6 +41,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
       book.setProperty("Publisher Name",map.get("Publisher Name"));
       book.setProperty("No Of Pages",map.get("No of Pages"));
       book.setProperty("Time",map.get("Time"));
+      book.setProperty("Date",map.get("Date"));
       
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
 
