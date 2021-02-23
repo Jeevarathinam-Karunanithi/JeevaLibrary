@@ -1,7 +1,5 @@
 package com.example.appengine.java8;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,32 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.apphosting.api.DatastorePb.DatastoreService_3;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.AdminDatastoreService.EntityBuilder;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.FetchOptions.Builder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.google.appengine.api.datastore.Query.SortDirection;
-import java.sql.Timestamp;
 import java.util.*;  
-import java.io.IOException;
-
 
 @WebServlet(name = "GetUser", value = "/getuser")
 public class GetUser extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException,ServletException
     {
-        List<Entity> lst=new ArrayList<Entity>();
-
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
          
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
-
         PreparedQuery pq = datastore.prepare(q);
+        List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
         ObjectMapper objMap = new ObjectMapper();
         String str = objMap.writeValueAsString(lst);
