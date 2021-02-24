@@ -67,6 +67,8 @@
 
               </table><br><br><br>
 
+              <button id = "mapobj" onclick="getmap()">GETMAP</button><br><br>
+
 <!-- SAMPLE TABLE                   
               <table>
                <tr>

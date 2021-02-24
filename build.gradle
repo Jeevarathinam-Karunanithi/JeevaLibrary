@@ -22,9 +22,7 @@ buildscript {    // Configuration for building
   }
 }
 plugins {
-	id 'org.springframework.boot' version '2.4.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+
 }
 
 repositories {   // repositories for Jar's you access in your code
@@ -51,8 +49,7 @@ dependencies {
   compile 'jstl:jstl:1.2'
   compile 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
 
-  implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  api group: 'org.springframework', name: 'spring-webmvc', version: '5.0.7.RELEASE'
 
 // Add your dependencies here.
 //  compile 'com.google.cloud:google-cloud:+'   // Latest Cloud API's http://googlecloudplatform.github.io/google-cloud-java

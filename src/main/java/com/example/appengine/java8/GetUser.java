@@ -16,19 +16,28 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.google.appengine.api.datastore.Query.SortDirection;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.*;  
 
-@WebServlet(name = "GetUser", value = "/getuser")
+//@WebServlet(name = "GetUser", value = "/getuser")
+@Controller
+@ResponseBody
 public class GetUser extends HttpServlet {
     @Override
+    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException,ServletException
     {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-         
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
+
         ObjectMapper objMap = new ObjectMapper();
         String str = objMap.writeValueAsString(lst);
        
@@ -37,7 +46,19 @@ public class GetUser extends HttpServlet {
             response.getWriter().write(str);
     
 
-        
+    }
+    @RequestMapping(value = "/returndata", method = RequestMethod.GET)
+    public @ResponseBody Object returnData( HttpServletRequest request, HttpServletResponse response){
+        Map map=new HashMap();  
+        map.put(1,"jeeva");  
+        map.put(5,"Rahul");  
+        map.put(2,"Jai");  
+        map.put(6,"kumar");  
+         System.out.println("Map Object returned");
+        return map;
+
+    }
+
         
        
 
@@ -90,7 +111,7 @@ public class GetUser extends HttpServlet {
 
         */
 
-} 
+
 }
     
 
