@@ -73,8 +73,20 @@ function loadDoc(){
 
       xhttp.open('GET','/getuser',true);
       xhttp.send();
+}
 
-  
+
+function getmap(){
+
+   const xhMap = new XMLHttpRequest();
+    xhMap.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       var obmap =  JSON.parse(xhMap.responseText);
+       console.log(obmap);
+    }
+  }
+  xhMap.open('GET','/returndata',true);
+  xhMap.send();
 }
 
 //Sample 
