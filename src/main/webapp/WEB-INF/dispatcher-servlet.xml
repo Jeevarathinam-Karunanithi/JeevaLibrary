@@ -16,6 +16,11 @@
 		class="com.example.appengine.java8.SampleController"></bean>
         <bean id="HelloAppEngine"
 		class="com.example.appengine.java8.HelloAppEngine"></bean>
+		  <bean id="AddBook"
+		class="com.example.appengine.java8.AddBook"></bean>
+		 <bean id="GetBook"
+		class="com.example.appengine.java8.GetBook"></bean>
+    
         
 
 	<mvc:annotation-driven />
