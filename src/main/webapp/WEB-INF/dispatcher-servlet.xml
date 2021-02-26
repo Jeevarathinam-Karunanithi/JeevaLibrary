@@ -18,8 +18,9 @@
 		class="com.example.appengine.java8.HelloAppEngine"></bean>
 		  <bean id="AddBook"
 		class="com.example.appengine.java8.AddBook"></bean>
-		 <bean id="GetUser"
-		class="com.example.appengine.java8.GetUser"></bean>
+		 <bean id="GetBook"
+		class="com.example.appengine.java8.GetBook"></bean>
+    
         
 
 	<mvc:annotation-driven />

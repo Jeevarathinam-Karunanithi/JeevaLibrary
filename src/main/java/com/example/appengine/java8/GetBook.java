@@ -26,37 +26,32 @@ import java.util.*;
 
 //@WebServlet(name = "GetUser", value = "/getuser")
 @Controller
-@ResponseBody
-public class GetUser extends HttpServlet {
-    @Override
-    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
-    public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException,ServletException
+public class GetBook extends HttpServlet {
+
+    @RequestMapping(value = "/getbook")
+    public @ResponseBody Object getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException,ServletException
     {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
+      //   response.getWriter().println(lst);
+     //   ObjectMapper obMapper = new ObjectMapper();
+     //   Map<String, Object> map = obMapper.convertValue(lst, Map.class);
 
-        ObjectMapper objMap = new ObjectMapper();
-        String str = objMap.writeValueAsString(lst);
-       
-            response.setContentType("application/json");  
-            response.setCharacterEncoding("UTF-8"); 
-            response.getWriter().write(str);
-    
-
-    }
-    @RequestMapping(value = "/returndata", method = RequestMethod.GET)
-    public @ResponseBody Object returnData( HttpServletRequest request, HttpServletResponse response){
-        Map map=new HashMap();  
-        map.put(1,"jeeva");  
-        map.put(5,"Rahul");  
-        map.put(2,"Jai");  
-        map.put(6,"kumar");  
-         System.out.println("Map Object returned");
-        return map;
-
+         List<Map> lst2 = new ArrayList<Map>();
+       for (Entity e : lst) { 
+               Map<String, Object> map = new HashMap<>(); 
+                map.put("Book Name",e.getProperty("Book Name")); 
+                map.put("Author Name",e.getProperty("Author Name"));
+                map.put("Publisher Name",e.getProperty("Publisher Name"));
+                map.put("No Of Pages",e.getProperty("No Of Pages"));
+                map.put("Date", e.getProperty("Date"));
+              lst2.add(map);
+            } 
+   
+     return lst2;
     }
 
         

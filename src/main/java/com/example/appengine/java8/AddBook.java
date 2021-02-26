@@ -24,20 +24,11 @@ import java.util.*;
 //@WebServlet(name = "AddBook", value = "/addbook")
 
 @Controller
-@ResponseBody
 public class AddBook extends HttpServlet {
-
-@Override
 @RequestMapping(value = "/addbook" ,method = RequestMethod.POST)
-public  void doPost(HttpServletRequest request, HttpServletResponse response)
+public @ResponseBody Object addBooktoStore(@RequestBody String js)
     throws IOException {
-
-     StringBuffer jb = new StringBuffer();
-      String json = "";
-      BufferedReader reader = request.getReader();   
-      while ((json = reader.readLine()) != null)
-         jb.append(json);
-      String js = jb.toString();
+      
       ObjectMapper mapper = new ObjectMapper();
       Map<String, String> map = mapper.readValue(js, Map.class); 
 
@@ -53,12 +44,10 @@ public  void doPost(HttpServletRequest request, HttpServletResponse response)
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
 
       d.put(book);
-    
-     response.setContentType("text/plain");
-     response.getWriter().println("The Book has been added");
- 
+      
+     return map; 
     }
-
+   
   }
 
 

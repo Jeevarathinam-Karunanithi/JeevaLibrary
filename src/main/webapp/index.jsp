@@ -33,9 +33,9 @@
   </style>
        
 </head>
-<body onload="getuser()">
+<body onload="getbook()">
            
-           <h2>JEEVA LIBRARY</h2>
+           <h4>JEEVA LIBRARY</h4>
             
              <div id = "test">
               
@@ -67,7 +67,7 @@
 
               </table><br><br><br>
 
-              <button id = "mapobj" onclick="getmap()">GETMAP</button><br><br>
+          
 
 <!-- SAMPLE TABLE                   
               <table>
