@@ -16,5 +16,5 @@ public class SampleController {
       HttpServletRequest request, HttpServletResponse response) {
           System.out.println("hello");
     return "hello";
-  }
+      }
 }

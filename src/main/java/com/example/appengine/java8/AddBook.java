@@ -13,29 +13,27 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.apphosting.api.DatastorePb.DatastoreService_3;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
+//@WebServlet(name = "AddBook", value = "/addbook")
 
-@WebServlet(name = "AddBook", value = "/addbook")
+@Controller
 public class AddBook extends HttpServlet {
-
-@Override
-public void doPost(HttpServletRequest request, HttpServletResponse response)
+@RequestMapping(value = "/addbook" ,method = RequestMethod.POST)
+public @ResponseBody Object addBooktoStore(@RequestBody String js)
     throws IOException {
-
-      StringBuffer jb = new StringBuffer();
-      //String json = "{\"Book Name\":\"Alche\", \"Author Name\":\"jack\",\"Publisher Name\":\"jack rayn\",\"No of Pages\":\"jack\"}";
-      String json = "";
-      BufferedReader reader = request.getReader();   
-      while ((json = reader.readLine()) != null)
-         jb.append(json);
-      //JsonObject jObject = JsonObject.fromObject(jb.toString());*/
-      String js = jb.toString();
+      
       ObjectMapper mapper = new ObjectMapper();
-
       Map<String, String> map = mapper.readValue(js, Map.class); 
+
       Entity book = new Entity("Books");
+
       book.setProperty("Book Name",map.get("Book Name"));
       book.setProperty("Author Name",map.get("Author Name"));
       book.setProperty("Publisher Name",map.get("Publisher Name"));
@@ -46,12 +44,10 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
 
       d.put(book);
-
-     response.setContentType("text/plain");
-     response.getWriter().println("The Book has been added");
-    
+      
+     return map; 
     }
-
+   
   }
 
 
