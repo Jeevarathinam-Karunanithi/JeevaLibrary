@@ -40,7 +40,7 @@ function loadDoc(){
 
 
 
-  function getuser() {
+  function getbook() {
 
      
       const xhttp = new XMLHttpRequest();
@@ -48,7 +48,7 @@ function loadDoc(){
         if (this.readyState == 4 && this.status == 200) {
          var ob = JSON.parse(xhttp.responseText);
 
-       console.log(JSON.stringify(ob))
+         //console.log(ob)
         
           var tableone = document.getElementById("tableones")
          
@@ -58,11 +58,11 @@ function loadDoc(){
         for(var i= 0; i < ob.length; i++)
         {
           var row = `<tr>       
-                     <td>${ob[i]["properties"]["Book Name"]}</td>  
-                     <td>${ob[i]["properties"]["Publisher Name"]}</td>
-                     <td>${ob[i]["properties"]["Author Name"]}</td>
-                     <td>${ob[i]["properties"]["No Of Pages"]}</td>
-                     <td>${ob[i]["properties"]["Date"]}</td>
+                     <td>${ob[i]["Book Name"]}</td>  
+                     <td>${ob[i]["Publisher Name"]}</td>
+                     <td>${ob[i]["Author Name"]}</td>
+                     <td>${ob[i]["No Of Pages"]}</td>
+                     <td>${ob[i]["Date"]}</td>
 
                      </tr>`
                      tableone.innerHTML += row;
@@ -71,7 +71,7 @@ function loadDoc(){
     }
 };
 
-      xhttp.open('GET','/getuser',true);
+      xhttp.open('GET','/getbook',true);
       xhttp.send();
 }
 
@@ -82,7 +82,7 @@ function getmap(){
     xhMap.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
        var obmap =  JSON.parse(xhMap.responseText);
-       console.log(obmap);
+       //console.log(obmap);
     }
   }
   xhMap.open('GET','/returndata',true);
