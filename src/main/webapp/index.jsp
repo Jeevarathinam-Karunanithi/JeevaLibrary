@@ -70,8 +70,12 @@
 
           
 
+<<<<<<< HEAD
 <!-- SAMPLE TABLE  
   sample commit                 
+=======
+<!-- SAMPLE TABLE                   
+>>>>>>> c882a3fb6e7a53ba14b31704bfbb6f2854a993dc
               <table>
                <tr>
                  <th> BOOK NAME </th>

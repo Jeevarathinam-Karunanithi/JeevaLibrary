@@ -49,20 +49,3 @@ public @ResponseBody Object addBooktoStore(@RequestBody String js)
     }
    
   }
-
-
-
-
-
-  /* JsonObject jsonobj = JsonObject.fromObject(jb.toString());
-    HashMap<String,String> map=new HashMap<String,String>();
-
-
-
-    "{
-        Book Name\"\": \"Alchemist\",
-         \"Author Name\":\"xxx\",
-         \"Publisher Name\":\"abc\",
-         \"No of Pages\":\"222\"}"; 
-
-    map.put("","");*/
