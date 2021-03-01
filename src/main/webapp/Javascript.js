@@ -62,7 +62,9 @@ function loadDoc(){
                      <td>${ob[i]["Author Name"]}</td>
                      <td>${ob[i]["No Of Pages"]}</td>
                      <td>${ob[i]["Date"]}</td>
-                     <td> "<button type='button' onclick='productDelete(this);>" delete </button> </td> 
+                     <td><button type=button onclick=productDelete(this);>DELETE
+                     </button>
+                     </td>
                      </tr>`
                      tableone.innerHTML += row;
         } 
@@ -72,20 +74,6 @@ function loadDoc(){
 
       xhttp.open('GET','/getbook',true);
       xhttp.send();
-}
-
-
-function getmap(){
-
-   const xhMap = new XMLHttpRequest();
-    xhMap.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-       var obmap =  JSON.parse(xhMap.responseText);
-       //console.log(obmap);
-    }
-  }
-  xhMap.open('GET','/returndata',true);
-  xhMap.send();
 }
 
 function productDelete(ctl) {
