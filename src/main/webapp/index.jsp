@@ -59,6 +59,7 @@
                      <th> PUBLISHER NAME</th>
                        <th> NO OF PAGES </th>
                        <th> DATE </th>
+                       <th> DELETE </th>
                        
                 </tr>
                          

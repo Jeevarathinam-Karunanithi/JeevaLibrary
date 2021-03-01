@@ -62,7 +62,7 @@ function loadDoc(){
                      <td>${ob[i]["Author Name"]}</td>
                      <td>${ob[i]["No Of Pages"]}</td>
                      <td>${ob[i]["Date"]}</td>
-
+                     <td> "<button type='button' onclick='productDelete(this);>" delete </button> </td> 
                      </tr>`
                      tableone.innerHTML += row;
         } 
@@ -86,6 +86,10 @@ function getmap(){
   }
   xhMap.open('GET','/returndata',true);
   xhMap.send();
+}
+
+function productDelete(ctl) {
+  $(ctl).parents("tr").remove();
 }
 
 //Sample 
