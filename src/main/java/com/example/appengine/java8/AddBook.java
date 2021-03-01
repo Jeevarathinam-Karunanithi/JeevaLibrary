@@ -12,7 +12,6 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.apphosting.api.DatastorePb.DatastoreService_3;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
