@@ -68,26 +68,5 @@
                  </tbody>
 
               </table><br><br><br>
-
-          
-<!-- SAMPLE TABLE  
-  
-              <table>
-               <tr>
-                 <th> BOOK NAME </th>
-                  <th> AUTHOR NAME </th>
-                    <th> PUBLISHER NAME</th>
-                      <th> NO OF PAGES </th>
-                       
-                    
-                </tr>
-                        
-                 <tbody id = "table">
-                      <button onclick="sample()">SAMPLE TABLE</button><br><br>
-                </tbody>
-                    
-              </table> !-->
-                 
-
                 </body>
 </html>

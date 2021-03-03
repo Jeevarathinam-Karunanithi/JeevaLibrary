@@ -42,83 +42,29 @@ function loadDoc(){
   function getbook() {
 
      
-      const xhttp = new XMLHttpRequest();
+       const xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+      if (this.readyState == 4 && this.status == 200) {
          var ob = JSON.parse(xhttp.responseText);
-
-         //console.log(ob)
-        
-          var tableone = document.getElementById("tableones")
-         
-
-        // console.log(ob[0]["properties"]["Book Name"]);
-        //Not able to access the data in object
-        for(var i= 0; i < ob.length; i++)
-        {
-          var row = `<tr>       
+         for(var i= 0; i < ob.length; i++)
+           {
+              var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  
                      <td>${ob[i]["Publisher Name"]}</td>
                      <td>${ob[i]["Author Name"]}</td>
                      <td>${ob[i]["No Of Pages"]}</td>
                      <td>${ob[i]["Date"]}</td>
-                     <td><button type=button onclick=productDelete(this);>DELETE
-                     </button>
-                     </td>
+                     <td><button type=button onclick=productDelete()>DELETE</button></td>
                      </tr>`
-                     tableone.innerHTML += row;
-        } 
-       
+                     document.getElementById("tableones").innerHTML += row;
+            } 
+      }
     }
-};
-
       xhttp.open('GET','/getbook',true);
       xhttp.send();
 }
 
+
 function productDelete(ctl) {
-  $(ctl).parents("tr").remove();
+  console.log("ProductDelete executing");
 }
-
-//Sample 
-
- /* function sample(){
-    var obj = [{
-        "Book": "The New Day",
-         "Author":"Alex",
-         "Publisher":"Brain",
-         "Pages":"200"
-    },
-    {
-        "Book": "The New Day1",
-         "Author":"Alex",
-         "Publisher":"Brain",
-         "Pages":"200"
-    },
-    {
-        "Book": "The New Day3",
-         "Author":"Alex",
-         "Publisher":"Brain",
-         "Pages":"200"
-    },
-]
-     
-     
-         
-         var table = document.getElementById("table")
-         for(var i = 0; i < obj.length ; i++){
-         var row = `<tr>
-                    <td>${obj[i].Book}</td>
-                    <td>${obj[i].Author}</td>
-                    <td>${obj[i].Publisher}</td>
-                    <td>${obj[i].Pages}</td>
-                    </tr>`
-                    table.innerHTML += row
-         }
-       /*
-  myObj = JSON.parse(this.responseText);
-          txt += "<table border='1'>"
-          for (x in myObj) {
-            txt += "<tr><td>" + myObj[x]["Book Name"] + "</td></tr>";
-          }
-          txt += "</table>" */

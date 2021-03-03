@@ -29,8 +29,8 @@ public class GetBook extends HttpServlet {
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
   
-         List<Map> lst2 = new ArrayList<Map>();
-       for (Entity e : lst) { 
+        List<Map> lst2 = new ArrayList<Map>();
+        for (Entity e : lst) { 
                Map<String, Object> map = new HashMap<>(); 
                 map.put("Book Name",e.getProperty("Book Name")); 
                 map.put("Author Name",e.getProperty("Author Name"));
