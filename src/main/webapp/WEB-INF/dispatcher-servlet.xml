@@ -20,6 +20,8 @@
 		class="com.example.appengine.java8.AddBook"></bean>
 		 <bean id="GetBook"
 		class="com.example.appengine.java8.GetBook"></bean>
+		<bean id="DeleteBook"
+		class="com.example.appengine.java8.DeleteBook"></bean>
     
         
 

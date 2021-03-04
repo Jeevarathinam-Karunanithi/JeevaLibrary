@@ -51,7 +51,7 @@
             
               </div>
  
-              <table>
+              <table id = "tableID">
                 <h1>Recently Added Books</h1>
                 <tr>
                   <th> BOOK NAME </th>
@@ -59,6 +59,7 @@
                      <th> PUBLISHER NAME</th>
                        <th> NO OF PAGES </th>
                        <th> DATE </th>
+                       <th> KEY </th>
                        <th> DELETE </th>
                        
                 </tr>

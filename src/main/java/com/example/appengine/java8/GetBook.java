@@ -14,6 +14,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 import java.util.*;  
 
 //@WebServlet(name = "GetUser", value = "/getuser")
@@ -21,14 +23,13 @@ import java.util.*;
 public class GetBook extends HttpServlet {
 
     @RequestMapping(value = "/getbook")
-    public @ResponseBody Object getBookFromStore(HttpServletRequest request, HttpServletResponse response)
+    public @ResponseBody Object getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException
    {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
-  
         List<Map> lst2 = new ArrayList<Map>();
         for (Entity e : lst) { 
                Map<String, Object> map = new HashMap<>(); 
@@ -37,9 +38,10 @@ public class GetBook extends HttpServlet {
                 map.put("Publisher Name",e.getProperty("Publisher Name"));
                 map.put("No Of Pages",e.getProperty("No Of Pages"));
                 map.put("Date", e.getProperty("Date"));
+                map.put("Key",e.getKey());
               lst2.add(map);
             } 
    
-     return lst2;
+    return lst2;
     }
 }
