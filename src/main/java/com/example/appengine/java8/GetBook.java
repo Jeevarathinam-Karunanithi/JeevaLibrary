@@ -30,6 +30,10 @@ public class GetBook extends HttpServlet {
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
+       
+       /* List<Entity> results =
+        datastore.prepare(mediaQuery).asList(FetchOptions.Builder.withDefaults());*/
+
         List<Map> lst2 = new ArrayList<Map>();
         for (Entity e : lst) { 
                Map<String, Object> map = new HashMap<>(); 

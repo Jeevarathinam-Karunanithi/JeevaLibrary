@@ -48,12 +48,12 @@ function loadDoc(){
          var ob = JSON.parse(xhttp.responseText);
          for(var i= 0; i < ob.length; i++)
            {
-             globalObj[i] = ob[i]["Key"];
+             globalObj[i] = ob[i]["Key"]["id"];
             // console.log("obj",globalObj);
               var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  
-                     <td>${ob[i]["Publisher Name"]}</td>
                      <td>${ob[i]["Author Name"]}</td>
+                     <td>${ob[i]["Publisher Name"]}</td>
                      <td>${ob[i]["No Of Pages"]}</td>
                      <td>${ob[i]["Date"]}</td>
                      <td><button type=button value=Delete onclick=deleteRow(this)>DELETE</button></td>
@@ -71,15 +71,52 @@ function loadDoc(){
 
 function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
-    var temp = globalObj[i-1];
-     var js = JSON.stringify(temp);
-   //  console.log(js);
-     document.getElementById("tableID").deleteRow(i);
+    var localObj = {
+
+    };
+       localObj["id"] = globalObj[i-1];
+     // console.log(localObj);
+     var js = JSON.stringify(localObj);
      
       const xh = new XMLHttpRequest();
+      xh.onreadystatechange = function() {
+        if (this.readyState == 4 || this.status == 200) {
+          document.getElementById("tableID").deleteRow(i);
+        }
+      }
       xh.open('POST','/deletebook',true);
       xh.setRequestHeader("Content-Type", "application/json");
       xh.send(js); 
-    
+}
+
+function searchBook(){
+  var title = document.getElementById("d1").value;
+  var name = document.getElementById("input").value;
+  var lo_obj = new Object();
+  lo_obj["columnHeading"] = title;
+  lo_obj["value"] = name;
+  
+  var temp = JSON.stringify(lo_obj);
+
+  const xht = new XMLHttpRequest();
+  xht.onreadystatechange = function() {
+  if(xht.readyState == 4 && this.status ==200){
+    var data = JSON.parse(xht.responseText);
+    for(var i= 0; i < data.length; i++)
+    {
+       var row = `<tr>       
+              <td>${data[i]["Book Name"]}</td>  
+              <td>${data[i]["Author Name"]}</td>
+              <td>${data[i]["Publisher Name"]}</td>
+              <td>${data[i]["No Of Pages"]}</td>
+              <td>${data[i]["Date"]}</td>
+              </tr>`
+              document.getElementById("tableBodySearch").innerHTML += row;
+     }
+  }
+}
+  xht.open('POST','/searchbook',true)
+  xht.setRequestHeader("Content-Type" , "application/json");
+  xht.send(temp)
 
 }

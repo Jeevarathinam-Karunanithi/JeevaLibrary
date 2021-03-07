@@ -22,6 +22,8 @@
 		class="com.example.appengine.java8.GetBook"></bean>
 		<bean id="DeleteBook"
 		class="com.example.appengine.java8.DeleteBook"></bean>
+		<bean id="SearchBook"
+		class="com.example.appengine.java8.SearchBook"></bean>
     
         
 

@@ -48,26 +48,49 @@
               <label for = "n1">No of Pages:</label><br>
               <input type = "text" id = "n4" name = "v4"/><br><br>
               <button onclick= "loadDoc()">SUBMIT</button><br><br> 
-            
-              </div>
- 
-              <table id = "tableID">
-                <h1>Recently Added Books</h1>
+             </div>
+         
+             
+              <label for = "d1">Select the Heading:</label>&nbsp;
+              <select name = "heading" id = "d1">
+                 <option></option> 
+                 <option value = "Book Name">BOOK NAME</option> 
+                 <option value = "Author Name">AUTHOR NAME</option> 
+                 <option value = "Publisher Name">PUBLISHER NAME</option> 
+              </select><br><br>
+              <label for = "input">Enter the text to search</label>&nbsp;
+              <input type = "text" id = "input" name = "input1"/> <br>
+              <button onclick= "searchBook()">SEARCH</button><br><br>
+
+              <table id = "tableSearch">
+                <h5>Your Search Results</h5>
                 <tr>
                   <th> BOOK NAME </th>
-                   <th> AUTHOR NAME </th>
-                     <th> PUBLISHER NAME</th>
-                       <th> NO OF PAGES </th>
-                       <th> DATE </th>
-                       <th> KEY </th>
-                       <th> DELETE </th>
-                       
+                  <th> AUTHOR NAME </th>
+                  <th> PUBLISHER NAME</th>
+                  <th> NO OF PAGES </th>
+                  <th> DATE </th>
                 </tr>
-                         
-               <tbody  id = "tableones">
-                
-                 </tbody>
+               <tbody  id = "tableBodySearch">
+               </tbody>
 
               </table><br><br><br>
+ 
+              <table id = "tableID">
+                <h5>Recently Added Books</h5>
+                <tr>
+                  <th> BOOK NAME </th>
+                  <th> AUTHOR NAME </th>
+                  <th> PUBLISHER NAME</th>
+                  <th> NO OF PAGES </th>
+                  <th> DATE </th>
+                  <th> DELETE </th>
+                </tr>
+
+               <tbody  id = "tableones">
+               </tbody>
+
+              </table><br><br><br>
+                     
                 </body>
 </html>
