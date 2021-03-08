@@ -12,18 +12,18 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
-	<bean id="SampleController"
-		class="com.example.appengine.java8.SampleController"></bean>
+	    <bean id="SampleController"
+		    class="com.example.appengine.java8.SampleController"></bean>
         <bean id="HelloAppEngine"
-		class="com.example.appengine.java8.HelloAppEngine"></bean>
-		  <bean id="AddBook"
-		class="com.example.appengine.java8.AddBook"></bean>
-		 <bean id="GetBook"
-		class="com.example.appengine.java8.GetBook"></bean>
+		    class="com.example.appengine.java8.HelloAppEngine"></bean>
+		<bean id="AddBook"
+		    class="com.example.appengine.java8.AddBook"></bean>
+		<bean id="GetBook"
+		    class="com.example.appengine.java8.GetBook"></bean>
 		<bean id="DeleteBook"
-		class="com.example.appengine.java8.DeleteBook"></bean>
+		    class="com.example.appengine.java8.DeleteBook"></bean>
 		<bean id="SearchBook"
-		class="com.example.appengine.java8.SearchBook"></bean>
+		    class="com.example.appengine.java8.SearchBook"></bean>
     
         
 

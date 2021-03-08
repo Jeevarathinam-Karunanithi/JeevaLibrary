@@ -102,6 +102,8 @@ function searchBook(){
   xht.onreadystatechange = function() {
   if(xht.readyState == 4 && this.status ==200){
     var data = JSON.parse(xht.responseText);
+    var table = document.getElementById("tableBodySearch");
+    table.innerHTML="";
     for(var i= 0; i < data.length; i++)
     {
        var row = `<tr>       
