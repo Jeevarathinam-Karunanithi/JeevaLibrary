@@ -35,22 +35,22 @@
 </head>
 <body onload="getbook()">
            
-           <h4>JEEVA LIBRARY</h4>
+           <h3>JEEVA LIBRARY</h3>
             
              <div id = "test">
               
-              <label for = "n1">Book Name:</label><br>
+              <label for = "n1">Book Name:</label>&nbsp;
               <input type = "text" id = "n1" name = "v1"/><br><br>
-              <label for = "n1">Author Name:</label><br>
+              <label for = "n1">Author Name:</label>&nbsp;
               <input type = "text" id = "n2" name = "v2"/><br><br>
-              <label for = "n1">Publisher Name:</label><br>
+              <label for = "n1">Publisher Name:</label>&nbsp;
               <input type = "text" id = "n3" name = "v3"/><br><br>
-              <label for = "n1">No of Pages:</label><br>
+              <label for = "n1">No of Pages:</label>&nbsp;
               <input type = "text" id = "n4" name = "v4"/><br><br>
               <button onclick= "loadDoc()">SUBMIT</button><br><br> 
              </div>
          
-             
+             <h4>Search Books From Library</h4>
               <label for = "d1">Select the Heading:</label>&nbsp;
               <select name = "heading" id = "d1">
                  <option></option> 
@@ -63,7 +63,7 @@
               <button onclick= "searchBook()">SEARCH</button><br><br>
 
               <table id = "tableSearch">
-                <h5>Your Search Results</h5>
+                <h4>Your Search Results</h4>
                 <tr>
                   <th> BOOK NAME </th>
                   <th> AUTHOR NAME </th>
@@ -77,7 +77,7 @@
               </table><br><br><br>
  
               <table id = "tableID">
-                <h5>Recently Added Books</h5>
+                <h4>Recently Added Books</h4>
                 <tr>
                   <th> BOOK NAME </th>
                   <th> AUTHOR NAME </th>
