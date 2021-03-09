@@ -24,7 +24,8 @@
 		    class="com.example.appengine.java8.DeleteBook"></bean>
 		<bean id="SearchBook"
 		    class="com.example.appengine.java8.SearchBook"></bean>
-    
+       <bean id="LoginPage"
+		    class="com.example.appengine.java8.LoginPage"></bean>
         
 
 	<mvc:annotation-driven />

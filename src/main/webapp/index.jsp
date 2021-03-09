@@ -24,73 +24,26 @@
 
 <html>
 <head>
-
-<script type="text/javascript" src = "Javascript.js"> </script>
-<style>
-  table, th, td {
-    border: 1px solid black;
-  }
-  </style>
-       
-</head>
-<body onload="getbook()">
-           
-           <h3>JEEVA LIBRARY</h3>
-            
-             <div id = "test">
-              
-              <label for = "n1">Book Name:</label>&nbsp;
-              <input type = "text" id = "n1" name = "v1"/><br><br>
-              <label for = "n1">Author Name:</label>&nbsp;
-              <input type = "text" id = "n2" name = "v2"/><br><br>
-              <label for = "n1">Publisher Name:</label>&nbsp;
-              <input type = "text" id = "n3" name = "v3"/><br><br>
-              <label for = "n1">No of Pages:</label>&nbsp;
-              <input type = "text" id = "n4" name = "v4"/><br><br>
-              <button onclick= "loadDoc()">SUBMIT</button><br><br> 
-             </div>
-         
-             <h4>Search Books From Library</h4>
-              <label for = "d1">Select the Heading:</label>&nbsp;
-              <select name = "heading" id = "d1">
-                 <option></option> 
-                 <option value = "Book Name">BOOK NAME</option> 
-                 <option value = "Author Name">AUTHOR NAME</option> 
-                 <option value = "Publisher Name">PUBLISHER NAME</option> 
-              </select><br><br>
-              <label for = "input">Enter the text to search</label>&nbsp;
-              <input type = "text" id = "input" name = "input1"/> <br>
-              <button onclick= "searchBook()">SEARCH</button><br><br>
-
-              <table id = "tableSearch">
-                <h4>Your Search Results</h4>
-                <tr>
-                  <th> BOOK NAME </th>
-                  <th> AUTHOR NAME </th>
-                  <th> PUBLISHER NAME</th>
-                  <th> NO OF PAGES </th>
-                  <th> DATE </th>
-                </tr>
-               <tbody  id = "tableBodySearch">
-               </tbody>
-
-              </table><br><br><br>
- 
-              <table id = "tableID">
-                <h4>Recently Added Books</h4>
-                <tr>
-                  <th> BOOK NAME </th>
-                  <th> AUTHOR NAME </th>
-                  <th> PUBLISHER NAME</th>
-                  <th> NO OF PAGES </th>
-                  <th> DATE </th>
-                  <th> DELETE </th>
-                </tr>
-
-               <tbody  id = "tableones">
-               </tbody>
-
-              </table><br><br><br>
-                     
-                </body>
+    <script type="text/javascript" src = "loginjavascript.js"></script>
+<head>
+<body align="center">
+<form action="loginpage" method="post">  
+  <label for ="n1">USERNAME :</label> &nbsp;
+  <input type="text" id = "n1" name="userName"/><br><br>
+  <label for ="n1">PASSWORD :</label> &nbsp;
+  <input type="password" id = "n2" name="userPass"/><br><br>  
+  <input type="submit" value="login"/>  
+  </form> 
+<!--<table align = "centre">
+<tr>
+<td>USERNAME</td>
+<td><input type ="text" id = "userId"name="username"></td>
+</tr>
+<tr>
+<td>PASSWORD</td>
+<td><input type ="password" id = "passId" name="pass"></td>
+</tr>
+<td><button onclick="login()">SUBMIT</button>
+</table> !-->
+<body>
 </html>
