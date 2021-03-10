@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- [START_EXCLUDE] -->
+<!-- [START_EXCLUDE] <a href="logoutpage">Logout</a>|-->
 <%--
   ~ Copyright 2017 Google Inc.
   ~
@@ -21,6 +21,8 @@
 <%@ page import="com.example.appengine.java8.AddBook" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*" %>
 
 <html>
 <head>
@@ -33,8 +35,32 @@
   </style>
        
 </head>
+<% String user = null;
+String pass = null;
+Cookie ck[] =request.getCookies();
+if(ck != null){  
+for(Cookie CK: ck){
+  if(CK.getName().equals("userName"))
+  {
+    user = CK.getName();
+   // out.println("user: "+user);
+  } 
+  if(CK.getValue().equals("userCookie"))
+  {
+    pass = CK.getValue();
+   // out.println("  pass: "+pass);
+  }
+  
+ }
+}
+ if(user==null || pass==null)
+ {
+  // out.println(pass + " " + user);
+   RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
+   rd.forward(request, response); 
+ }
+%>
 <body onload="getbook()">
-           
            <h3>JEEVA LIBRARY</h3>
             
              <div id = "test">
@@ -91,6 +117,12 @@
                </tbody>
 
               </table><br><br><br>
-                     
+              <button onclick="location.href='/logoutpage'" type="button">
+                LOGOUT</button>
+                 
                 </body>
+                <!-- 
+ 
+   
+  -->
 </html>

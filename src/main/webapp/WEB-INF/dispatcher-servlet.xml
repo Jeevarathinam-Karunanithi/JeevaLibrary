@@ -26,6 +26,8 @@
 		    class="com.example.appengine.java8.SearchBook"></bean>
        <bean id="LoginPage"
 		    class="com.example.appengine.java8.LoginPage"></bean>
+		<bean id="LogoutPage"
+		    class="com.example.appengine.java8.LogoutPage"></bean>
         
 
 	<mvc:annotation-driven />

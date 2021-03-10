@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;  
 
 //@WebServlet(name = "GetUser", value = "/getuser")
@@ -25,12 +26,14 @@ public class GetBook extends HttpServlet {
     @RequestMapping(value = "/getbook")
     public @ResponseBody Object getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException
    {
+        //PrintWriter out=response.getWriter();  
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
-       
+      //  System.out.print(lst);
+        
        /* List<Entity> results =
         datastore.prepare(mediaQuery).asList(FetchOptions.Builder.withDefaults());*/
 

@@ -122,3 +122,10 @@ function searchBook(){
   xht.send(temp)
 
 }
+
+/*function logout()
+{
+    const xht = new XMLHttpRequest();
+    xht.open("GET","/logoutpage",true);
+    xht.send();
+}*/

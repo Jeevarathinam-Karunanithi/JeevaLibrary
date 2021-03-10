@@ -24,7 +24,6 @@
 
 <html>
 <head>
-    <script type="text/javascript" src = "loginjavascript.js"></script>
 <head>
 <body align="center">
 <form action="loginpage" method="post">  
@@ -32,18 +31,7 @@
   <input type="text" id = "n1" name="userName"/><br><br>
   <label for ="n1">PASSWORD :</label> &nbsp;
   <input type="password" id = "n2" name="userPass"/><br><br>  
-  <input type="submit" value="login"/>  
+  <input type="submit" value="LOGIN"/>  
   </form> 
-<!--<table align = "centre">
-<tr>
-<td>USERNAME</td>
-<td><input type ="text" id = "userId"name="username"></td>
-</tr>
-<tr>
-<td>PASSWORD</td>
-<td><input type ="password" id = "passId" name="pass"></td>
-</tr>
-<td><button onclick="login()">SUBMIT</button>
-</table> !-->
 <body>
 </html>
