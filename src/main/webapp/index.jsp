@@ -17,16 +17,29 @@
   --%>
 <!-- [END_EXCLUDE] -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.appengine.java8.HelloAppEngine" %>
-<%@ page import="com.example.appengine.java8.AddBook" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.google.appengine.api.datastore.Entity" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*" %>
 
 <html>
 <head>
+
 <head>
 <body align="center">
-<form action="loginpage" method="post">  
+  <%
+   
+  String n=(String)session.getAttribute("sessiontAtr"); 
+  //out.println(" Index page ATR  : " + n);
+ if (n != null)
+  {
+    
+    RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+    rd.forward(request, response);
+    
+  }
+ 
+  %>
+<form action="/loginpage" method="post">  
   <label for ="n1">USERNAME :</label> &nbsp;
   <input type="text" id = "n1" name="userName"/><br><br>
   <label for ="n1">PASSWORD :</label> &nbsp;

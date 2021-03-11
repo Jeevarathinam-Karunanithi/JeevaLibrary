@@ -17,14 +17,15 @@ public class LogoutPage extends HttpServlet{
         response.setContentType("text/jsp");  
         PrintWriter out=response.getWriter();  
           
-          
-        Cookie ck=new Cookie("userName","");  
-        ck.setMaxAge(0);  
-        response.addCookie(ck);  
-
+        HttpSession session=request.getSession(false);
+        session.removeAttribute("sessiontAtr");   
+        session.invalidate();
+        
+        
         out.println("you are successfully logged out!");  
-        RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);  
-
+        
+        RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+        rd.forward(request, response);
+        out.close();
     }
 }

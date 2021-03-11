@@ -22,24 +22,29 @@ public class LoginPage extends HttpServlet{
       PrintWriter out = response.getWriter();  
           
       String userName=request.getParameter("userName");  
-      String password =request.getParameter("userPass");  
+      String password =request.getParameter("userPass"); 
 
-  
+      Date date = new Date();
+
+      long timeMilli = date.getTime();
+      String s=String.valueOf(timeMilli);
+      out.println(s);
           
     if(userName.equals("admin") && password.equals("admin"))
     { 
        // out.println("true");  
-       Cookie ck=new Cookie("userName","userCookie");  
-       response.setContentType("text/jsp");
-       response.addCookie(ck);
-            
-        RequestDispatcher rd=request.getRequestDispatcher("/library.jsp");  
-        rd.forward(request, response); 
+        HttpSession session=request.getSession();  
+        session.setAttribute("sessiontAtr",s);  
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");    
+        RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+        rd.forward(request, response);
+        
     } 
         else{  
             out.println("Username or Password is Invalid");  
-            RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);  
+           
+            RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+           rd.forward(request, response);
     } 
 }
 

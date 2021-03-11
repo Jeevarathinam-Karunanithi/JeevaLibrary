@@ -26,6 +26,9 @@
 
 <html>
 <head>
+<meta Http-Equiv="Cache-Control" Content="no-cache">
+<meta Http-Equiv="Pragma" Content="no-cache">
+<meta Http-Equiv="Expires" Content="0"> 
 
 <script type="text/javascript" src = "Javascript.js"> </script>
 <style>
@@ -35,30 +38,15 @@
   </style>
        
 </head>
-<% String user = null;
-String pass = null;
-Cookie ck[] =request.getCookies();
-if(ck != null){  
-for(Cookie CK: ck){
-  if(CK.getName().equals("userName"))
-  {
-    user = CK.getName();
-   // out.println("user: "+user);
-  } 
-  if(CK.getValue().equals("userCookie"))
-  {
-    pass = CK.getValue();
-   // out.println("  pass: "+pass);
-  }
+<%  
+String str=(String)session.getAttribute("sessiontAtr"); 
+if(str == null)
+{
+  RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+  rd.forward(request, response);
   
- }
 }
- if(user==null || pass==null)
- {
-  // out.println(pass + " " + user);
-   RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
-   rd.forward(request, response); 
- }
+
 %>
 <body onload="getbook()">
            <h3>JEEVA LIBRARY</h3>
