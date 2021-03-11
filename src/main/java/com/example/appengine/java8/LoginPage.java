@@ -1,17 +1,20 @@
 package com.example.appengine.java8;
 
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.PreparedQuery;
 import javax.servlet.annotation.WebServlet;  
-import java.io.*;  
+import java.io.*;
 import javax.servlet.*;  
 import javax.servlet.http.*;
 import java.util.*;  
-
 
 @WebServlet(name = "LoginPage", value = "/loginpage")
 public class LoginPage extends HttpServlet{
@@ -28,9 +31,27 @@ public class LoginPage extends HttpServlet{
 
       long timeMilli = date.getTime();
       String s=String.valueOf(timeMilli);
-      out.println(s);
-          
-    if(userName.equals("admin") && password.equals("admin"))
+     // out.println(s);
+     // out.println("name :  " + userName);
+      
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      Filter flt1 = new FilterPredicate("Username" , FilterOperator.EQUAL, userName);
+      Filter flt2 = new FilterPredicate("Password" , FilterOperator.EQUAL, password);
+      CompositeFilter UserFilter = CompositeFilterOperator.and(flt1,flt2);
+      Query q = new Query("User").setFilter(flt1);
+      PreparedQuery pq = datastore.prepare(q);
+      Entity result = pq.asSingleEntity();
+      if(result == null)
+      {
+        RequestDispatcher rd=request.getRequestDispatcher("/register.jsp"); 
+        rd.forward(request, response);
+      }
+    //  out.println("\n result " + result);
+      String user = result.getProperty("Username").toString();
+      String pass = result.getProperty("Password").toString();
+    //  out.println("\n user  :" + u + "    " + "pass : "+ p);
+
+    if(user != null && pass != null)
     { 
        // out.println("true");  
         HttpSession session=request.getSession();  

@@ -28,6 +28,8 @@
 		    class="com.example.appengine.java8.LoginPage"></bean>
 		<bean id="LogoutPage"
 		    class="com.example.appengine.java8.LogoutPage"></bean>
+		<bean id="RegisterPage"
+		    class="com.example.appengine.java8.RegisterPage"></bean>
         
 
 	<mvc:annotation-driven />

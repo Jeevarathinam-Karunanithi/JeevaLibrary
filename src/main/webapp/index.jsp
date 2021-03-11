@@ -27,15 +27,15 @@
 <head>
 <body align="center">
   <%
-   response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+  response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
   String n=(String)session.getAttribute("sessiontAtr"); 
   //out.println(" Index page ATR  : " + n);
  if (n != null)
   {
     response.sendRedirect("/library.jsp");
     
-   // RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
-   // rd.forward(request, response);
+   //RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+  // rd.forward(request, response);
     
   }
  
@@ -46,6 +46,10 @@
   <label for ="n1">PASSWORD :</label> &nbsp;
   <input type="password" id = "n2" name="userPass"/><br><br>  
   <input type="submit" value="LOGIN"/>  
-  </form> 
+  </form><br>
+  <h5> New User </h5>
+ <button onclick="location.href='/register.jsp'" type="button">
+    REGISTER</button>
+
 <body>
 </html>
