@@ -27,14 +27,15 @@
 <head>
 <body align="center">
   <%
-   
+   response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
   String n=(String)session.getAttribute("sessiontAtr"); 
   //out.println(" Index page ATR  : " + n);
  if (n != null)
   {
+    response.sendRedirect("/library.jsp");
     
-    RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
-    rd.forward(request, response);
+   // RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+   // rd.forward(request, response);
     
   }
  

@@ -35,7 +35,7 @@ public class LoginPage extends HttpServlet{
        // out.println("true");  
         HttpSession session=request.getSession();  
         session.setAttribute("sessiontAtr",s);  
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");    
+       // response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");    
         RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
         rd.forward(request, response);
         
