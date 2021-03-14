@@ -41,7 +41,7 @@
 <% 
 response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
 String str=(String)session.getAttribute("sessiontAtr"); 
-if(str == null)
+if(str == null || session == null)
 {
   RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
   rd.forward(request, response);

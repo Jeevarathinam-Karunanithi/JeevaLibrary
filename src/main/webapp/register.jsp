@@ -6,11 +6,9 @@
 <html>
     <head>
     </head>
-        <body>
-            <%
-            response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
-            %>
-            <h5>Enter User Details </h5>
+        <body align = "center">
+            
+            <h3>Enter User Details </h3>
             <form action="/registerpage" method="POST">
             <label for = "id1">NAME :</label>&nbsp;
             <input type="text" id = "id1"name="name" /><br><br>
@@ -20,7 +18,7 @@
             <input type = "text" id = "id2" name = "username"/><br><br>
             <label for = "id3"> PASSWORD :</label>
             <input type = "password" id = "id2" name = "password"/><br><br>
-            <input type="SUBMIT" value="Login">&nbsp;
+            <input type="SUBMIT" value="REGISTER">&nbsp;
            </form>
             
         </body>

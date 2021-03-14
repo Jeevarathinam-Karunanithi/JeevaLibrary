@@ -21,8 +21,15 @@ buildscript {    // Configuration for building
     classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0' // If a newer version is available, use it
   }
 }
-plugins {
 
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework:spring-framework-bom:5.1.9.RELEASE'
+    }
 }
 
 repositories {   // repositories for Jar's you access in your code
@@ -48,9 +55,13 @@ dependencies {
 
   compile 'jstl:jstl:1.2'
   compile 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+  compile 'org.springframework.security:spring-security-crypto:4.0.2.RELEASE'
+ // compile "org.springframework.boot:spring-boot-starter-security"
+ 
 
   api group: 'org.springframework', name: 'spring-webmvc', version: '5.0.7.RELEASE'
-
+//compile "org.springframework.security:spring-security-web"
+//compile "org.springframework.security:spring-security-config"
 // Add your dependencies here.
 //  compile 'com.google.cloud:google-cloud:+'   // Latest Cloud API's http://googlecloudplatform.github.io/google-cloud-java
 

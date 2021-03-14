@@ -47,7 +47,7 @@
   <input type="password" id = "n2" name="userPass"/><br><br>  
   <input type="submit" value="LOGIN"/>  
   </form><br>
-  <h5> New User </h5>
+  <h3> New User </h3>
  <button onclick="location.href='/register.jsp'" type="button">
     REGISTER</button>
 

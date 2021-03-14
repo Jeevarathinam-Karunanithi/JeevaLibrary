@@ -15,58 +15,55 @@ import java.io.*;
 import javax.servlet.*;  
 import javax.servlet.http.*;
 import java.util.*;  
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @WebServlet(name = "LoginPage", value = "/loginpage")
 public class LoginPage extends HttpServlet{
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException {  
-   
-      PrintWriter out = response.getWriter();  
-          
-      String userName=request.getParameter("userName");  
-      String password =request.getParameter("userPass"); 
+       String user = null;
+       String pass = null;
+       Entity result = null;
+       PrintWriter out = response.getWriter();  
+       String userName=request.getParameter("userName");  
+       String passWord =request.getParameter("userPass"); 
+       Date date = new Date();
+       long timeMilli = date.getTime();
+       String s=String.valueOf(timeMilli);
 
-      Date date = new Date();
+//   BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+//    String result12 = encoder.encode("myPassword");
+//    String result123 = encoder.encode("myPassword");
+// String r1 = BCrypt.hashpw("123", BCrypt.gensalt(10));
+//String r2 = BCrypt.hashpw("123", BCrypt.gensalt(10));
 
-      long timeMilli = date.getTime();
-      String s=String.valueOf(timeMilli);
-     // out.println(s);
-     // out.println("name :  " + userName);
-      
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Filter flt1 = new FilterPredicate("Username" , FilterOperator.EQUAL, userName);
-      Filter flt2 = new FilterPredicate("Password" , FilterOperator.EQUAL, password);
-      CompositeFilter UserFilter = CompositeFilterOperator.and(flt1,flt2);
       Query q = new Query("User").setFilter(flt1);
       PreparedQuery pq = datastore.prepare(q);
-      Entity result = pq.asSingleEntity();
-      if(result == null)
+      result = pq.asSingleEntity();
+      if(result != null )
       {
-        RequestDispatcher rd=request.getRequestDispatcher("/register.jsp"); 
-        rd.forward(request, response);
-      }
-    //  out.println("\n result " + result);
-      String user = result.getProperty("Username").toString();
-      String pass = result.getProperty("Password").toString();
-    //  out.println("\n user  :" + u + "    " + "pass : "+ p);
-
-    if(user != null && pass != null)
-    { 
-       // out.println("true");  
-        HttpSession session=request.getSession();  
-        session.setAttribute("sessiontAtr",s);  
-       // response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");    
-        RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
-        rd.forward(request, response);
-        
-    } 
-        else{  
-            out.println("Username or Password is Invalid");  
-           
+         user = result.getProperty("Username").toString();
+         pass = result.getProperty("Password").toString();
+         if(BCrypt.checkpw(passWord, pass)){
+            HttpSession session=request.getSession();  
+            session.setAttribute("sessiontAtr",s);  
+            RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+            rd.forward(request, response);
+         }
+          else{
+            out.println("Enter a Vallid Password or Password");
             RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
-           rd.forward(request, response);
-    } 
-}
-
+            rd.forward(request, response); 
+         }
+   }
+      else{ 
+         out.println("Enter a Vallid Username or Password");
+         RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+         rd.forward(request, response);     
+       
+  }
+ }   
 }
