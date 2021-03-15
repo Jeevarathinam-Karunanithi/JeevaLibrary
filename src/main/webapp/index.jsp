@@ -29,18 +29,21 @@
   <%
   response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
   String n=(String)session.getAttribute("sessiontAtr"); 
-  String ns=(String)session.getAttribute("logout"); 
+  String lo=(String)session.getAttribute("logout"); 
+  String li=(String)session.getAttribute("login"); 
 
   if (n != null )
   {
     response.sendRedirect("/library.jsp");
     
   }
-  if(n == null && ns == null)
+  if(li != null)
  {
-  out.println("Login With Valid userName and Password");
+  out.println("Login With Valid Username and Password");
+  session.removeAttribute("login");
+  session.invalidate(); 
  }
- if(ns != null){
+ if(lo != null){
   out.println("Logged Out Successfully");
   session.removeAttribute("logout");   
   session.invalidate(); 

@@ -22,9 +22,13 @@ public class LoginPage extends HttpServlet{
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException {  
+     // response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
        String user = null;
        String pass = null;
        Entity result = null;
+ 
+       HttpSession session = request.getSession();
+       session.setAttribute("login","li");
 
        response.setContentType("text/html");
        PrintWriter out = response.getWriter();  
@@ -50,8 +54,10 @@ public class LoginPage extends HttpServlet{
          user = result.getProperty("Username").toString();
          pass = result.getProperty("Password").toString();
          if(BCrypt.checkpw(passWord, pass)){
-            HttpSession session=request.getSession();  
-            session.setAttribute("sessiontAtr",s);  
+
+            session.removeAttribute("login");
+            session.setAttribute("sessiontAtr",s); 
+
             RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
             rd.forward(request, response);
          }
