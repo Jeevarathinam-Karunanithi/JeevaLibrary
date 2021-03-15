@@ -26,10 +26,6 @@
 
 <html>
 <head>
-<meta Http-Equiv="Cache-Control" Content="no-cache">
-<meta Http-Equiv="Pragma" Content="no-cache">
-<meta Http-Equiv="Expires" Content="0"> 
-
 <script type="text/javascript" src = "Javascript.js"> </script>
 <style>
   table, th, td {
@@ -41,7 +37,7 @@
 <% 
 response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
 String str=(String)session.getAttribute("sessiontAtr"); 
-if(str == null || session == null)
+if(str == null)
 {
   RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
   rd.forward(request, response);
@@ -50,6 +46,7 @@ if(str == null || session == null)
 
 %>
 <body onload="getbook()">
+ <% response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate"); %>
            <h3>JEEVA LIBRARY</h3>
             
              <div id = "test">

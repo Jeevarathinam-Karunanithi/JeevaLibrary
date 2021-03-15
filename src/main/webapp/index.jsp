@@ -29,24 +29,21 @@
   <%
   response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
   String n=(String)session.getAttribute("sessiontAtr"); 
-  String sessLogin=(String)session.getAttribute("sessionValidation");
-  String sessLogout=(String)session.getAttribute("sessionlogout");
- if (n != null)
+  String ns=(String)session.getAttribute("logout"); 
+
+  if (n != null )
   {
     response.sendRedirect("/library.jsp");
     
   }
-  if(sessLogin != null)
+  if(n == null && ns == null)
  {
-  out.println("Wrong username or password");
-  session.removeAttribute("sessionValidation");   
-  session.invalidate();
+  out.println("Login With Valid userName and Password");
  }
- if(sessLogout != null)
- {
-  out.println("you are successfully logged out!");
-  session.removeAttribute("sessionlogout");   
-  session.invalidate();
+ if(ns != null){
+  out.println("Logged Out Successfully");
+  session.removeAttribute("logout");   
+  session.invalidate(); 
  }
   %>
 <form action="/loginpage" method="post">  

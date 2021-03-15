@@ -19,10 +19,11 @@ public class LogoutPage extends HttpServlet{
           
         HttpSession session=request.getSession(false);
         session.removeAttribute("sessiontAtr");   
-        session.invalidate();
-        HttpSession session1=request.getSession();  
-        session1.setAttribute("sessionlogout","logout");  
+        session.invalidate();  
         
+        HttpSession s = request.getSession();
+        s.setAttribute("logout","ls"); 
+      //  out.println("<html><body><h6>Logged Out</h6></body></html>");
         RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
         rd.forward(request, response);
         out.close();

@@ -25,10 +25,8 @@ public class LoginPage extends HttpServlet{
        String user = null;
        String pass = null;
        Entity result = null;
-       HttpSession session1=request.getSession();  
-       session1.setAttribute("sessionValidation","login");  
 
-       response.setContentType("text/plain");
+       response.setContentType("text/html");
        PrintWriter out = response.getWriter();  
        String userName=request.getParameter("userName");  
        String passWord =request.getParameter("userPass"); 
@@ -52,22 +50,19 @@ public class LoginPage extends HttpServlet{
          user = result.getProperty("Username").toString();
          pass = result.getProperty("Password").toString();
          if(BCrypt.checkpw(passWord, pass)){
-            HttpSession sessio=request.getSession(false);  
-            sessio.removeAttribute("sessiontAtr");   
-            sessio.invalidate();
             HttpSession session=request.getSession();  
             session.setAttribute("sessiontAtr",s);  
             RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
             rd.forward(request, response);
          }
           else{
-            out.println("Enter a Vallid Password or Password index");
+         //   out.println("Enter a Vallid Password or Password index");
             RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
             rd.forward(request, response); 
          }
    }
-      else{ 
-         out.println("Enter a Vallid Username or Password index");
+   else{ 
+        // out.println("Enter a Vallid Username or Password index");
          RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
          rd.forward(request, response);     
        
