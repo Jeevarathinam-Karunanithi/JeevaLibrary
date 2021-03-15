@@ -14,14 +14,14 @@ public class LogoutPage extends HttpServlet{
     
     public void doGet(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException { 
-        response.setContentType("text/jsp");  
+        response.setContentType("text/html");
         PrintWriter out=response.getWriter();  
           
         HttpSession session=request.getSession(false);
         session.removeAttribute("sessiontAtr");   
         session.invalidate();
-
-        out.println("you are successfully logged out!");  
+        HttpSession session1=request.getSession();  
+        session1.setAttribute("sessionlogout","logout");  
         
         RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
         rd.forward(request, response);

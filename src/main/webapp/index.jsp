@@ -29,16 +29,25 @@
   <%
   response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
   String n=(String)session.getAttribute("sessiontAtr"); 
-  //out.println(" Index page ATR  : " + n);
+  String sessLogin=(String)session.getAttribute("sessionValidation");
+  String sessLogout=(String)session.getAttribute("sessionlogout");
  if (n != null)
   {
     response.sendRedirect("/library.jsp");
     
-   //RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
-  // rd.forward(request, response);
-    
   }
- 
+  if(sessLogin != null)
+ {
+  out.println("Wrong username or password");
+  session.removeAttribute("sessionValidation");   
+  session.invalidate();
+ }
+ if(sessLogout != null)
+ {
+  out.println("you are successfully logged out!");
+  session.removeAttribute("sessionlogout");   
+  session.invalidate();
+ }
   %>
 <form action="/loginpage" method="post">  
   <label for ="n1">USERNAME :</label> &nbsp;

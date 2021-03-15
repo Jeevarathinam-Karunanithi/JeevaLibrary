@@ -25,7 +25,7 @@ public class RegisterPage extends HttpServlet{
     
     public void doPost(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException {  
-   
+      response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       DatastoreService ds = DatastoreServiceFactory.getDatastoreService();  
           
