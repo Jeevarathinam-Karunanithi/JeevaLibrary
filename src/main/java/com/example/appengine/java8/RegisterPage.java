@@ -41,11 +41,9 @@ public class RegisterPage extends HttpServlet{
       Entity result = p.asSingleEntity();
       if(result != null)
       {
-        String user = result.getProperty("Username").toString();
-        if(username == user){
-          RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
-          rd.forward(request, response); 
-        }
+          RequestDispatcher rd=request.getRequestDispatcher("/register.jsp"); 
+          rd.include(request, response); 
+    
       }
       else{
       Entity e = new Entity("User");

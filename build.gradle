@@ -56,12 +56,11 @@ dependencies {
   compile 'jstl:jstl:1.2'
   compile 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
   compile 'org.springframework.security:spring-security-crypto:4.0.2.RELEASE'
- // compile "org.springframework.boot:spring-boot-starter-security"
+
  
 
   api group: 'org.springframework', name: 'spring-webmvc', version: '5.0.7.RELEASE'
-//compile "org.springframework.security:spring-security-web"
-//compile "org.springframework.security:spring-security-config"
+
 // Add your dependencies here.
 //  compile 'com.google.cloud:google-cloud:+'   // Latest Cloud API's http://googlecloudplatform.github.io/google-cloud-java
 

@@ -5,11 +5,14 @@
 <%@ page import="javax.servlet.http.*" %>
 <html>
     <head>
+        <% 
+        response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+        %>
     </head>
         <body align = "center">
             
             <h3>Enter User Details </h3>
-            <form action="/registerpage" method="POST">
+            <form action="/registerpage" method="POST" >
             <label for = "id1">NAME :</label>&nbsp;
             <input type="text" id = "id1"name="name" /><br><br>
             <label for = "id2"> CITY :</label>&nbsp;
