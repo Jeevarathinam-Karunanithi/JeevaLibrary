@@ -2,7 +2,7 @@ package com.example.appengine.java8;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-public class Test
+public class SampleTest
 {
     Calculator c = new Calculator();
     @Test

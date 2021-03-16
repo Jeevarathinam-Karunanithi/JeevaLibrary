@@ -95,7 +95,6 @@ appengine {  // App Engine tasks configuration
 }
 
 test {
-  useJUnitPlatform()
   useJUnit()
   testLogging.showStandardStreams = true
   beforeTest { descriptor ->
