@@ -54,7 +54,9 @@ public class RegisterPage extends HttpServlet{
       e.setProperty("Password",pass); 
 
       ds.put(e);
-      response.sendRedirect("/index.jsp");
+     // response.sendRedirect("/index.jsp");
+      RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+      rd.forward(request, response); 
       }
       
     }

@@ -16,7 +16,6 @@ public class LogoutPage extends HttpServlet{
     throws ServletException, IOException { 
        
         response.setContentType("text/html");
-        PrintWriter out=response.getWriter();  
         
         HttpSession session=request.getSession(false);
         if(session != null)
@@ -24,7 +23,7 @@ public class LogoutPage extends HttpServlet{
         session.removeAttribute("sessiontAtr");   
         session.setAttribute("logout","ls"); 
      
-      //  out.println("<html><body><h6>Logged Out</h6></body></html>");
+   
         RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
         rd.forward(request, response);
         }

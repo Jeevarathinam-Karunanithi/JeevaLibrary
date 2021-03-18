@@ -24,6 +24,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServlet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ import org.mockito.MockitoAnnotations;
 @RunWith(JUnit4.class)
 public class HelloAppEngineTest {
   private static final String FAKE_URL = "fake.fk/hello";
-  // Set up a helper so that the ApiProxy returns a valid environment for local testing.
+  
   private final LocalServiceTestHelper helper = new LocalServiceTestHelper();
 
   @Mock private HttpServletRequest mockRequest;
