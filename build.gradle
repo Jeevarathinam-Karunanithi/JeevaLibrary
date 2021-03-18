@@ -43,6 +43,7 @@ repositories {   // repositories for Jar's you access in your code
   mavenCentral()
   jcenter()
 }
+apply plugin: "jacoco"
 apply plugin: 'java'                              // standard Java tasks
 apply plugin: "java-library"
 apply plugin: "war"
@@ -117,3 +118,22 @@ version = "1.0-SNAPSHOT"       // Version in generated output
 sourceCompatibility = 1.8     // App Engine Flexible uses Java 8
 targetCompatibility = 1.8     // App Engine Flexible uses Java 8
 // [END gradle]
+
+
+jacoco.toolVersion ='0.8.5'
+
+jacocoTestReport {
+      reports {
+	      html.enabled =true
+	      xml.enabled =true
+      }
+
+      afterEvaluate {
+       classDirectories.setFrom(classDirectories.files.collect{
+       	fileTree(dir: it, exclude : ['com/adaptavant/crm/controller/**'])
+       })
+      }
+}
+
+compileJava.dependsOn clean
+test.finalizedBy jacocoTestReport
