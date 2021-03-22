@@ -7,7 +7,10 @@ import static org.junit.Assert.*;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
@@ -23,8 +26,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import com.google.appengine.api.datastore.*;
 @RunWith(JUnit4.class)
 public class GetBookTest {
 
@@ -46,8 +48,23 @@ public class GetBookTest {
   }
   @Test
   public void getbooktest() throws Exception {
+    DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+    Entity book = new Entity("Books");
+       book.setProperty("Book Name","Alchemist");
+       book.setProperty("Author Name","Paulo cohelo");
+       book.setProperty("Publisher Name","Halper Caplins");
+       book.setProperty("No Of Pages","200");
+       book.setProperty("Time","1616032786653");
+       book.setProperty("Date","18-03-2021");
+       ds.put(book);
   List<Map> lst = servletUnderTest.getBookFromStore(mockRequest, mockResponse);
-  assertNotNull(lst);
+    Map<String,Object> m = lst.get(0);
+    assertEquals("Alchemist",m.get("Book Name"));
+    assertEquals("Paulo cohelo",m.get("Author Name"));
+    assertEquals("Halper Caplins",m.get("Publisher Name"));
+    assertEquals("200",m.get("No Of Pages"));
+    assertEquals("18-03-2021",m.get("Date"));
+ 
  
 }
 }

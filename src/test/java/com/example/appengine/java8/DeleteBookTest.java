@@ -3,6 +3,11 @@ package com.example.appengine.java8;
 import static com.google.common.truth.Truth.assertThat;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +16,8 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.*;
+import com.google.appengine.api.datastore.*;
+import java.util.*;
 
 @RunWith(JUnit4.class)
 public class DeleteBookTest {
@@ -30,9 +37,31 @@ public class DeleteBookTest {
     helper.tearDown();
   }
   @Test
-  public void Deletetest1() throws Exception {
-    String str = "{\"id\":5066549580791809}";
-   String s= servletUnderTest.deleteBook(str);
-    assertEquals("Success",s);
-  }  
+  public void Deletetest2() throws Exception {
+    DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+    Entity book = new Entity("Books","key");
+      book.setProperty("Book Name","Alchemist");
+      book.setProperty("Author Name","Paulo cohelo");
+      book.setProperty("Publisher Name","Halper Caplins");
+      book.setProperty("No of Pages","200");
+      book.setProperty("Time","1616032786653");
+      book.setProperty("Date","18-03-2021");
+      Key key = ds.put(book);
+      
+      Query q = new Query("Books");
+      PreparedQuery p = ds.prepare(q);
+      Entity result = p.asSingleEntity();
+      assertNotNull(result);
+      String str = "{\"id\" : \"key\"}";
+      String s= servletUnderTest.deleteBook(str);
+      assertEquals("Success",s);
+      Query qry = new Query("Books");
+      PreparedQuery pr = ds.prepare(q);
+      Entity result1 = pr.asSingleEntity();
+      assertEquals(result1,null); 
+  }
+ /* @Test
+  public void Deletetest2(){
+      testDelete();
+  } */ 
 }

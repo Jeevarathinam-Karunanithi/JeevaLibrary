@@ -22,7 +22,7 @@ import java.util.*;
 @Controller
 public class SearchBook extends HttpServlet{
     @RequestMapping(value = "searchbook",method = RequestMethod.POST)
-    public  @ResponseBody Object  searchMatchedBook(@RequestBody String str)throws IOException{
+    public  @ResponseBody List<Map>  searchMatchedBook(@RequestBody String str)throws IOException{
          
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> search_map = mapper.readValue(str, Map.class);
@@ -33,7 +33,7 @@ public class SearchBook extends HttpServlet{
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
         Filter matchFilter =
-new FilterPredicate(colHead, FilterOperator.EQUAL, searchVal);
+        new FilterPredicate(colHead, FilterOperator.EQUAL, searchVal);
         Query qry = new Query("Books").setFilter(matchFilter);
         PreparedQuery preq = datastore.prepare(qry);
         List<Entity> res_lst=new ArrayList<Entity>();

@@ -7,8 +7,14 @@ import static org.junit.Assert.*;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.*;
+
 import javax.servlet.*;  
 import javax.servlet.http.*;
 
@@ -19,6 +25,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import com.google.appengine.api.datastore.*;
 
 @RunWith(JUnit4.class)
 public class SearchBookTest {
@@ -41,8 +48,18 @@ public class SearchBookTest {
   }
   @Test
   public void logintest() throws Exception {
+    DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+   Entity book = new Entity("Books");
+      book.setProperty("Book Name","Alchemist");
+      book.setProperty("Author Name","Paulo cohelo");
+      book.setProperty("Publisher Name","Halper Caplins");
+      book.setProperty("No Of Pages","200");
+      book.setProperty("Date","18-03-2021");
+      ds.put(book);
     String str = "{\"columnHeading\":\"Book Name\",\"value\":\"Alchemist\"}";
-  Object obj =  servletUnderTest.searchMatchedBook(str);
-   assertNotNull(obj);
+    List<Map> obj =  servletUnderTest.searchMatchedBook(str);
+    Map<String,Object> m = obj.get(0);
+    assertEquals("Alchemist",m.get("Book Name"));
+  
 }
 } 

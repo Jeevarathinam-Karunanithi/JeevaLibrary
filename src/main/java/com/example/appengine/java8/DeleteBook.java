@@ -28,9 +28,9 @@ public class DeleteBook extends HttpServlet {
     public String deleteBook(@RequestBody  String str)
     throws IOException {
       ObjectMapper mapper = new ObjectMapper();
-      Map<String, Long> mapNew = mapper.readValue(str, Map.class); 
+      Map<String, String> mapNew = mapper.readValue(str, Map.class); 
 
-      long id = mapNew.get("id");
+      String id = mapNew.get("id");
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
