@@ -16,6 +16,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import jdk.jfr.Timestamp;
+
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
@@ -46,11 +49,9 @@ public class LoginPageTest {
     helper.tearDown();
   }
   @Test
-  public void logintest() throws Exception {
+  public void logintest1() throws Exception {
     servletUnderTest.doPost(mockRequest, mockResponse);
     verify(session).setAttribute("login","li");
     verify(rd).forward(mockRequest, mockResponse);
-  }
-
-
+  }  
 }

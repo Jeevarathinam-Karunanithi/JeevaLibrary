@@ -47,6 +47,7 @@ public class LogoutPageTest {
   @Test
   public void logoutTest() throws Exception {
     servletUnderTest.doGet(mockRequest, mockResponse);
+    verify(session).removeAttribute("sessiontAtr");
     verify(session).setAttribute("logout","ls");
     verify(rd).forward(mockRequest, mockResponse);
   }

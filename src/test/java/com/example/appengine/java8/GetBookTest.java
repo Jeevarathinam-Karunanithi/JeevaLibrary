@@ -7,10 +7,15 @@ import static org.junit.Assert.*;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.google.appengine.api.datastore.Entity;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.*;
+
 import javax.servlet.*;  
 import javax.servlet.http.*;
+import javax.xml.stream.events.EntityDeclaration;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +23,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 @RunWith(JUnit4.class)
 public class GetBookTest {
 
@@ -40,7 +46,8 @@ public class GetBookTest {
   }
   @Test
   public void getbooktest() throws Exception {
-  Object obj = servletUnderTest.getBookFromStore(mockRequest, mockResponse);
-  assertNotNull(obj);
+  List<Map> lst = servletUnderTest.getBookFromStore(mockRequest, mockResponse);
+  assertNotNull(lst);
+ 
 }
 }

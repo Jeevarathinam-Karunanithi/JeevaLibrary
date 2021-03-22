@@ -24,7 +24,7 @@ import java.util.*;
 public class GetBook extends HttpServlet {
 
     @RequestMapping(value = "/getbook")
-    public @ResponseBody Object getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException
+    public @ResponseBody List<Map> getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException
    {
         //PrintWriter out=response.getWriter();  
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -32,10 +32,6 @@ public class GetBook extends HttpServlet {
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
         lst= pq.asList(FetchOptions.Builder.withLimit(5));
-      //  System.out.print(lst);
-        
-       /* List<Entity> results =
-        datastore.prepare(mediaQuery).asList(FetchOptions.Builder.withDefaults());*/
 
         List<Map> lst2 = new ArrayList<Map>();
         for (Entity e : lst) { 

@@ -22,9 +22,10 @@ import java.util.*;
 @Controller
 public class DeleteBook extends HttpServlet {
 
-    @RequestMapping(value = "/deletebook", method = RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
+   // consumes=MediaType.APPLICATION_JSON_VALUE
 
-    public void deleteBook(@RequestBody  String str)
+    public String deleteBook(@RequestBody  String str)
     throws IOException {
       ObjectMapper mapper = new ObjectMapper();
       Map<String, Long> mapNew = mapper.readValue(str, Map.class); 
@@ -33,6 +34,7 @@ public class DeleteBook extends HttpServlet {
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
+      return "Success";
    }
 
 

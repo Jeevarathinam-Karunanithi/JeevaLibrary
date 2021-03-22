@@ -62,7 +62,7 @@ public class HelloAppEngineTest {
     servletUnderTest = new HelloAppEngine();
   }
 
-  @After public void tearDown() {
+  @After public void tearDown() { 
     helper.tearDown();
   }
 

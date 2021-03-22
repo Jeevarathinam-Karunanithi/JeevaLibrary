@@ -31,7 +31,7 @@ function loadDoc(){
   
         const jstr = JSON.stringify(obj)
         const xhttp = new XMLHttpRequest();
-
+        
         xhttp.open('POST','/addbook',true);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send(jstr);
