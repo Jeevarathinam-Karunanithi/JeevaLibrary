@@ -28,7 +28,7 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       book.setProperty("Book Name",map.get("Book Name"));
       book.setProperty("Author Name",map.get("Author Name"));
       book.setProperty("Publisher Name",map.get("Publisher Name"));
-      book.setProperty("No Of Pages",map.get("No of Pages"));
+      book.setProperty("No Of Pages",map.get("No Of Pages"));
       book.setProperty("Time",map.get("Time"));
       book.setProperty("Date",map.get("Date"));
       
