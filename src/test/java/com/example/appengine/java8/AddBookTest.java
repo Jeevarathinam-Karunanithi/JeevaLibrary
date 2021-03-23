@@ -52,9 +52,6 @@ public class AddBookTest {
   @After public void tearDown() {
     helper.tearDown();
   }
-   private void testDatastore() {
-  }
-
   private void toTestReturnedData() throws Exception{
 
   String str = "{\"Book Name\":\"Alchemist\",\"Author Name\":\"Paulo cohelo\",\"Publisher Name\":\"Halper Caplins\",\"No Of Pages\":\"200\",\"Time\":\"1616032786653\",\"Date\":\"22-03-2021\"}";
