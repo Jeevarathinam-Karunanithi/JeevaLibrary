@@ -3,3 +3,6 @@ bin/
 build/
 .settings/
 .gradle/
+src/main/webapp/jasmine-junit-results/
+src/main/webapp/coverage/
+node_modules/
