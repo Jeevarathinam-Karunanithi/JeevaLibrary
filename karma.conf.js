@@ -8,6 +8,7 @@ module.exports = function(config) { config.set({
         "js/jquery.3.4.1.min.js",
         "lib/jasmine-3.6.0/jasmine-jquery.js",
         "lib/jasmine-3.6.0/jasmine-ajax.js",
+        "lib/sinon-1.17.3.js",
         "test/initFixtures.js",
 
         "Javascript.js",
