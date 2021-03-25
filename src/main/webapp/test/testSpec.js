@@ -41,13 +41,49 @@ describe("sample test",function(){
         expect(a).toBe(true);
 	});
 });
-describe("A suite", function(){
-    var a = true;
-	it("can be declared by calling 'pending' in the spec body", function() {
-		expect(true).toBe(false);
-		pending('this is why it is pending');
-	  });
-	xit(" with xit",function(){
-        expect(a).not.toBe(false);
-	});
+
+describe("A sample test", function(){
+     it("can be used for later",function(){
+		 expect(sample(false)).toBe(true);
+	 });
 });
+
+describe("Test for getbook",function(){
+	beforeEach(function(){
+		jasmine.Ajax.install();
+	});
+	afterEach(function() {
+		jasmine.Ajax.uninstall();
+	  });
+	it("With ajax call", function() {
+		var doneFn = jasmine.createSpy("spyon");
+		var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(args) {
+        if (this.readyState == this.DONE) {
+          doneFn(this.responseText);
+        }
+      };
+	  xhr.open("GET",'/getbook');
+      xhr.send();
+	  expect(jasmine.Ajax.requests.mostRecent().url).toBe('/getbook');
+      expect(doneFn).not.toHaveBeenCalled();
+});
+});
+
+// describe("Test for getbook",function(){
+
+// 	beforeEach(function() {
+// 		jasmine.Ajax.install();
+// 		loadFixtures('library.jsp');
+// 	    loadDoc();
+// 	  });
+// 	  afterEach(function() {
+// 		jasmine.Ajax.uninstall();
+// 	  });
+	   
+// // 	  it("specifying response when you need it", function() {
+// // 		var doneFn = jasmine.createSpy("success");
+// // 	  expect(jasmine.Ajax.requests.getBook()).toBe('/getbook ');
+// //       expect(doneFn).not.toHaveBeenCalled();
+// // });
+// 	});

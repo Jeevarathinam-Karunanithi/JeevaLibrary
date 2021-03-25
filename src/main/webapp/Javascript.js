@@ -40,8 +40,6 @@ function loadDoc(){
 
   var globalObj = new Object();
   function getbook() {
-
-      const arr = new Array();
        const xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -123,9 +121,8 @@ function searchBook(){
 
 }
 
-/*function logout()
-{
-    const xht = new XMLHttpRequest();
-    xht.open("GET","/logoutpage",true);
-    xht.send();
-}*/
+function sample(num){
+
+ return true;
+
+}

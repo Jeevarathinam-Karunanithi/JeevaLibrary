@@ -20,5 +20,8 @@
   },
   "author": "jeeva",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "jasmine-ajax": "^4.0.0"
+  }
 }
