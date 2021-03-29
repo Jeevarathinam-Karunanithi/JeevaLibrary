@@ -62,7 +62,7 @@ function loadDoc(){
                      document.getElementById("tableones").innerHTML += row;
             }
            // console.log(globalObj);
-    }
+    }  
   }
       xhttp.open('GET','/getbook',true);
       xhttp.send();

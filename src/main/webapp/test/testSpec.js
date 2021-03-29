@@ -59,7 +59,7 @@ describe("A sample test", function(){
 
 	  });
 	  it("Working with testing",function(){
-		server.respondWith("GET", "/some/article/comments.json",
+		server.respondWith("GET", "/getbook",
             [200, { "Content-Type": "application/json" },
              '[{ "Book Name": Alchemist, "Author Name": "Paulo","Publisher Name":"Halper coplins","No Of Pages":"122","Date":"29-03-2021" }]']);
 
