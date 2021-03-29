@@ -44,7 +44,9 @@ function loadDoc(){
        const xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-         var ob = JSON.parse(xhttp.responseText);
+        var res = xhttp.responseText;
+        console.log(res)
+         var ob = JSON.parse(res);
          for(var i= 0; i < ob.length; i++)
            {
              globalObj[i] = ob[i]["Key"]["id"];
@@ -134,3 +136,13 @@ function sample(num){
 //      return res * 1000;
 //   });
 // }
+function testWithFakeServer(callback){
+  
+        const xhttp = new XMLHttpRequest();
+      //  var data = JSON.parse(xhttp.responseText);
+        
+        xhttp.open('GET','/add',true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        callback();
+}

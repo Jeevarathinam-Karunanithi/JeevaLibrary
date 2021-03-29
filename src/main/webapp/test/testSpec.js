@@ -48,72 +48,27 @@ describe("A sample test", function(){
 	 });
 });
 
-describe("Test for getbook",function(){
-	beforeEach(function(){
-		jasmine.Ajax.install();
-	});
-	afterEach(function() {
-		jasmine.Ajax.uninstall();
+  var server;
+  describe("Testing the server" ,function(){
+      beforeEach(function(){
+		 server = sinon.fakeServer.create();
+		
 	  });
-	it("With ajax call", function() {
-		var doneFn = jasmine.createSpy("spyon");
-		var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function(args) {
-        if (this.readyState == this.DONE) {
-          doneFn(this.responseText);
-        }
-      };
-	  xhr.open("GET",'/getbook');
-      xhr.send();
-	  expect(jasmine.Ajax.requests.mostRecent().url).toBe('/getbook');
-      expect(doneFn).not.toHaveBeenCalled();
-});
-});
+	  afterEach(function(){
+		server.restore();
 
-// describe("functions",function(){
-
-// var xhr, requests;
-
-// beforeEach(function () {
-//   xhr = useFakeXMLHttpRequest();
-//   requests = [];
-//   xhr.onCreate = function (req) {
-//     requests.push(req);
-//   };
-// });
-
-// afterEach(function () {
-//   xhr.restore();
-// });
-
-// it("makes a GET request for todo items", function () {
-//   getbook();
-
-//   assert.equals(requests.length, 1);
-//   assert.match(requests[0].url, "/getbook");
-// });
-//});
-describe('Testing MyLibrary  getbook using sinon', function() {
-	beforeEach(function() {
-	  this.xhr = sinon.useFakeXMLHttpRequest();
-   
-	  this.requests = [];
-	  this.xhr.onCreate = function(xhr) {
-		this.requests.push(xhr);
-	  }.bind(this);
-	});
-   
-	afterEach(function() {
-	  this.xhr.restore();
-	});
-	it("which makes a GET request GetBook", function () {
-		var callback = sinon.spy();
-		getbook(callback);
-	
-		expect(callback.calledOnce).toEqual(true);
-      //  this.requests[0].respond(200, { "Content-Type": "application/json" });
-        
 	  });
-	
+	  it("Working with testing",function(){
+		server.respondWith("GET", "/some/article/comments.json",
+            [200, { "Content-Type": "application/json" },
+             '[{ "Book Name": Alchemist, "Author Name": "Paulo","Publisher Name":"Halper coplins","No Of Pages":"122","Date":"29-03-2021" }]']);
+
+	var callback = sinon.spy();
+	getbook(callback,"/add");
+    server.respond();
+	sinon.assert.called(callback);
+	//sinon.assert.calledWith(callback, [{ "Book Name": "Alchemist", "Author Name": "Paulo","Publisher Name":"Halper coplins", "No Of Pages":"122","Date":"29-03-2021"}]);
+
+	  });
   });
 
