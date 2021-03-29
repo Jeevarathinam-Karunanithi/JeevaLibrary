@@ -65,7 +65,18 @@ describe("A sample test", function(){
 
 	getbook();
     server.respond();
-	
+	var bookName = document.getElementById("tableones").rows[0].cells[0].innerHTML;
+	var authorName = document.getElementById("tableones").rows[0].cells[1].innerHTML;
+	var publisherName = document.getElementById("tableones").rows[0].cells[2].innerHTML;
+	var noOfPages =  document.getElementById("tableones").rows[0].cells[3].innerHTML;
+	var date =  document.getElementById("tableones").rows[0].cells[4].innerHTML;
+
+	expect(bookName).toBe("Alchemist");
+	expect(authorName).toBe("Paulo");
+	expect(publisherName).toBe("Halper coplins");
+	expect(noOfPages).toBe("122");
+	expect(date).toBe("29-03-2021");
+
 	//sinon.assert.called(callback);
 	//sinon.assert.calledWith(callback, [{ "Book Name": "Alchemist", "Author Name": "Paulo","Publisher Name":"Halper coplins", "No Of Pages":"122","Date":"29-03-2021"}]);
 
