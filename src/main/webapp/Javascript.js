@@ -67,9 +67,9 @@ function deleteRow(r) {
     var localObj = {
     };
        localObj["id"] = globalObj[i-1];
-     // console.log(localObj);
+    
      var js = JSON.stringify(localObj);
-     console.log("JSON",js);
+
       const xh = new XMLHttpRequest();
       xh.onreadystatechange = function() {
         if (this.readyState == 4 || this.status == 200) {

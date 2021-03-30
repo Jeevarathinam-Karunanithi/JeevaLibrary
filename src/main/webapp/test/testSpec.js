@@ -11,57 +11,21 @@ if(mm<10)
     mm='0'+mm;
 } 
 today = dd+'-'+mm+'-'+yyyy;
-describe("Sample test module1", function() {
-	beforeEach(function() {
-		loadFixtures('register.jsp');
-		
-	});
-	
-	afterEach(function() {
-        
-	});
-	
-		
-	it("sample test1", function() {
-	});
-});
-describe("Sample test module2", function() {
-	beforeEach(function() {
-		loadFixtures('library.jsp');
-		
-	});
-	
-	afterEach(function() {
-        
-	});
-	
-		
-	it("sample test2", function() {
-		
-	});
-});
-describe("sample test",function(){
-	var a = true;
-	it("testing the boolean value",function(){
-        expect(a).toBe(true);
-	});
-});
 
-
-  describe("A suite to test getbook" ,function(){
+describe("A suite to test getbook" ,function(){
 	var server;
-      beforeEach(function(){
-		 server = sinon.fakeServer.create();
+    beforeEach(function(){
 		 loadFixtures('library.jsp');
-	  });
-	  afterEach(function(){
+		 server = sinon.fakeServer.create();
+	});
+	afterEach(function(){
 		server.restore();
 
-	  });
-       it("which adds data to the table",function(){
+	});
+    it("which adds data to the table",function(){
 		server.respondWith("GET", "/getbook",
             [200, { "Content-Type": "application/json" },
-              '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist2", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist3", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" },{ "Key":{"id":"124"},"Book Name": "Alchemist4", "Author Name": "Paulo4","Publisher Name":"Halper coplins4","No Of Pages":"124","Date":"29-03-2021" },{ "Key":{"id":"125"},"Book Name": "Alchemist5", "Author Name": "Paulo5","Publisher Name":"Halper coplins5","No Of Pages":"125","Date":"29-03-2021" }]']);
+            '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist2", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist3", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" },{ "Key":{"id":"124"},"Book Name": "Alchemist4", "Author Name": "Paulo4","Publisher Name":"Halper coplins4","No Of Pages":"124","Date":"29-03-2021" },{ "Key":{"id":"125"},"Book Name": "Alchemist5", "Author Name": "Paulo5","Publisher Name":"Halper coplins5","No Of Pages":"125","Date":"29-03-2021" }]']);
 
 	getbook();
     server.respond();
@@ -145,7 +109,7 @@ describe("sample test",function(){
 			"columnHeading" : "Book Name",
 			 "value" : "Alchemist"
 		  };
-       jsonLocalObj = JSON.stringify(localObj);
+      var jsonLocalObj = JSON.stringify(localObj);
 		server.respondWith("POST", '/searchbook',
             [200, { "Content-Type": "application/json" },
              '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist1", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist1", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" }]']);
@@ -216,9 +180,20 @@ describe("sample test",function(){
 
 	   });
 	   it("which delets row from the server",function(){
-		const deleteRow = sinon.stub();
-        deleteRow.withArgs(1).returns({'id' : 1643562763829290});	 
-	    expect(deleteRow(1)).toEqual({'id' : 1643562763829290})
+		  var r = {
+			parentNode : {
+				parentNode : {
+					rowIndex : 1
+				}
+			}
+		  };
+		  var sampleobj = {
+			  "id" : "121"
+		  }
+		  var jsonSampleobj = JSON.stringify(sampleobj);
+		   deleteRow(r);
+		   var localobj= server.requests[0].requestBody;
+		  expect(jsonSampleobj).toEqual(localobj);
 
 	});
 
