@@ -48,8 +48,7 @@ function loadDoc(){
          var ob = JSON.parse(res);
          for(var i= 0; i < ob.length; i++)
            {
-             globalObj[i] = ob[i]["Key"]["id"];
-            // console.log("obj",globalObj);
+             globalObj[i] = ob[i]["Key"]["id"];s
               var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  
                      <td>${ob[i]["Author Name"]}</td>
@@ -60,7 +59,7 @@ function loadDoc(){
                      </tr>`
                      document.getElementById("tableones").innerHTML += row;
             }
-           // console.log(globalObj);
+          
     }  
   }
       xhttp.open('GET','/getbook',true);
@@ -123,18 +122,3 @@ function searchBook(){
 
 }
 
-function sample(num){
-
- return true;
-
-}
-function testWithFakeServer(callback){
-  
-        const xhttp = new XMLHttpRequest();
-      //  var data = JSON.parse(xhttp.responseText);
-        
-        xhttp.open('GET','/add',true);
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.send();
-        callback();
-}
