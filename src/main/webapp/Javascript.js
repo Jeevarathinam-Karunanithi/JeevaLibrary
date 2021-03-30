@@ -128,13 +128,6 @@ function sample(num){
  return true;
 
 }
-// function testingPromise(){
-//   return new Promise(function(resolve){
-//      setTimeout(() => resolve(3),3000);
-//   }).then(function(res){
-//      return res * 1000;
-//   });
-// }
 function testWithFakeServer(callback){
   
         const xhttp = new XMLHttpRequest();
