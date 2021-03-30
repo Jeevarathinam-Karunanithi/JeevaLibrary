@@ -20,12 +20,13 @@ function loadDoc(){
         "Book Name": bookName,
          "Author Name": authorName,
          "Publisher Name": publisherName,
-         "No of Pages": noOfPages,
+         "No Of Pages": noOfPages,
          "Time" : Date.now(),
          "Date" : today
       };
-  
-        const jstr = JSON.stringify(obj)
+           
+       const jstr = JSON.stringify(obj)
+       console.log(jstr);
         const xhttp = new XMLHttpRequest();
         
         xhttp.open('POST','/addbook',true);
@@ -68,7 +69,7 @@ function deleteRow(r) {
        localObj["id"] = globalObj[i-1];
      // console.log(localObj);
      var js = JSON.stringify(localObj);
-     
+     console.log("JSON",js);
       const xh = new XMLHttpRequest();
       xh.onreadystatechange = function() {
         if (this.readyState == 4 || this.status == 200) {

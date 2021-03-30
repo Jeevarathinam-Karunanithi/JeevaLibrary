@@ -1,3 +1,16 @@
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+    dd='0'+dd;
+} 
+if(mm<10) 
+{
+    mm='0'+mm;
+} 
+today = dd+'-'+mm+'-'+yyyy;
 describe("Sample test module1", function() {
 	beforeEach(function() {
 		loadFixtures('register.jsp');
@@ -125,12 +138,23 @@ describe("sample test",function(){
 
 	  });
 	  it("which returns the searched data from the server",function(){
+   
+	      document.getElementById("d1").value = "Book Name";
+		  document.getElementById("input").value = "Alchemist";
+		  var localObj = {
+			"columnHeading" : "Book Name",
+			 "value" : "Alchemist"
+		  };
+       jsonLocalObj = JSON.stringify(localObj);
 		server.respondWith("POST", '/searchbook',
             [200, { "Content-Type": "application/json" },
              '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist1", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist1", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" }]']);
 
 	searchBook();
     server.respond();
+	var resBdy = server.requests[1].requestBody;
+    expect(jsonLocalObj).toEqual(resBdy);
+
 	var bookName1 = document.getElementById("tableBodySearch").rows[0].cells[0].innerHTML;
 	var bookName2 = document.getElementById("tableBodySearch").rows[1].cells[0].innerHTML;
 	var bookName3 = document.getElementById("tableBodySearch").rows[2].cells[0].innerHTML;
@@ -153,18 +177,48 @@ describe("sample test",function(){
 
 	   });
 	   it("which adds data to the server",function(){
-		document.getElementById("n1").innerHTML="Alchemist";
-		document.getElementById("n2").innerHTML="Paulo";
-		document.getElementById("n3").innerHTML="Halper";
-		document.getElementById("n4").innerHTML="122";
-		console.log(server.requests);
-		 server.respondWith("POST",'/addbook',
-			 [200, { "Content-Type": "application/json" },
-			  '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021"  }]']);
+		  document.getElementById("n1").value="Alchemist";
+		  document.getElementById("n2").value="Paulo";
+		  document.getElementById("n3").value="Halper";
+		  document.getElementById("n4").value="122";
 
+		 var local_obj = {
+			"Book Name": "Alchemist",
+			"Author Name": "Paulo",
+			"Publisher Name":"Halper",
+			"No Of Pages":"122",
+			"Time" : Date.now(),
+			"Date": today
+		 }
+	 var jsonLocalObj = JSON.stringify(local_obj);
 	 loadDoc();
-	 server.respond();
+	 server.respondWith("POST",'/addbook',
+	 [200, { "Content-Type": "application/json" },
+    '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021"  }]']);
+     
+    var responseBdy = server.requests[1].requestBody;
+    console.log(server.requests[1].requestBody);
+	server.respond();
+	expect(jsonLocalObj).toEqual(responseBdy);
 
+
+	});
+
+   });
+
+   describe("A suite to test to test deletebook",function(){
+	var server;
+	beforeEach(function(){
+	 server = sinon.fakeServer.create();
+	   });
+	   afterEach(function(){
+		 server.restore();
+
+	   });
+	   it("which delets row from the server",function(){
+		const deleteRow = sinon.stub();
+        deleteRow.withArgs(1).returns({'id' : 1643562763829290});	 
+	    expect(deleteRow(1)).toEqual({'id' : 1643562763829290})
 
 	});
 
