@@ -1,25 +1,21 @@
 var today = new Date();
 var dd = today.getDate();
-
 var mm = today.getMonth()+1; 
 var yyyy = today.getFullYear();
 if(dd<10) 
 {
     dd='0'+dd;
 } 
-
 if(mm<10) 
 {
     mm='0'+mm;
 } 
 today = dd+'-'+mm+'-'+yyyy;
-
 function loadDoc(){
        var bookName = document.getElementById("n1").value;
        var authorName = document.getElementById("n2").value;
        var publisherName = document.getElementById("n3").value;
        var noOfPages = document.getElementById("n4").value;
-
        var obj = {
         "Book Name": bookName,
          "Author Name": authorName,
@@ -36,8 +32,6 @@ function loadDoc(){
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send(jstr);
     }
-
-
   var globalObj = new Object();
   function getbook() {
        const xhttp = new XMLHttpRequest();
@@ -48,7 +42,8 @@ function loadDoc(){
          var ob = JSON.parse(res);
          for(var i= 0; i < ob.length; i++)
            {
-             globalObj[i] = ob[i]["Key"]["id"];s
+             globalObj[i] = ob[i]["Key"]["id"];
+            // console.log("obj",globalObj);
               var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  
                      <td>${ob[i]["Author Name"]}</td>
@@ -59,19 +54,16 @@ function loadDoc(){
                      </tr>`
                      document.getElementById("tableones").innerHTML += row;
             }
-          
+           // console.log(globalObj);
     }  
   }
       xhttp.open('GET','/getbook',true);
       xhttp.send();
     
 }
-
-
 function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     var localObj = {
-
     };
        localObj["id"] = globalObj[i-1];
      // console.log(localObj);
@@ -87,7 +79,6 @@ function deleteRow(r) {
       xh.setRequestHeader("Content-Type", "application/json");
       xh.send(js); 
 }
-
 function searchBook(){
   var title = document.getElementById("d1").value;
   var name = document.getElementById("input").value;
@@ -96,7 +87,6 @@ function searchBook(){
   lo_obj["value"] = name;
   
   var temp = JSON.stringify(lo_obj);
-
   const xht = new XMLHttpRequest();
   xht.onreadystatechange = function() {
   if(xht.readyState == 4 && this.status ==200){
@@ -119,6 +109,4 @@ function searchBook(){
   xht.open('POST','/searchbook',true)
   xht.setRequestHeader("Content-Type" , "application/json");
   xht.send(temp)
-
 }
-

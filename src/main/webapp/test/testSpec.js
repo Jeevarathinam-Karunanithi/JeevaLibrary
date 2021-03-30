@@ -1,4 +1,41 @@
-describe("A suite to test getbook" ,function(){
+describe("Sample test module1", function() {
+	beforeEach(function() {
+		loadFixtures('register.jsp');
+		
+	});
+	
+	afterEach(function() {
+        
+	});
+	
+		
+	it("sample test1", function() {
+	});
+});
+describe("Sample test module2", function() {
+	beforeEach(function() {
+		loadFixtures('library.jsp');
+		
+	});
+	
+	afterEach(function() {
+        
+	});
+	
+		
+	it("sample test2", function() {
+		
+	});
+});
+describe("sample test",function(){
+	var a = true;
+	it("testing the boolean value",function(){
+        expect(a).toBe(true);
+	});
+});
+
+
+  describe("A suite to test getbook" ,function(){
 	var server;
       beforeEach(function(){
 		 server = sinon.fakeServer.create();
@@ -8,14 +45,15 @@ describe("A suite to test getbook" ,function(){
 		server.restore();
 
 	  });
-	  it("which adds data to the table",function(){
+       it("which adds data to the table",function(){
 		server.respondWith("GET", "/getbook",
             [200, { "Content-Type": "application/json" },
-             '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist2", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist3", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" },{ "Key":{"id":"124"},"Book Name": "Alchemist4", "Author Name": "Paulo4","Publisher Name":"Halper coplins4","No Of Pages":"124","Date":"29-03-2021" },{ "Key":{"id":"125"},"Book Name": "Alchemist5", "Author Name": "Paulo5","Publisher Name":"Halper coplins5","No Of Pages":"125","Date":"29-03-2021" }]']);
+              '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist2", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist3", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" },{ "Key":{"id":"124"},"Book Name": "Alchemist4", "Author Name": "Paulo4","Publisher Name":"Halper coplins4","No Of Pages":"124","Date":"29-03-2021" },{ "Key":{"id":"125"},"Book Name": "Alchemist5", "Author Name": "Paulo5","Publisher Name":"Halper coplins5","No Of Pages":"125","Date":"29-03-2021" }]']);
 
 	getbook();
     server.respond();
-	var bookName1 = document.getElementById("tableones").rows[0].cells[0].innerHTML;
+
+    var bookName1 = document.getElementById("tableones").rows[0].cells[0].innerHTML;
 	var authorName1 = document.getElementById("tableones").rows[0].cells[1].innerHTML;
 	var publisherName1 = document.getElementById("tableones").rows[0].cells[2].innerHTML;
 	var noOfPages1 =  document.getElementById("tableones").rows[0].cells[3].innerHTML;
@@ -44,13 +82,13 @@ describe("A suite to test getbook" ,function(){
 	var publisherName5 = document.getElementById("tableones").rows[4].cells[2].innerHTML;
 	var noOfPages5 =  document.getElementById("tableones").rows[4].cells[3].innerHTML;
 	var date5 =  document.getElementById("tableones").rows[4].cells[4].innerHTML;
-   
+
 	expect(bookName1).toBe("Alchemist1");
 	expect(authorName1).toBe("Paulo1");
 	expect(publisherName1).toBe("Halper coplins1");
 	expect(noOfPages1).toBe("121");
 	expect(date1).toBe("29-03-2021");
-	
+
 	expect(bookName2).toBe("Alchemist2");
 	expect(authorName2).toBe("Paulo2");
 	expect(publisherName2).toBe("Halper coplins2");
@@ -74,10 +112,8 @@ describe("A suite to test getbook" ,function(){
 	expect(publisherName5).toBe("Halper coplins5");
 	expect(noOfPages5).toBe("125");
 	expect(date5).toBe("29-03-2021");
-
-	  });
+      });
   });
-
   describe("A suite to test to test searchbook",function(){
    var server;
    beforeEach(function(){
@@ -114,7 +150,7 @@ describe("A suite to test getbook" ,function(){
 	   });
 	   afterEach(function(){
 		 server.restore();
- 
+
 	   });
 	   it("which adds data to the server",function(){
 		document.getElementById("n1").innerHTML="Alchemist";
@@ -125,16 +161,11 @@ describe("A suite to test getbook" ,function(){
 		 server.respondWith("POST",'/addbook',
 			 [200, { "Content-Type": "application/json" },
 			  '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021"  }]']);
-     
+
 	 loadDoc();
 	 server.respond();
-	
-	 
+
+
 	});
- 
+
    });
- 
-   
-
-  
-
