@@ -41,7 +41,7 @@ function loadDoc(){
          var ob = JSON.parse(res);
          for(var i= 0; i < ob.length; i++)
            {
-             globalObj[i] = ob[i]["Key"]["id"];
+              globalObj[i] = ob[i]["Key"]["id"];
             // console.log("obj",globalObj);
               var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  

@@ -28,7 +28,8 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
 
       MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
       memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-
+      List<Map> ls = new ArrayList<Map>();
+      
       
       ObjectMapper mapper = new ObjectMapper();
       Map<String, Object> map = mapper.readValue(js, Map.class); 
@@ -42,10 +43,23 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
       Key k = d.put(book);
-      memcache.delete("bookList");
       Key k1 = book.getKey();
       map.put("key",k);
       map.put("key1", k1);
+
+      Map<String, Object> tempMap = new HashMap<String,Object>();
+      tempMap.put("Book Name",map.get("Book Name"));
+      tempMap.put("Author Name",map.get("Author Name"));
+      tempMap.put("Publisher Name",map.get("Publisher Name"));
+      tempMap.put("No Of Pages",map.get("No Of Pages"));
+      tempMap.put("Date",map.get("Date"));
+      tempMap.put("Key",k);
+      ls = (List)memcache.get("bookList");
+      ls.add(0, tempMap);
+      int lstIndex = ls.size() - 1;
+      ls.remove(lstIndex);
+      memcache.put("bookList", ls);
+
      return map; 
     }
    
