@@ -38,12 +38,6 @@ public class LoginPage extends HttpServlet{
        long timeMilli = date.getTime();
        String s=String.valueOf(timeMilli);
 
-//   BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
-//    String result12 = encoder.encode("myPassword");
-//    String result123 = encoder.encode("myPassword");
-// String r1 = BCrypt.hashpw("123", BCrypt.gensalt(10));
-//String r2 = BCrypt.hashpw("123", BCrypt.gensalt(10));
-
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Filter flt1 = new FilterPredicate("Username" , FilterOperator.EQUAL, userName);
       Query q = new Query("User").setFilter(flt1);

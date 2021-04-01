@@ -107,8 +107,4 @@ if(str == null)
                 LOGOUT</button>
                  
                 </body>
-                <!-- 
- 
-   
-  -->
 </html>

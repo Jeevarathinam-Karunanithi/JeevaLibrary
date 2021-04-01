@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.google.appengine.api.datastore.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.google.appengine.api.memcache.ErrorHandlers;
+import java.util.logging.Level;
+
 import java.io.BufferedReader;
 import java.io.IOException; 
 
@@ -22,28 +27,22 @@ import java.util.*;
 @Controller
 public class DeleteBook extends HttpServlet {
 
-    @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
-   // consumes=MediaType.APPLICATION_JSON_VALUE
+    @RequestMapping(value ="/deletebook",method = RequestMethod.POST)
 
-    public String deleteBook(@RequestBody  String str)
+    public void deleteBook(@RequestBody  String str)
     throws IOException {
-      ObjectMapper mapper = new ObjectMapper();
-      Map<String, String> mapNew = mapper.readValue(str, Map.class); 
 
-      String id = mapNew.get("id");
+      MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
+      memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+
+      ObjectMapper mapper = new ObjectMapper();
+      Map<String,Long> mapNew = mapper.readValue(str, Map.class); 
+
+      Long id = mapNew.get("id");
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
-      return "Success";
+      memcache.delete("bookList");
    }
-
-
-   /*StringBuffer jb = new StringBuffer();
-   String json = "";
-   BufferedReader reader = request.getReader();
-   while ((json = reader.readLine()) != null)
-       jb.append(json);
-   String js = jb.toString();*/
- 
 }
 

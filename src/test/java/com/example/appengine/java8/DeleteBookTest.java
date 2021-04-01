@@ -39,7 +39,7 @@ public class DeleteBookTest {
   @Test
   public void Deletetest2() throws Exception {
     DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-    Entity book = new Entity("Books","key");
+    Entity book = new Entity("Books",6758376219876267L);
       book.setProperty("Book Name","Alchemist");
       book.setProperty("Author Name","Paulo cohelo");
       book.setProperty("Publisher Name","Halper Caplins");
@@ -52,16 +52,11 @@ public class DeleteBookTest {
       PreparedQuery p = ds.prepare(q);
       Entity result = p.asSingleEntity();
       assertNotNull(result);
-      String str = "{\"id\" : \"key\"}";
-      String s= servletUnderTest.deleteBook(str);
-      assertEquals("Success",s);
-      Query qry = new Query("Books");
+      String str = "{\"id\":6758376219876267}";
+      servletUnderTest.deleteBook(str);
+      Query qry = new Query("Books");  
       PreparedQuery pr = ds.prepare(q);
       Entity result1 = pr.asSingleEntity();
       assertEquals(result1,null); 
   }
- /* @Test
-  public void Deletetest2(){
-      testDelete();
-  } */ 
 }

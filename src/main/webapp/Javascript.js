@@ -26,7 +26,6 @@ function loadDoc(){
       };
            
        const jstr = JSON.stringify(obj)
-       console.log(jstr);
         const xhttp = new XMLHttpRequest();
         
         xhttp.open('POST','/addbook',true);
@@ -39,7 +38,6 @@ function loadDoc(){
        xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var res = xhttp.responseText;
-        console.log(res)
          var ob = JSON.parse(res);
          for(var i= 0; i < ob.length; i++)
            {
@@ -65,8 +63,8 @@ function loadDoc(){
 function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     var localObj = {
+       "id" : globalObj[i-1]
     };
-       localObj["id"] = globalObj[i-1];
     
      var js = JSON.stringify(localObj);
 

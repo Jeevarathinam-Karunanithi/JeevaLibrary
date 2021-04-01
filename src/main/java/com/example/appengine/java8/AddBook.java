@@ -15,12 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 import com.google.appengine.api.datastore.*; 
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.google.appengine.api.memcache.ErrorHandlers;
+import java.util.logging.Level;
 //@WebServlet(name = "AddBook", value = "/addbook")
 @Controller
 public class AddBook extends HttpServlet {
 @RequestMapping(value = "/addbook" ,method = RequestMethod.POST)
 public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
     throws IOException {
+
+      MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
+      memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+
       
       ObjectMapper mapper = new ObjectMapper();
       Map<String, Object> map = mapper.readValue(js, Map.class); 
@@ -34,6 +42,7 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
       Key k = d.put(book);
+      memcache.delete("bookList");
       Key k1 = book.getKey();
       map.put("key",k);
       map.put("key1", k1);
