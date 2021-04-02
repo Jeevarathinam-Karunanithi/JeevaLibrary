@@ -19,6 +19,10 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.api.memcache.ErrorHandlers;
 import java.util.logging.Level;
+
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 //@WebServlet(name = "AddBook", value = "/addbook")
 @Controller
 public class AddBook extends HttpServlet {
@@ -54,11 +58,13 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       tempMap.put("No Of Pages",map.get("No Of Pages"));
       tempMap.put("Date",map.get("Date"));
       tempMap.put("Key",k);
-      ls = (List)memcache.get("bookList");
-      ls.add(0, tempMap);
-      int lstIndex = ls.size() - 1;
-      ls.remove(lstIndex);
-      memcache.put("bookList", ls);
+
+      
+      String json = mapper.writeValueAsString(tempMap);
+
+      Queue queue = QueueFactory.getQueue("add-queue");
+      queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+      
 
      return map; 
     }

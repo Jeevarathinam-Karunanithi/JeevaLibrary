@@ -18,7 +18,9 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.api.memcache.ErrorHandlers;
 import java.util.logging.Level;
-
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import java.io.BufferedReader;
 import java.io.IOException; 
 
@@ -32,9 +34,6 @@ public class DeleteBook extends HttpServlet {
     public void deleteBook(@RequestBody  String str)
     throws IOException {
 
-      MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
-      memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-
       ObjectMapper mapper = new ObjectMapper();
       Map<String,Long> mapNew = mapper.readValue(str, Map.class); 
 
@@ -42,7 +41,9 @@ public class DeleteBook extends HttpServlet {
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
-      memcache.delete("bookList");
+
+      Queue queue = QueueFactory.getQueue("delete-queue");
+      queue.add(TaskOptions.Builder.withUrl("/deletedata").param("memKey", "bookList"));
    }
 }
 
