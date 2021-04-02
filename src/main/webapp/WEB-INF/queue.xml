@@ -4,12 +4,4 @@
 <name>default</name>
 <rate>5/s</rate>
 </queue>
-<queue>
-<name>add-queue</name>
-<rate>5/s</rate>
-</queue>
-<queue>
-<name>delete-queue</name>
-<rate>5/s</rate>
-</queue>
 </queue-entries>

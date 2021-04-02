@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException; 
 
 import java.util.*;
+import javax.servlet.*; 
 
 @Controller
 public class DeleteBook extends HttpServlet {
@@ -32,7 +33,7 @@ public class DeleteBook extends HttpServlet {
     @RequestMapping(value ="/deletebook",method = RequestMethod.POST)
 
     public void deleteBook(@RequestBody  String str)
-    throws IOException {
+    throws IOException, ServletException {
 
       ObjectMapper mapper = new ObjectMapper();
       Map<String,Long> mapNew = mapper.readValue(str, Map.class); 
@@ -42,7 +43,7 @@ public class DeleteBook extends HttpServlet {
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
 
-      Queue queue = QueueFactory.getQueue("delete-queue");
+      Queue queue = QueueFactory.getDefaultQueue();
       queue.add(TaskOptions.Builder.withUrl("/deletedata").param("memKey", "bookList"));
    }
 }

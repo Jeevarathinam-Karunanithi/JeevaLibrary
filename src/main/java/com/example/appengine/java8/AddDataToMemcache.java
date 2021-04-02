@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
+import javax.servlet.*;  
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.api.memcache.ErrorHandlers;
@@ -20,15 +21,15 @@ import java.util.logging.Level;
 @Controller
 class AddDataToMemcache extends HttpServlet{
 @RequestMapping(value = "/adddata", method = RequestMethod.POST)
-public void addBooktoMemcache(@RequestBody String js)
-throws IOException{
+public void addBooktoMemcache(@RequestBody String jstr)
+throws IOException , ServletException{
 
     
     MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
     memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
 
     ObjectMapper mapper = new ObjectMapper();
-    Map<String, Object> m = mapper.readValue(js, Map.class); 
+    Map<String, Object> m = mapper.readValue(jstr, Map.class); 
 
     List ls = (List)memcache.get("bookList");
     ls.add(0, m);

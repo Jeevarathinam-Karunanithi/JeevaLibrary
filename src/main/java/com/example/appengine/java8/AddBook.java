@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
+import javax.servlet.*; 
 import com.google.appengine.api.datastore.*; 
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -23,18 +24,16 @@ import java.util.logging.Level;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.fasterxml.jackson.core.JsonParseException;
 //@WebServlet(name = "AddBook", value = "/addbook")
 @Controller
 public class AddBook extends HttpServlet {
 @RequestMapping(value = "/addbook" ,method = RequestMethod.POST)
 public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
-    throws IOException {
+    throws IOException,ServletException {
 
-      MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
-      memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
       List<Map> ls = new ArrayList<Map>();
-      
-      
+            
       ObjectMapper mapper = new ObjectMapper();
       Map<String, Object> map = mapper.readValue(js, Map.class); 
       Entity book = new Entity("Books");
@@ -59,11 +58,15 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       tempMap.put("Date",map.get("Date"));
       tempMap.put("Key",k);
 
-      
-      String json = mapper.writeValueAsString(tempMap);
-
-      Queue queue = QueueFactory.getQueue("add-queue");
-      queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+      ObjectMapper ma = new ObjectMapper();
+      Queue queue = QueueFactory.getDefaultQueue();
+      try { 
+        String json = ma.writeValueAsString(tempMap);
+        queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+        
+    } catch (JsonParseException e) {
+        e.printStackTrace();
+    }
       
 
      return map; 
