@@ -26,6 +26,7 @@ function loadDoc(){
       };
            
        const jstr = JSON.stringify(obj)
+      
         const xhttp = new XMLHttpRequest();
         
         xhttp.open('POST','/addbook',true);
@@ -62,10 +63,9 @@ function loadDoc(){
 }
 function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
-    var localObj = {
-       "id" : globalObj[i-1]
-    };
-    
+    var localObj = new Object();
+    localObj["id"] = globalObj[i-1];
+
      var js = JSON.stringify(localObj);
 
       const xh = new XMLHttpRequest();

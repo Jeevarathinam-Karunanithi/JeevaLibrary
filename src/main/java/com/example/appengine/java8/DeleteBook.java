@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,26 +26,27 @@ import java.io.BufferedReader;
 import java.io.IOException; 
 
 import java.util.*;
+import java.lang.Long;
 import javax.servlet.*; 
 
 @Controller
+@RequestMapping(value ="/deletebook")
 public class DeleteBook extends HttpServlet {
-
-    @RequestMapping(value ="/deletebook",method = RequestMethod.POST)
-
-    public void deleteBook(@RequestBody  String str)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteBook(@RequestBody  String js)
     throws IOException, ServletException {
 
-      ObjectMapper mapper = new ObjectMapper();
-      Map<String,Long> mapNew = mapper.readValue(str, Map.class); 
-
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String,Long> mapNew = mapper.readValue(js, Map.class); 
+      
       Long id = mapNew.get("id");
+
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("Books",id);
       datastore.delete(k);
 
       Queue queue = QueueFactory.getDefaultQueue();
-      queue.add(TaskOptions.Builder.withUrl("/deletedata").param("memKey", "bookList"));
+      queue.add(TaskOptions.Builder.withUrl("/deletedata"));
    }
 }
 

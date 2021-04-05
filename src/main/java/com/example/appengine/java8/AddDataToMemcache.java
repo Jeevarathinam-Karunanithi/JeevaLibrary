@@ -21,21 +21,25 @@ import java.util.logging.Level;
 @Controller
 class AddDataToMemcache extends HttpServlet{
 @RequestMapping(value = "/adddata", method = RequestMethod.POST)
-public void addBooktoMemcache(@RequestBody String jstr)
-throws IOException , ServletException{
+public void doPost(HttpServletRequest request, HttpServletResponse response)  
+throws ServletException, IOException {  
 
-    
+    try{
     MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
     memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-
+    String s = request.getParameter("dataMap");
     ObjectMapper mapper = new ObjectMapper();
-    Map<String, Object> m = mapper.readValue(jstr, Map.class); 
+    Map<String, Object> m = mapper.readValue(s, Map.class); 
 
     List ls = (List)memcache.get("bookList");
     ls.add(0, m);
     int lstIndex = ls.size() - 1;
     ls.remove(lstIndex);
     memcache.put("bookList", ls);
+    }
+    catch(Exception e){
+        System.out.println("Error");
+    }
 }
 
 }

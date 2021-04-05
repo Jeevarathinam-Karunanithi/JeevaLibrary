@@ -50,7 +50,7 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       map.put("key",k);
       map.put("key1", k1);
 
-      Map<String, Object> tempMap = new HashMap<String,Object>();
+      Map<String, Object> tempMap = new HashMap();
       tempMap.put("Book Name",map.get("Book Name"));
       tempMap.put("Author Name",map.get("Author Name"));
       tempMap.put("Publisher Name",map.get("Publisher Name"));
@@ -58,15 +58,14 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       tempMap.put("Date",map.get("Date"));
       tempMap.put("Key",k);
 
-      ObjectMapper ma = new ObjectMapper();
-      Queue queue = QueueFactory.getDefaultQueue();
-      try { 
-        String json = ma.writeValueAsString(tempMap);
-        queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+     
+      Queue queue = QueueFactory.getDefaultQueue(); 
+      String json = mapper.writeValueAsString(tempMap);
+      queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
         
-    } catch (JsonParseException e) {
-        e.printStackTrace();
-    }
+ //   } catch (JsonParseException e) {
+//        e.printStackTrace();
+ //   }
       
 
      return map; 
