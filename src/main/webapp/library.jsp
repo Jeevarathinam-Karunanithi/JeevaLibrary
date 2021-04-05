@@ -73,6 +73,7 @@ if(str == null)
               <label for = "input">Enter the text to search</label>&nbsp;
               <input type = "text" id = "input" name = "input1"/> <br>
               <button onclick= "searchBook()">SEARCH</button><br><br>
+              <button onclick= "demo()">DEMO</button><br><br>
   
               <table id = "tableSearch">
                 <h4>Your Search Results</h4>
