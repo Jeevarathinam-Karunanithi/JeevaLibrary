@@ -108,6 +108,7 @@ test {
   afterTest { descriptor, result ->
     logger.lifecycle("test: " + descriptor + ": " + result )
   }
+  dependsOn = ["demo"]
 }
 
 group   = "com.example.appenginej8"        // Generated output GroupId
@@ -170,9 +171,16 @@ task runJavaScriptTests {
 compileJava.dependsOn clean
 test.finalizedBy jacocoTestReport
 
-task printName {
+task name {
     doLast {
         println "Jeeva"
     }
+}
+
+task demo {
+    doLast {
+        println 'JEEVA'
+    }
+    
 }
 
