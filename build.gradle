@@ -169,3 +169,10 @@ task runJavaScriptTests {
 
 compileJava.dependsOn clean
 test.finalizedBy jacocoTestReport
+
+task printName {
+    doLast {
+        println "Jeeva"
+    }
+}
+
