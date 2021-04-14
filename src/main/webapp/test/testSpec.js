@@ -219,7 +219,7 @@ describe("A suite to test GetName", function(){
 		server.respond();
  	   var name = document.getElementById("inputid").innerHTML;
  	   console.log(name);
- 	   expect(name).toBe("");
+ 	   expect(name).toBe("jeeva");
 		
 	 });
 
@@ -237,7 +237,6 @@ describe("A suite to test GetName", function(){
 	   });
 	   it("Which update the name form the datastore", function(){
 		document.getElementById("inputid").value = "jeeva";
-
 		var local_obj = {
 			name: 'jeeva',
 			id: '121'

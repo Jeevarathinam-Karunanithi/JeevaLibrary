@@ -21,7 +21,7 @@ if(str == null)
 <body onload="getNamefromStore()">
     <div id="inputDiv">
         <label for="inputid">Edit You Name :</label>&nbsp;
-        <input type="text" id="inputid" name="inputName"/>
+        <input type="text" id="inputid" name="inputName">
         <button onclick="updateName()">CONFIRM CHANGES</button>
     </div>
 </body>

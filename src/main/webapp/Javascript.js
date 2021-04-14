@@ -113,6 +113,13 @@ function searchBook(){
 var globalNameObj = new Object();
 
 function getNamefromStore(){
+  // var newInput = document.createElement("input");
+  // newInput.id = "inputId";
+  // var num = "Hello World";
+  // newInput.setAttribute("type", "text");
+  // newInput.setAttribute("value", num);
+  // var divTag = document.getElementById("inputDiv");
+  // divTag.appendChild(newInput);
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
 
@@ -149,6 +156,7 @@ function updateName(){
       console.log("Completed");
     }
     document.getElementById("inputid").value = "";
+
   }
   xhr.open("POST","/addname",true);
   xhr.setRequestHeader("Content-Type" , "application/json");
