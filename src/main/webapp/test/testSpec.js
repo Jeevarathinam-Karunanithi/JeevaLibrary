@@ -213,11 +213,11 @@ describe("A suite to test GetName", function(){
 
 	    server.respondWith("GET","/getname",
  		[200, { "Content-Type": "application/json" },
- 	   '[{"name": "jeeva","nameKey":{"id":"121"}}]']);
+		'{ "nameKey":{"id":"121"},"name": "jeeva" }']);
 
 		getNamefromStore();
 		server.respond();
- 	   var name = document.getElementById("inputid").innerHTML;
+ 	   var name = document.getElementById("inputid").value;
  	   console.log(name);
  	   expect(name).toBe("jeeva");
 		

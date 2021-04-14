@@ -113,26 +113,16 @@ function searchBook(){
 var globalNameObj = new Object();
 
 function getNamefromStore(){
-  // var newInput = document.createElement("input");
-  // newInput.id = "inputId";
-  // var num = "Hello World";
-  // newInput.setAttribute("type", "text");
-  // newInput.setAttribute("value", num);
-  // var divTag = document.getElementById("inputDiv");
-  // divTag.appendChild(newInput);
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-
     if(xhr.readyState == 4 && this.status ==200){
-      var data = JSON.parse(xht.responseText);
+      var data = JSON.parse(xhr.responseText);
       console.log("data",data);
-      var name = data["name"];
-      console.log(name);
+      var name1 = data["name"];
+      console.log(name1);
       globalNameObj["id"] = data["nameKey"]["id"];
-      console.log(globalNameObj["id"]);
-      document.getElementById("inputid").value = name;
-      var dat = document.getElementById("inputid").value;
-      console.log("dateee",dat);
+      console.log("ID",globalNameObj["id"]);
+      document.getElementById("inputid").value = name1;
     }
   }
   xhr.open("GET","/getname",true);
