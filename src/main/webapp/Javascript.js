@@ -84,12 +84,13 @@ function searchBook(){
   var lo_obj = new Object();
   lo_obj["columnHeading"] = title;
   lo_obj["value"] = name;
-  
+  console.log("title",title);
   var temp = JSON.stringify(lo_obj);
   const xht = new XMLHttpRequest();
   xht.onreadystatechange = function() {
   if(xht.readyState == 4 && this.status ==200){
     var data = JSON.parse(xht.responseText);
+    console.log("SEARCH",data);
     var table = document.getElementById("tableBodySearch");
     table.innerHTML="";
     for(var i= 0; i < data.length; i++)
@@ -108,6 +109,50 @@ function searchBook(){
   xht.open('POST','/searchbook',true)
   xht.setRequestHeader("Content-Type" , "application/json");
   xht.send(temp)
+}
+var globalNameObj = new Object();
+
+function getNamefromStore(){
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+
+    if(xhr.readyState == 4 && this.status ==200){
+      var data = JSON.parse(xht.responseText);
+      console.log("data",data);
+      var name = data["name"];
+      console.log(name);
+      globalNameObj["id"] = data["nameKey"]["id"];
+      console.log(globalNameObj["id"]);
+      document.getElementById("inputid").value = name;
+      var dat = document.getElementById("inputid").value;
+      console.log("dateee",dat);
+    }
+  }
+  xhr.open("GET","/getname",true);
+  xhr.send();
+}
+
+//globalNameObj["id"] = 121;
+function updateName(){
+  var nameStr = document.getElementById("inputid").value;
+  var longid = globalNameObj["id"];
+  var idToString = longid + "";
+
+  
+  var localNameObj = new Object();
+  localNameObj["name"] = nameStr;
+  localNameObj["id"] = idToString;
+  var js = JSON.stringify(localNameObj); 
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState == 4 && this.status == 200){
+      console.log("Completed");
+    }
+    document.getElementById("inputid").value = "";
+  }
+  xhr.open("POST","/addname",true);
+  xhr.setRequestHeader("Content-Type" , "application/json");
+  xhr.send(js);
 }
 
 

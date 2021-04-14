@@ -48,6 +48,9 @@ if(str == null)
 <body onload="getbook()">
  <% response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate"); %>
            <h3>JEEVA LIBRARY</h3>
+           <div align = "right">
+             <a href="settings.jsp">SETTINGS</a>
+           </div>
             
              <div id = "test">
               

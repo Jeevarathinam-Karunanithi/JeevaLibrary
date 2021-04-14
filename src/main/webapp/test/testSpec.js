@@ -191,10 +191,63 @@ describe("A suite to test getbook" ,function(){
 			  "id" : "121"
 		  }
 		  var jsonSampleobj = JSON.stringify(sampleobj);
-		   deleteRow(r);
+		  deleteRow(r);
 		   var localobj= server.requests[0].requestBody;
 		  expect(jsonSampleobj).toEqual(localobj);
 
 	});
+
+   });
+
+describe("A suite to test GetName", function(){
+	var server;
+	beforeEach(function(){
+		loadFixtures('settings.jsp');
+	   server = sinon.fakeServer.create();
+	   });
+	   afterEach(function(){
+		 server.restore();
+
+	   });
+	   it("Which get the name form the datastore", function(){
+
+	    server.respondWith("GET","/getname",
+ 		[200, { "Content-Type": "application/json" },
+ 	   '[{"name": "jeeva","nameKey":{"id":"121"}}]']);
+
+		getNamefromStore();
+		server.respond();
+ 	   var name = document.getElementById("inputid").innerHTML;
+ 	   console.log(name);
+ 	   expect(name).toBe("");
+		
+	 });
+
+   });
+
+   describe("A suite to test AddName", function(){
+	var server;
+	beforeEach(function(){
+		loadFixtures('settings.jsp');
+	   server = sinon.fakeServer.create();
+	   });
+	   afterEach(function(){
+		 server.restore();
+
+	   });
+	   it("Which update the name form the datastore", function(){
+		document.getElementById("inputid").value = "jeeva";
+
+		var local_obj = {
+			name: 'jeeva',
+			id: '121'
+		}
+		var local_JSON = JSON.stringify(local_obj);
+		updateName();
+		var responseBdy = server.requests[0].requestBody;
+		server.respond();
+		expect(local_JSON).toEqual(responseBdy);
+		
+	 });
 
    });

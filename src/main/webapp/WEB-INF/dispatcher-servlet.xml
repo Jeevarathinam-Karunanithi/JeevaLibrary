@@ -34,6 +34,10 @@
 		    class="com.example.appengine.java8.AddDataToMemcache"></bean>
 		<bean id="DeleteMemcache"
 		    class="com.example.appengine.java8.DeleteMemcache"></bean>
+		<bean id="GetName"
+		    class="com.example.appengine.java8.GetName"></bean>
+		<bean id="AddName"
+		    class="com.example.appengine.java8.AddName"></bean>
 		
         
 

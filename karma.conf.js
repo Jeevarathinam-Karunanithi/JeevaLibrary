@@ -27,6 +27,12 @@ module.exports = function(config) { config.set({
             "included": false,
             "served": true,
             "watched": true
+        },
+        {
+            "pattern": "spec/javascripts/fixtures/settings.jsp",
+            "included": false,
+            "served": true,
+            "watched": true
         }
 
     ],

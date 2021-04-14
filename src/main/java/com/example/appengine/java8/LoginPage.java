@@ -50,7 +50,7 @@ public class LoginPage extends HttpServlet{
          if(BCrypt.checkpw(passWord, pass)){
 
             session.removeAttribute("login");
-            session.setAttribute("sessiontAtr",s); 
+            session.setAttribute("sessiontAtr",userName); 
 
             RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
             rd.forward(request, response);

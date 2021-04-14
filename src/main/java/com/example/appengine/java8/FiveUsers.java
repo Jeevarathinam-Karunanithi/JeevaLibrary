@@ -21,10 +21,10 @@ import javax.servlet.annotation.WebServlet;
 @Controller
 public class FiveUsers extends HttpServlet{
    //@RequestMapping(value = "/fiveusers") 
- //  @WebServlet(name = "FiveUsers", value = "/fiveusers")
+   //@WebServlet(name = "FiveUsers", value = "/fiveusers")
    private static final Logger logger = Logger.getLogger(FiveUsers.class.getName());
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)  
+    public List<Map> getname(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException { 
 
     response.setContentType("text/html");
@@ -50,6 +50,7 @@ public class FiveUsers extends HttpServlet{
         catch (Exception ex) {
            System.out.println("ERROR");
         }
+        return userList;
     }
      
 }
