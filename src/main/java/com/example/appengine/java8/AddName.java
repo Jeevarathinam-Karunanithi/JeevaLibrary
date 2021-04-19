@@ -44,8 +44,6 @@ public class AddName extends HttpServlet {
         catch(EntityNotFoundException e) {
             
             }
-
-
       
     }
 }

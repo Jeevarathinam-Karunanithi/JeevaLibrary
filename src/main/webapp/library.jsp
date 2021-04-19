@@ -36,7 +36,7 @@
        
 </head>
 <% 
-response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Cache-Control", "no-cache , no-store");
 String str=(String)session.getAttribute("sessiontAtr"); 
 if(str == null)
 {

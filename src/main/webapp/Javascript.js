@@ -143,12 +143,23 @@ function updateName(){
     if(xhr.readyState == 4 && this.status == 200){
       console.log("Completed");
     }
-    document.getElementById("inputid").value = "";
-
+    window.location = '/library.jsp';
   }
   xhr.open("POST","/addname",true);
   xhr.setRequestHeader("Content-Type" , "application/json");
   xhr.send(js);
+  
+}
+function redirect(){
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+      if(this.status == 200){
+          
+      }
+  }
+  xhr.open("GET","/redirect",true);
+  xhr.send();
+
 }
 
 
