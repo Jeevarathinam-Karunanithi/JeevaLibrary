@@ -5,25 +5,23 @@
 <%@ page import="javax.servlet.http.*" %>
 <html>
     <head>
+        <link rel="stylesheet" href="registerStyle.css">
+        <title>Register Page</title>
     </head>
         <body align = "center">
             <% 
             response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
             %>
-            
-            <h3>Enter User Details </h3>
-            <form action="/registerpage" method="POST" >
-            <label for = "id1">NAME :</label>&nbsp;
-            <input type="text" id = "id1"name="name" /><br><br>
-            <label for = "id2"> CITY :</label>&nbsp;
-            <input type = "text" id = "id2" name = "city"/><br><br>
-            <label for = "id3"> USERNAME :</label>&nbsp;
-            <input type = "text" id = "id2" name = "username"/><br><br>
-            <label for = "id3"> PASSWORD :</label>
-            <input type = "password" id = "id2" name = "password"/><br><br>
-            <input type="SUBMIT" value="REGISTER">&nbsp;
+             <div class="main">
+            <h3 class="register">Enter User Details </h3>
+            <form class="form1" action="/registerpage" method="POST" >
+            <input class="nam" type="text" id = "id1"name="name" placeholder="Enter Your Name"><br><br>
+            <input class="cit" type = "text" id = "id2" name = "city" placeholder="Enter Your City"><br><br>
+            <input class="userNam" type = "text" id = "id2" name = "username" placeholder="Enter Your Username"><br><br>
+            <input class="pass" type = "password" id = "id2" name = "password" placeholder="Enter Your Password"><br><br>
+            <input class="submit" type="SUBMIT" value="CLICK TO REGISTER">
            </form>
-            
+        </div>
         </body>
 
-</html>
+</html> 

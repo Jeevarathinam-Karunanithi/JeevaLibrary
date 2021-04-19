@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <script type="text/javascript" src = "Javascript.js"> </script>
+    <link rel="stylesheet" href="settingsStye.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Change Name</title>
 </head>
 <% 
 response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
@@ -19,10 +21,10 @@ if(str == null)
 
 %>
 <body onload="getNamefromStore()">
-    <div id="inputDiv">
-        <label for="inputid">Edit You Name :</label>&nbsp;
-        <input type="text" id="inputid" name="inputName">
-        <button onclick="updateName()">CONFIRM CHANGES</button>
+    <div id="inputDiv" class="main">
+        <p class="change" align="center">Edit Your Name</p>
+        <input align="center" class="input" type="text" id="inputid" name="inputName"><br><br>
+        <button class="update" onclick="updateName()">CONFIRM CHANGES</button>
     </div>
 </body>
 </html>

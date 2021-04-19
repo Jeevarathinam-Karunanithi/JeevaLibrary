@@ -23,7 +23,8 @@
 
 <html>
 <head>
-
+<link rel="stylesheet" href="indexStyle.css">
+<title>Login Page</title>
 <head>
 <body align="center">
   <%
@@ -49,16 +50,17 @@
   session.invalidate(); 
  }
   %>
-<form action="/loginpage" method="post">  
-  <label for ="n1">USERNAME :</label> &nbsp;
-  <input type="text" id = "n1" name="userName"/><br><br>
-  <label for ="n1">PASSWORD :</label> &nbsp;
-  <input type="password" id = "n2" name="userPass"/><br><br>  
-  <input type="submit" value="LOGIN"/>  
-  </form><br>
-  <h3> New User </h3>
- <button onclick="location.href='/register.jsp'" type="button">
+  <div class="main">
+    <p align="center" class="sign">Sign in</p>
+  <form class="form1" action="/loginpage" method="post">  
+  <input class="un" align="center" type="text" id = "n1" name="userName" placeholder="Username"><br><br>
+  <input class="pass" align="center" type="password" id = "n2" name="userPass" placeholder="Password"><br><br>  
+  <input class="submit" type="submit" align="center" value="LOGIN">  
+  </form>
+  <h3 align="center" class="user"> New User </h3>
+ <button class="register" align="center" onclick="location.href='/register.jsp'" type="button">
     REGISTER</button>
+  </div>
 
 <body>
 </html>

@@ -12,18 +12,18 @@ if(mm<10)
 } 
 today = dd+'-'+mm+'-'+yyyy;
 function loadDoc(){
-       var bookName = document.getElementById("n1").value;
-       var authorName = document.getElementById("n2").value;
-       var publisherName = document.getElementById("n3").value;
-       var noOfPages = document.getElementById("n4").value;
-       var obj = {
-        "Book Name": bookName,
-         "Author Name": authorName,
-         "Publisher Name": publisherName,
-         "No Of Pages": noOfPages,
-         "Time" : Date.now(),
-         "Date" : today
-      };
+  var bookName = document.getElementById("n1").value;
+  var authorName = document.getElementById("n2").value;
+  var publisherName = document.getElementById("n3").value;
+  var noOfPages = document.getElementById("n4").value;
+  var obj = {
+  "Book Name": bookName,
+    "Author Name": authorName,
+    "Publisher Name": publisherName,
+    "No Of Pages": noOfPages,
+    "Time" : Date.now(),
+    "Date" : today
+};
            
        const jstr = JSON.stringify(obj)
       
@@ -43,18 +43,16 @@ function loadDoc(){
          for(var i= 0; i < ob.length; i++)
            {
               globalObj[i] = ob[i]["Key"]["id"];
-            // console.log("obj",globalObj);
               var row = `<tr>       
                      <td>${ob[i]["Book Name"]}</td>  
                      <td>${ob[i]["Author Name"]}</td>
                      <td>${ob[i]["Publisher Name"]}</td>
                      <td>${ob[i]["No Of Pages"]}</td>
                      <td>${ob[i]["Date"]}</td>
-                     <td><button type=button value=Delete onclick=deleteRow(this)>DELETE</button></td>
+                     <td><button style="color:white;background-color:#964537" type=button value=Delete onclick=deleteRow(this)>DELETE</button></td>
                      </tr>`
                      document.getElementById("tableones").innerHTML += row;
             }
-           // console.log(globalObj);
     }  
   }
       xhttp.open('GET','/getbook',true);
