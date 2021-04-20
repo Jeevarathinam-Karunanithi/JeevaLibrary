@@ -53,30 +53,33 @@ public class AddBookTest {
     helper.tearDown();
   }
   private void toTestReturnedData() throws Exception{
-
-  String str = "{\"Book Name\":\"Alchemist\",\"Author Name\":\"Paulo cohelo\",\"Publisher Name\":\"Halper Caplins\",\"No Of Pages\":\"200\",\"Time\":\"1616032786653\",\"Date\":\"22-03-2021\"}";
-  Map<String,Object> obj =  servletUnderTest.addBooktoStore(str);
-  assertEquals("Alchemist", obj.get("Book Name"));
-  assertEquals("Paulo cohelo", obj.get("Author Name"));
-  assertEquals("Halper Caplins", obj.get("Publisher Name"));
-  assertEquals("200", obj.get("No Of Pages"));
-  assertEquals("1616032786653", obj.get("Time"));
-  assertEquals("22-03-2021", obj.get("Date"));
-  assertEquals(obj.get("key"),obj.get("key1"));
-  DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-    Query q = new Query("Books");
-    PreparedQuery p = ds.prepare(q);
-    Entity result = p.asSingleEntity();
-   assertEquals("Alchemist",result.getProperty("Book Name"));
-   assertEquals("Paulo cohelo",result.getProperty("Author Name"));
-    assertEquals("Halper Caplins",result.getProperty("Publisher Name"));
-    assertEquals("200",result.getProperty("No Of Pages"));
-    assertEquals("1616032786653",result.getProperty("Time"));
-    assertEquals("22-03-2021",result.getProperty("Date"));
+      String str = "{\"Book Name\":\"Alchemist\",\"Author Name\":\"Paulo cohelo\",\"Publisher Name\":\"Halper Caplins\",\"No Of Pages\":\"200\",\"Book Number\":\"123456\",\"Status\":\"Available\" ,\"Time\":\"1616032786653\",\"Date\":\"22-03-2021\"}";
+      Map<String,Object> obj =  servletUnderTest.addBooktoStore(str);
+      assertEquals("Alchemist", obj.get("Book Name"));
+      assertEquals("Paulo cohelo", obj.get("Author Name"));
+      assertEquals("Halper Caplins", obj.get("Publisher Name"));
+      assertEquals("200", obj.get("No Of Pages"));
+      assertEquals("123456",obj.get("Book Number"));
+      assertEquals("Available",obj.get("Status"));
+      assertEquals("1616032786653", obj.get("Time"));
+      assertEquals("22-03-2021", obj.get("Date"));
+      assertEquals(obj.get("key"),obj.get("key1"));
+      DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+      Query q = new Query("Books");
+      PreparedQuery p = ds.prepare(q);
+      Entity result = p.asSingleEntity();
+      assertEquals("Alchemist",result.getProperty("Book Name"));
+      assertEquals("Paulo cohelo",result.getProperty("Author Name"));
+      assertEquals("Halper Caplins",result.getProperty("Publisher Name"));
+      assertEquals("200",result.getProperty("No Of Pages"));
+      assertEquals("123456",result.getProperty("Book Number"));
+      assertEquals("Available",result.getProperty("Status"));
+      assertEquals("1616032786653",result.getProperty("Time"));
+      assertEquals("22-03-2021",result.getProperty("Date"));
 }
 
   @Test
   public void addBookTest1()  throws Exception{
-    toTestReturnedData();
+      toTestReturnedData();
   }
 }

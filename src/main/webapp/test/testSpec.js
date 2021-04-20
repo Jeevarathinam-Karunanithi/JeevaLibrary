@@ -145,12 +145,14 @@ describe("A suite to test getbook" ,function(){
 		  document.getElementById("n2").value="Paulo";
 		  document.getElementById("n3").value="Halper";
 		  document.getElementById("n4").value="122";
-
+		  document.getElementById("n5").value="123456";
+      
 		 var local_obj = {
 			"Book Name": "Alchemist",
 			"Author Name": "Paulo",
 			"Publisher Name":"Halper",
 			"No Of Pages":"122",
+			"Book Number" :"123456",
 			"Time" : Date.now(),
 			"Date": today
 		 }
@@ -158,7 +160,7 @@ describe("A suite to test getbook" ,function(){
 	 loadDoc();
 	 server.respondWith("POST",'/addbook',
 	 [200, { "Content-Type": "application/json" },
-    '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021"  }]']);
+    '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Book Number":"123456","Date":"29-03-2021"  }]']);
      
     var responseBdy = server.requests[1].requestBody;
     console.log(server.requests[1].requestBody);

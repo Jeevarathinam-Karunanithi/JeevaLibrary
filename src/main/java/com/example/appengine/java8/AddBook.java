@@ -41,8 +41,11 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       book.setProperty("Author Name",map.get("Author Name"));
       book.setProperty("Publisher Name",map.get("Publisher Name"));
       book.setProperty("No Of Pages",map.get("No Of Pages"));
+      book.setProperty("Book Number",map.get("Book Number"));
+      book.setProperty("Status","Available");
       book.setProperty("Time",map.get("Time"));
       book.setProperty("Date",map.get("Date"));
+      
       
       DatastoreService d = DatastoreServiceFactory.getDatastoreService();
       Key k = d.put(book);
@@ -55,6 +58,7 @@ public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
       tempMap.put("Author Name",map.get("Author Name"));
       tempMap.put("Publisher Name",map.get("Publisher Name"));
       tempMap.put("No Of Pages",map.get("No Of Pages"));
+      // tempMap.put("Book Number", map.get("Book Number"));
       tempMap.put("Date",map.get("Date"));
       tempMap.put("Key",k);
 
