@@ -95,10 +95,12 @@ if(str == null)
               <th id="date2"> DATE </th>
               <th id="delete2"> DELETE </th>
             </tr>
-            <tbody  id = "tableones" class="tablebody2">
-            </tbody>
-
-            </table>
-             
+            <tbody  id = "tableones" class="tablebody2"></tbody>
+            </table><br>
+            <button id="selectbtn" class="selectcls" onclick="selectbook()">SELECT AVILABLE BOOKS</button>
+            <div id="divSelect"></div><br>
+            <input type="text" id="bknumber">
+            <button id="returnbtn" onclick="returnbook()">RETURN BOOK</button>
+            
    </body>
 </html>

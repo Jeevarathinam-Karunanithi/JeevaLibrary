@@ -38,6 +38,12 @@
 		    class="com.example.appengine.java8.GetName"></bean>
 		<bean id="AddName"
 		    class="com.example.appengine.java8.AddName"></bean>
+		<bean id="SelectBook"
+		    class="com.example.appengine.java8.SelectBook"></bean>
+		<bean id="UpdateStatus"
+		    class="com.example.appengine.java8.UpdateStatus"></bean>
+		<bean id="ReturnBook"
+		    class="com.example.appengine.java8.ReturnBook"></bean>
 		
 		
         

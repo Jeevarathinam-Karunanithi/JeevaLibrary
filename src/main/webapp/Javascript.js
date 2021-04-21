@@ -18,7 +18,6 @@ function loadDoc(){
     var publisherName = document.getElementById("n3").value;
     var noOfPages = document.getElementById("n4").value;
     var bookNumber = document.getElementById("n5").value;
-    console.log("Book Number",bookNumber);
     var obj = {
       "Book Name": bookName,
       "Author Name": authorName,
@@ -89,7 +88,6 @@ function searchBook(){
     var lo_obj = new Object();
     lo_obj["columnHeading"] = title;
     lo_obj["value"] = name;
-    console.log("title",title);
     var temp = JSON.stringify(lo_obj);
     const xht = new XMLHttpRequest();
     xht.onreadystatechange = function() {
@@ -154,6 +152,59 @@ function updateName(){
     xhr.setRequestHeader("Content-Type" , "application/json");
     xhr.send(js);
 }
-
-
+var globalSelectobj = {};
+function selectbook(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var data = JSON.parse(xhr.responseText);
+            var table = document.createElement("table");
+            table.id = "tableSelect";
+            var divtag = document.getElementById("divSelect");
+            divtag.appendChild(table);
+            var thead = document.getElementById("tableSelect");
+            thead.innerHTML="";
+            var temp = `<tr>
+            <th>BOOK NUMBER</th>
+            <th>BOOK NAME</th>
+            <th>AUTHOR NAME</th>
+            <th>"PUBLISHER NAME</th>
+            <th>NO OF PAGES</th>
+            <th>STATUS</th>
+            <th>SELECT</th>
+            </tr>`
+            thead.innerHTML += temp;
+            for(let i = 0; i < data.length; i++){
+                globalSelectobj[i] = data[i]["Key"]["id"];
+                var temp1 = `<tr>
+                            <td>${data[i]["Book Number"]}</td>
+                            <td>${data[i]["Book Name"]}</td>
+                            <td>${data[i]["Author Name"]}</td>
+                            <td>${data[i]["Publisher Name"]}</td>
+                            <td>${data[i]["No Of Pages"]}</td>
+                            <td>${data[i]["Status"]}</td>
+                            <td><button style="color:white;background-color:#964537" type=button value=SELECT onclick=selectrow(this)>SELECT</button></td>
+                            </tr>`
+            thead.innerHTML +=temp1;
+            }
+      }
+    }
+    xhr.open('GET','/selectbook',true);
+    xhr.send();
+}
+function selectrow(r){
+    var i = r.parentNode.parentNode.rowIndex;
+    var tempObj = {};
+    tempObj["id"] = globalSelectobj[i-1]; 
+    var jsonString = JSON.stringify(tempObj);
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if( this.readyState == 4 && this.status == 200){
+            console.log("Updated");
+        }
+    }
+    xhr.open("POST","/updatestatus",true);
+    xhr.setRequestHeader("Content-Type" , "application/json");
+    xhr.send(jsonString);
+}
 
