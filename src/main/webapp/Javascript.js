@@ -93,7 +93,7 @@ function searchBook(){
     xht.onreadystatechange = function() {
     if(xht.readyState == 4 && this.status ==200){
         var data = JSON.parse(xht.responseText);
-        console.log("SEARCH",data);
+        //console.log("SEARCH",data);
         var table = document.getElementById("tableBodySearch");
         table.innerHTML="";
         for(var i= 0; i < data.length; i++){
@@ -168,12 +168,14 @@ function selectbook(){
             <th>BOOK NUMBER</th>
             <th>BOOK NAME</th>
             <th>AUTHOR NAME</th>
-            <th>"PUBLISHER NAME</th>
+            <th>PUBLISHER NAME</th>
             <th>NO OF PAGES</th>
             <th>STATUS</th>
             <th>SELECT</th>
             </tr>`
             thead.innerHTML += temp;
+            var bk = document.getElementById("tableSelect").rows[0].cells[0].innerHTML;
+            console.log("bk",bk);
             for(let i = 0; i < data.length; i++){
                 globalSelectobj[i] = data[i]["Key"]["id"];
                 var temp1 = `<tr>
@@ -207,4 +209,20 @@ function selectrow(r){
     xhr.setRequestHeader("Content-Type" , "application/json");
     xhr.send(jsonString);
 }
+function returnBook(){
+    var bookNum = document.getElementById("bknumber").value;
+    var bookNumObj = {};
+    bookNumObj["Book Number"] = bookNum;
+    var jsonString = JSON.stringify(bookNumObj);
+    document.getElementById("bknumber").value = "";
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("Updated");
+        }
 
+    } 
+    xhr.open("POST","/returnbook",true);
+    xhr.setRequestHeader("Content-Type" , "application/json");
+    xhr.send(jsonString);
+}

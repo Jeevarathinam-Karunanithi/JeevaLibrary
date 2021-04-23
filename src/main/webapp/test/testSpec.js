@@ -12,6 +12,7 @@ if(mm<10)
 } 
 today = dd+'-'+mm+'-'+yyyy;
 
+
 describe("A suite to test getbook" ,function(){
 	var server;
     beforeEach(function(){
@@ -109,7 +110,7 @@ describe("A suite to test getbook" ,function(){
 			"columnHeading" : "Book Name",
 			 "value" : "Alchemist"
 		  };
-      var jsonLocalObj = JSON.stringify(localObj);
+        var jsonLocalObj = JSON.stringify(localObj);
 		server.respondWith("POST", '/searchbook',
             [200, { "Content-Type": "application/json" },
              '[{ "Key":{"id":"121"},"Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121","Date":"29-03-2021" },{ "Key":{"id":"122"},"Book Name": "Alchemist1", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122","Date":"29-03-2021" },{ "Key":{"id":"123"},"Book Name": "Alchemist1", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123","Date":"29-03-2021" }]']);
@@ -172,7 +173,7 @@ describe("A suite to test getbook" ,function(){
 
    });
 
-   describe("A suite to test to test deletebook",function(){
+   describe("A suite to test deletebook",function(){
 	var server;
 	beforeEach(function(){
 	 server = sinon.fakeServer.create();
@@ -252,3 +253,109 @@ describe("A suite to test GetName", function(){
 	 });
 
    });
+
+
+   describe("A suite to test selectbook" ,function(){
+	var server;
+    beforeEach(function(){
+		 server = sinon.fakeServer.create();
+		 loadFixtures('library.jsp');
+	});
+	afterEach(function(){
+		server.restore();
+
+	});
+    it("which select a row from the table",function(){
+		server.respondWith("GET", "/selectbook",
+            [200, { "Content-Type": "application/json" },
+            '[{ "Key":{"id":"121"},"Book Number" : "123456", "Book Name": "Alchemist1", "Author Name": "Paulo1","Publisher Name":"Halper coplins1","No Of Pages":"121"},{ "Key":{"id":"122"},"Book Number" : "123457","Book Name": "Alchemist2", "Author Name": "Paulo2","Publisher Name":"Halper coplins2","No Of Pages":"122"},{ "Key":{"id":"123"},"Book Number" : "123458","Book Name": "Alchemist3", "Author Name": "Paulo3","Publisher Name":"Halper coplins3","No Of Pages":"123" }]']);
+
+	selectbook();
+    server.respond();
+    
+	var bookNum1 = document.getElementById("tableSelect").rows[1].cells[0].innerHTML;
+    var bookName1 = document.getElementById("tableSelect").rows[1].cells[1].innerHTML;
+	var authorName1 = document.getElementById("tableSelect").rows[1].cells[2].innerHTML;
+	var publisherName1 = document.getElementById("tableSelect").rows[1].cells[3].innerHTML;
+	var noOfPages1 =  document.getElementById("tableSelect").rows[1].cells[4].innerHTML;
+
+	var bookNum2 = document.getElementById("tableSelect").rows[2].cells[0].innerHTML;
+	var bookName2 = document.getElementById("tableSelect").rows[2].cells[1].innerHTML;
+	var authorName2 = document.getElementById("tableSelect").rows[2].cells[2].innerHTML;
+	var publisherName2 = document.getElementById("tableSelect").rows[2].cells[3].innerHTML;
+	var noOfPages2 =  document.getElementById("tableSelect").rows[2].cells[4].innerHTML;
+
+	var bookNum3 = document.getElementById("tableSelect").rows[3].cells[0].innerHTML;
+	var bookName3 = document.getElementById("tableSelect").rows[3].cells[1].innerHTML;
+	var authorName3 = document.getElementById("tableSelect").rows[3].cells[2].innerHTML;
+	var publisherName3 = document.getElementById("tableSelect").rows[3].cells[3].innerHTML;
+	var noOfPages3 =  document.getElementById("tableSelect").rows[3].cells[4].innerHTML;
+
+	expect(bookNum1).toBe("123456");
+	expect(bookName1).toBe("Alchemist1");
+	expect(authorName1).toBe("Paulo1");
+	expect(publisherName1).toBe("Halper coplins1");
+	expect(noOfPages1).toBe("121");
+
+	expect(bookNum2).toBe("123457");
+	expect(bookName2).toBe("Alchemist2");
+	expect(authorName2).toBe("Paulo2");
+	expect(publisherName2).toBe("Halper coplins2");
+	expect(noOfPages2).toBe("122");
+
+    expect(bookNum3).toBe("123458");
+	expect(bookName3).toBe("Alchemist3");
+	expect(authorName3).toBe("Paulo3");
+	expect(publisherName3).toBe("Halper coplins3");
+	expect(noOfPages3).toBe("123");
+      });
+  });
+  describe("A suite to test selectrow",function(){
+	var server;
+	beforeEach(function(){
+	 server = sinon.fakeServer.create();
+	   });
+	   afterEach(function(){
+		 server.restore();
+
+	   });
+	   it("which select row and update in the server",function(){
+		  var r = {
+			parentNode : {
+				parentNode : {
+					rowIndex : 1
+				}
+			}
+		  };
+		  var sampleobj = {
+			  "id" : "121"
+		  }
+		  var jsonSampleobj = JSON.stringify(sampleobj);
+		  selectrow(r);
+		   console.log(server.requests);
+		   var localobj= server.requests[0].requestBody;
+		  expect(jsonSampleobj).toEqual(localobj);
+
+	});
+
+});
+  describe("A suite to test returnBook",function(){
+	var server;
+	beforeEach(function(){
+		server = sinon.fakeServer.create();
+		loadFixtures('library.jsp');
+	});
+	afterEach(function(){
+		server.restore();
+    });
+	it("which update in the server when the book is returned",function(){
+		document.getElementById("bknumber").value = "121";
+		var sampleobj = {
+			"Book Number" : "121"
+		}
+		var jsonSampleobj = JSON.stringify(sampleobj);
+		returnBook();
+		var localobj= server.requests[1].requestBody;
+		expect(jsonSampleobj).toEqual(localobj);
+    });
+});

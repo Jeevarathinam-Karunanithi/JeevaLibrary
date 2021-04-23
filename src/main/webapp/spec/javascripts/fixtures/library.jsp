@@ -27,6 +27,7 @@
 <html>
 <head>
 <script type="text/javascript" src = "Javascript.js"> </script>
+<link rel="stylesheet" href="libraryStyle.css">
 <style>
   table, th, td {
     border: 1px solid black;
@@ -35,7 +36,7 @@
        
 </head>
 <% 
-response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Cache-Control", "no-cache , no-store");
 String str=(String)session.getAttribute("sessiontAtr"); 
 if(str == null)
 {
@@ -47,68 +48,59 @@ if(str == null)
 %>
 <body onload="getbook()">
  <% response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate"); %>
-           <h3>JEEVA LIBRARY</h3>
+            <h2 class="title">JEEVA LIBRARY</h2>
+            <a class="settings" align="right" href="settings.jsp">SETTINGS</a><br><br>
+            <button class="logout" align="right" onclick="location.href='/logoutpage'" type="button">LOGOUT</button>
             
-             <div id = "test">
-              
-              <label for = "n1">Book Name:</label>&nbsp;
-              <input type = "text" id = "n1" name = "v1"/><br><br>
-              <label for = "n1">Author Name:</label>&nbsp;
-              <input type = "text" id = "n2" name = "v2"/><br><br>
-              <label for = "n1">Publisher Name:</label>&nbsp;
-              <input type = "text" id = "n3" name = "v3"/><br><br>
-              <label for = "n1">No of Pages:</label>&nbsp;
-              <input type = "text" id = "n4" name = "v4"/><br><br>
-              <button onclick= "loadDoc()">SUBMIT</button><br><br> 
-             </div>
+            <div id = "test">
+              <p class="addbook">Add BooksTo Library</p>
+              <input class="book" type = "text" id = "n1" name = "v1" placeholder="Enter Book Name"><br>
+              <input class="author" type = "text" id = "n2" name = "v2" placeholder="Enter Author Name"><br>
+              <input class="publisher" type = "text" id = "n3" name = "v3" placeholder="Enter Publisher Name"><br>
+              <input class="page" type = "text" id = "n4" name = "v4" placeholder="No of Pages"><br>
+              <input class="number" type = "text" id= "n5" name="v5" placeholder="Enter Book Number" maxlength="6"><br>
+              <button class="submit" onclick= "loadDoc()">SUBMIT</button><br><br> 
+            </div>
          
-             <h4>Search Books From Library</h4>
-              <label for = "d1">Select the Heading:</label>&nbsp;
-              <select name = "heading" id = "d1">
-                 <option></option> 
-                 <option value = "Book Name">BOOK NAME</option> 
-                 <option value = "Author Name">AUTHOR NAME</option> 
-                 <option value = "Publisher Name">PUBLISHER NAME</option> 
-              </select><br><br>
-              <label for = "input">Enter the text to search</label>&nbsp;
-              <input type = "text" id = "input" name = "input1"/> <br>
-              <button onclick= "searchBook()">SEARCH</button><br><br>
-
-              <table id = "tableSearch">
-                <h4>Your Search Results</h4>
-                <tr>
-                  <th> BOOK NAME </th>
-                  <th> AUTHOR NAME </th>
-                  <th> PUBLISHER NAME</th>
-                  <th> NO OF PAGES </th>
-                  <th> DATE </th>
-                </tr>
-               <tbody  id = "tableBodySearch">
-               </tbody>
-
-              </table><br><br><br>
+            <p class="searchHeading">Search Books From Library</p>
+            <select class="dropDown" name = "heading" id = "d1">
+                 <option class="drop" value="" disabled selected hidden>Select Heading</option>
+                 <option class="drop" value = "Book Name">BOOK NAME</option> 
+                 <option class="drop" value = "Author Name">AUTHOR NAME</option> 
+                 <option class="drop" value = "Publisher Name">PUBLISHER NAME</option> 
+            </select><br><br>
+            <input class="searchText" type = "text" id = "input" name = "input1" placeholder="Enter the text to search"> <br>
+            <button class="search" onclick= "searchBook()">SEARCH</button><br><br>
+  
+            <table id = "tableSearch">
+            <p class="searchResults">Your Search Results</p>
+            <tr class="head1">
+              <th id="boook"> BOOK NAME </th>
+              <th id="author"> AUTHOR NAME </th>
+              <th id="publiser"> PUBLISHER NAME</th>
+              <th id="pages"> NO OF PAGES </th>
+              <th id="date"> DATE </th>
+           </tr>
+           <tbody  id="tableBodySearch" class="tablebody1">
+           </tbody>
+           </table><br><br><br>
  
-              <table id = "tableID">
-                <h4>Recently Added Books</h4>
-                <tr>
-                  <th> BOOK NAME </th>
-                  <th> AUTHOR NAME </th>
-                  <th> PUBLISHER NAME</th>
-                  <th> NO OF PAGES </th>
-                  <th> DATE </th>
-                  <th> DELETE </th>
-                </tr>
-
-               <tbody  id = "tableones">
-               </tbody>
-
-              </table><br><br><br>
-              <button onclick="location.href='/logoutpage'" type="button">
-                LOGOUT</button>
-                 
-                </body>
-                <!-- 
- 
-   
-  -->
+           <table id = "tableID">
+           <p class="recent">Recently Added Books</p>
+           <tr class="head2">
+              <th id="book2"> BOOK NAME </th>
+              <th id="author2"> AUTHOR NAME </th>
+              <th id="publisher2"> PUBLISHER NAME</th>
+              <th id="pages2"> NO OF PAGES </th>
+              <th id="date2"> DATE </th>
+              <th id="delete2"> DELETE </th>
+            </tr>
+            <tbody  id = "tableones" class="tablebody2"></tbody>
+            </table><br>
+            <button id="selectbtn" class="selectcls" onclick="selectbook()">SELECT AVILABLE BOOKS</button>
+            <div id="divSelect"></div><br>
+            <input class="bknumcls" type="text" id="bknumber" name="bkname" placeholder="Enter Book Number"><br>
+            <button class="returncls" id="returnbtn" onclick="returnBook()">RETURN BOOK</button>
+            
+   </body>
 </html>

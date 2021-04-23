@@ -99,8 +99,8 @@ if(str == null)
             </table><br>
             <button id="selectbtn" class="selectcls" onclick="selectbook()">SELECT AVILABLE BOOKS</button>
             <div id="divSelect"></div><br>
-            <input type="text" id="bknumber">
-            <button id="returnbtn" onclick="returnbook()">RETURN BOOK</button>
+            <input class="bknumcls" type="text" id="bknumber" name="bkname" placeholder="Enter Book Number"><br>
+            <button class="returncls" id="returnbtn" onclick="returnBook()">RETURN BOOK</button>
             
    </body>
 </html>
