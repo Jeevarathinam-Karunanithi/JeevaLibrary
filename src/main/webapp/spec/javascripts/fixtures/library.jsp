@@ -54,7 +54,7 @@ if(str == null)
             
             <div id = "test">
               <p class="addbook">Add BooksTo Library</p>
-              <input class="book" type = "text" id = "n1" name = "v1" placeholder="Enter Book Name"><br>
+              <input class="book" type = "text" id = "n1" name = "v1" placeholder="Enter Books Name"><br>
               <input class="author" type = "text" id = "n2" name = "v2" placeholder="Enter Author Name"><br>
               <input class="publisher" type = "text" id = "n3" name = "v3" placeholder="Enter Publisher Name"><br>
               <input class="page" type = "text" id = "n4" name = "v4" placeholder="No of Pages"><br>
