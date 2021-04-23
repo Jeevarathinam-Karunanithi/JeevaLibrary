@@ -185,7 +185,7 @@ function selectbook(){
                             <td>${data[i]["Publisher Name"]}</td>
                             <td>${data[i]["No Of Pages"]}</td>
                             <td>${data[i]["Status"]}</td>
-                            <td><button style="color:white;background-color:#964537" type=button value=SELECT onclick=selectrow(this)>SELECT</button></td>
+                            <td><button style="color:white;background-color:#964537" type=button value=SELECT onclick=selectrow(this)>BORROW</button></td>
                             </tr>`
             thead.innerHTML +=temp1;
             }
@@ -225,4 +225,17 @@ function returnBook(){
     xhr.open("POST","/returnbook",true);
     xhr.setRequestHeader("Content-Type" , "application/json");
     xhr.send(jsonString);
+}
+function deleteUser(){
+    localObj["id"] = "121";
+    var js = JSON.stringify(localObj);
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            console.log("Updated");
+        }
+    } 
+    xhr.open("POST","/deleteuser",true);
+    xhr.send(js);
+
 }

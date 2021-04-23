@@ -71,6 +71,9 @@ if(str == null)
             </select><br><br>
             <input class="searchText" type = "text" id = "input" name = "input1" placeholder="Enter the text to search"> <br>
             <button class="search" onclick= "searchBook()">SEARCH</button><br><br>
+             <div id="divid">
+               <p>This is demo para</p>
+             </div>
   
             <table id = "tableSearch">
             <p class="searchResults">Your Search Results</p>
@@ -101,6 +104,7 @@ if(str == null)
             <div id="divSelect"></div><br>
             <input class="bknumcls" type="text" id="bknumber" name="bkname" placeholder="Enter Book Number"><br>
             <button class="returncls" id="returnbtn" onclick="returnBook()">RETURN BOOK</button>
+            <button id="returnbt" onclick="deleteUser()">DELETE</button>
             
    </body>
 </html>

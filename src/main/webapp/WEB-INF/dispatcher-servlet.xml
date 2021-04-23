@@ -44,6 +44,9 @@
 		    class="com.example.appengine.java8.UpdateStatus"></bean>
 		<bean id="ReturnBook"
 		    class="com.example.appengine.java8.ReturnBook"></bean>
+		<bean id="DeleteUser"
+		    class="com.example.appengine.java8.DeleteUser"></bean>
+		
 		
 		
         

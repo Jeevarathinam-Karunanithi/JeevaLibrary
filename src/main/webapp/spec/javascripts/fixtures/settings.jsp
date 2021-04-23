@@ -23,6 +23,7 @@ if(str == null)
         <label for="inputid">Edit You Name :</label>&nbsp;
         <input type="text" id="inputid" name="inputName"/>
         <button onclick="updateName()">CONFIRM CHANGES</button>
+
     </div>
 </body>
 </html>
