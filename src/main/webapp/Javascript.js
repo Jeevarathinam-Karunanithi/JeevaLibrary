@@ -33,13 +33,27 @@ function loadDoc(){
     document.getElementById("n3").value = "";
     document.getElementById("n4").value = "";
     document.getElementById("n5").value = "";       
-    const jstr = JSON.stringify(obj)
+    const jstr = JSON.stringify(obj);
     const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status ==200){
+             var data = JSON.parse(this.responseText);
+             if(data["Name"] != "admin" ){
+                var p = document.createElement("p");
+                p.id = "paraId";
+                p.innerHTML = "";
+                p.innerHTML = "You don't have permission to Add book";
+                p.style.color = "red";
+                let div = document.getElementById("divError");
+                div.appendChild(p);
+            }  
+        }
+    }
     xhttp.open('POST','/addbook',true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(jstr);
 }
-
+   
 var globalObj = new Object();
 
 function getbook() {
@@ -158,6 +172,7 @@ function selectbook(){
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             var data = JSON.parse(xhr.responseText);
+            if(data.length != 0){
             var table = document.createElement("table");
             table.id = "tableSelect";
             var divtag = document.getElementById("divSelect");
@@ -165,17 +180,16 @@ function selectbook(){
             var thead = document.getElementById("tableSelect");
             thead.innerHTML="";
             var temp = `<tr>
-            <th>BOOK NUMBER</th>
-            <th>BOOK NAME</th>
-            <th>AUTHOR NAME</th>
-            <th>PUBLISHER NAME</th>
-            <th>NO OF PAGES</th>
-            <th>STATUS</th>
-            <th>SELECT</th>
-            </tr>`
+                        <th>BOOK NUMBER</th>
+                        <th>BOOK NAME</th>
+                        <th>AUTHOR NAME</th>
+                        <th>PUBLISHER NAME</th>
+                        <th>NO OF PAGES</th>
+                        <th>STATUS</th>
+                        <th>SELECT</th>
+                        </tr>`
             thead.innerHTML += temp;
-            var bk = document.getElementById("tableSelect").rows[0].cells[0].innerHTML;
-            console.log("bk",bk);
+            // var bk = document.getElementById("tableSelect").rows[0].cells[0].innerHTML;
             for(let i = 0; i < data.length; i++){
                 globalSelectobj[i] = data[i]["Key"]["id"];
                 var temp1 = `<tr>
@@ -185,12 +199,14 @@ function selectbook(){
                             <td>${data[i]["Publisher Name"]}</td>
                             <td>${data[i]["No Of Pages"]}</td>
                             <td>${data[i]["Status"]}</td>
-                            <td><button style="color:white;background-color:#964537" type=button value=SELECT onclick=selectrow(this)>BORROW</button></td>
+                            <td><button style="color:white;background-color:#964537" type=button value=Borrow onclick=selectrow(this)>BORROW</button></td>
                             </tr>`
             thead.innerHTML +=temp1;
             }
       }
     }
+    
+ }
     xhr.open('GET','/selectbook',true);
     xhr.send();
 }
@@ -202,7 +218,7 @@ function selectrow(r){
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if( this.readyState == 4 && this.status == 200){
-            console.log("Updated");
+           console.log("Updated");
         }
     }
     xhr.open("POST","/updatestatus",true);
@@ -227,6 +243,7 @@ function returnBook(){
     xhr.send(jsonString);
 }
 function deleteUser(){
+    var localObj = {};
     localObj["id"] = "121";
     var js = JSON.stringify(localObj);
     const xhr = new XMLHttpRequest();

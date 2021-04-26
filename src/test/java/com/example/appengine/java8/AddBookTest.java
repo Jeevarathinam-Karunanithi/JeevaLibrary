@@ -28,7 +28,9 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.*;
-
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.io.Reader;
 import static com.google.appengine.api.datastore.FetchOptions.Builder.withLimit;
 import com.google.appengine.api.datastore.*;
 @RunWith(JUnit4.class)
@@ -39,6 +41,8 @@ public class AddBookTest {
 
   @Mock private HttpServletRequest mockRequest;
   @Mock private HttpServletResponse mockResponse;
+  @Mock private HttpSession session;
+  @Mock private BufferedReader reader;
 
 
   private AddBook servletUnderTest;
@@ -46,6 +50,13 @@ public class AddBookTest {
   public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     helper.setUp();
+
+    when(mockRequest.getSession(false)).thenReturn(session);
+    when(session.getAttribute("sessiontAtr")).thenReturn("admin");
+    String str = "{\"Book Name\":\"Alchemist\",\"Author Name\":\"Paulo cohelo\",\"Publisher Name\":\"Halper Caplins\",\"No Of Pages\":\"200\",\"Book Number\":\"123456\",\"Status\":\"Available\" ,\"Time\":\"1616032786653\",\"Date\":\"22-03-2021\"}";
+    Reader inputString = new StringReader(str);
+    BufferedReader reader = new BufferedReader(inputString);
+    when(mockRequest.getReader()).thenReturn(reader);
     servletUnderTest = new AddBook();
 
   }
@@ -53,8 +64,7 @@ public class AddBookTest {
     helper.tearDown();
   }
   private void toTestReturnedData() throws Exception{
-      String str = "{\"Book Name\":\"Alchemist\",\"Author Name\":\"Paulo cohelo\",\"Publisher Name\":\"Halper Caplins\",\"No Of Pages\":\"200\",\"Book Number\":\"123456\",\"Status\":\"Available\" ,\"Time\":\"1616032786653\",\"Date\":\"22-03-2021\"}";
-      Map<String,Object> obj =  servletUnderTest.addBooktoStore(str);
+      Map<String,Object> obj =  servletUnderTest.addBooktoStore(mockRequest, mockResponse);
       assertEquals("Alchemist", obj.get("Book Name"));
       assertEquals("Paulo cohelo", obj.get("Author Name"));
       assertEquals("Halper Caplins", obj.get("Publisher Name"));

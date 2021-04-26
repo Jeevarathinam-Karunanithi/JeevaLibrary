@@ -29,52 +29,61 @@ import com.fasterxml.jackson.core.JsonParseException;
 @Controller
 public class AddBook extends HttpServlet {
 @RequestMapping(value = "/addbook" ,method = RequestMethod.POST)
-public @ResponseBody Map<String,Object> addBooktoStore(@RequestBody String js)
+public @ResponseBody Map<String,Object> addBooktoStore(HttpServletRequest request, HttpServletResponse response)
     throws IOException,ServletException {
-       
 
-      List<Map> ls = new ArrayList<Map>();
-            
-      ObjectMapper mapper = new ObjectMapper();
-      Map<String, Object> map = mapper.readValue(js, Map.class); 
-      Entity book = new Entity("Books");
-      book.setProperty("Book Name",map.get("Book Name"));
-      book.setProperty("Author Name",map.get("Author Name"));
-      book.setProperty("Publisher Name",map.get("Publisher Name"));
-      book.setProperty("No Of Pages",map.get("No Of Pages"));
-      book.setProperty("Book Number",map.get("Book Number"));
-      book.setProperty("Status","Available");
-      book.setProperty("Time",map.get("Time"));
-      book.setProperty("Date",map.get("Date"));
-      
-      
-      DatastoreService d = DatastoreServiceFactory.getDatastoreService();
-      Key k = d.put(book);
-      Key k1 = book.getKey();
-      map.put("key",k);
-      map.put("key1", k1);
+      HttpSession session = request.getSession(false);
+      String sessionAtr =(String)session.getAttribute("sessiontAtr");
+      if(sessionAtr.equals("admin")){
+          StringBuffer jb = new StringBuffer();
+          String jsonStr = "";
+          BufferedReader reader = request.getReader();   
+          while ((jsonStr = reader.readLine()) != null)
+              jb.append(jsonStr);
+          String js = jb.toString();
+          List<Map> ls = new ArrayList<Map>();
 
-      Map<String, Object> tempMap = new HashMap();
-      tempMap.put("Book Name",map.get("Book Name"));
-      tempMap.put("Author Name",map.get("Author Name"));
-      tempMap.put("Publisher Name",map.get("Publisher Name"));
-      tempMap.put("No Of Pages",map.get("No Of Pages"));
-      // tempMap.put("Book Number", map.get("Book Number"));
-      tempMap.put("Date",map.get("Date"));
-      tempMap.put("Key",k);
+          ObjectMapper mapper = new ObjectMapper();
+          Map<String, Object> map = mapper.readValue(js, Map.class); 
+          Entity book = new Entity("Books");
+          book.setProperty("Book Name",map.get("Book Name"));
+          book.setProperty("Author Name",map.get("Author Name"));
+          book.setProperty("Publisher Name",map.get("Publisher Name"));
+          book.setProperty("No Of Pages",map.get("No Of Pages"));
+          book.setProperty("Book Number",map.get("Book Number"));
+          book.setProperty("Status","Available");
+          book.setProperty("Time",map.get("Time"));
+          book.setProperty("Date",map.get("Date"));
+          
+          
+          DatastoreService d = DatastoreServiceFactory.getDatastoreService();
+          Key k = d.put(book);
+          Key k1 = book.getKey();
+          map.put("key",k);
+          map.put("key1", k1);
+          map.put("Name","admin");
 
-     
-      Queue queue = QueueFactory.getDefaultQueue(); 
-      String json = mapper.writeValueAsString(tempMap);
-      queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+          Map<String, Object> tempMap = new HashMap();
+          tempMap.put("Book Name",map.get("Book Name"));
+          tempMap.put("Author Name",map.get("Author Name"));
+          tempMap.put("Publisher Name",map.get("Publisher Name"));
+          tempMap.put("No Of Pages",map.get("No Of Pages"));
+          // tempMap.put("Book Number", map.get("Book Number"));
+          tempMap.put("Date",map.get("Date"));
+          tempMap.put("Key",k);
+
         
- //   } catch (JsonParseException e) {
-//        e.printStackTrace();
- //   }
-      
-
-     return map; 
-   // }
-  }
+          Queue queue = QueueFactory.getDefaultQueue(); 
+          String json = mapper.writeValueAsString(tempMap);
+          queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
+          
+        return map; 
+    }
+      else {
+          Map<String, Object> tempMap1 = new HashMap();
+          tempMap1.put("Name","User");
+          return tempMap1;  
+      }
+   }
    
-  }
+}

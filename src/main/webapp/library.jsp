@@ -59,9 +59,9 @@ if(str == null)
               <input class="publisher" type = "text" id = "n3" name = "v3" placeholder="Enter Publisher Name"><br>
               <input class="page" type = "text" id = "n4" name = "v4" placeholder="No of Pages"><br>
               <input class="number" type = "text" id= "n5" name="v5" placeholder="Enter Book Number" maxlength="6"><br>
-              <button class="submit" onclick= "loadDoc()">SUBMIT</button><br><br> 
+              <button class="submit" onclick= "loadDoc()">SUBMIT</button><br>
             </div>
-         
+            <div id="divError"></div>
             <p class="searchHeading">Search Books From Library</p>
             <select class="dropDown" name = "heading" id = "d1">
                  <option class="drop" value="" disabled selected hidden>Select Heading</option>
@@ -101,6 +101,8 @@ if(str == null)
             <div id="divSelect"></div><br>
             <input class="bknumcls" type="text" id="bknumber" name="bkname" placeholder="Enter Book Number"><br>
             <button class="returncls" id="returnbtn" onclick="returnBook()">RETURN BOOK</button>
+           
+            
             
    </body>
 </html>

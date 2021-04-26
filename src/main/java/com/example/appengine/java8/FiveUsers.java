@@ -22,7 +22,7 @@ import javax.servlet.annotation.WebServlet;
 public class FiveUsers extends HttpServlet{
    //@RequestMapping(value = "/fiveusers") 
    //@WebServlet(name = "FiveUsers", value = "/fiveusers")
-   private static final Logger logger = Logger.getLogger(FiveUsers.class.getName());
+   private static final Logger logger = Logger.getLogger(FiveUsers.class.getName());//returns the class name represented by this object
 
     public List<Map> getname(HttpServletRequest request, HttpServletResponse response)  
     throws ServletException, IOException { 
