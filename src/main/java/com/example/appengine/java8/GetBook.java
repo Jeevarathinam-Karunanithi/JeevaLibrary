@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;  
+import javax.servlet.http.*;
 
 //@WebServlet(name = "GetUser", value = "/getuser")
 @Controller
@@ -33,10 +34,14 @@ public class GetBook extends HttpServlet {
        String memKey = "bookList";
        MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
        memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-
+       HttpSession session = request.getSession(false);
+       String str=(String)session.getAttribute("sessiontAtr");
        List<Map> lst2 = new ArrayList<Map>();
        List<Map> ls = new ArrayList<Map>();
-       
+
+       //Map to add session value(USERNAME) to response
+       Map<String, Object> usernameMap = new HashMap<>(); 
+       usernameMap.put("name", str);
         ls = (List)memcache.get(memKey);
        // response.getWriter().println("LS" + ls);
         
@@ -58,10 +63,12 @@ public class GetBook extends HttpServlet {
                 lst2.add(map);
             } 
              memcache.put(memKey,lst2);
+             lst2.add(usernameMap);
              return lst2;
          }
           else{
-             return ls;
+              ls.add(usernameMap);
+              return ls;
          }
 }
 }

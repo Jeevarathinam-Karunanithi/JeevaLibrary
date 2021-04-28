@@ -35,12 +35,17 @@ public class GetBookTest {
 
   @Mock private HttpServletRequest mockRequest;
   @Mock private HttpServletResponse mockResponse;
+  @Mock private HttpSession session;
 
   private GetBook servletUnderTest;
   @Before
   public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     helper.setUp();
+
+    when(mockRequest.getSession(false)).thenReturn(session);
+    when(session.getAttribute("sessiontAtr")).thenReturn("admin");
+    
     servletUnderTest = new GetBook();
   }
   @After public void tearDown() {
@@ -100,7 +105,7 @@ public class GetBookTest {
        book5.setProperty("Date","23-03-2021");
        ds.put(book5);
   List<Map> lst = servletUnderTest.getBookFromStore(mockRequest, mockResponse);
-   assertEquals(5,lst.size());
+   assertEquals(6,lst.size());
    Map<String,Object> m1 = lst.get(0);
     assertEquals("Alchemist5",m1.get("Book Name"));
     Map<String,Object> m2 = lst.get(1);

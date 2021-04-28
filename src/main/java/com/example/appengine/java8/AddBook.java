@@ -34,7 +34,7 @@ public @ResponseBody Map<String,Object> addBooktoStore(HttpServletRequest reques
 
       HttpSession session = request.getSession(false);
       String sessionAtr =(String)session.getAttribute("sessiontAtr");
-      if(sessionAtr.equals("admin")){
+     // if(sessionAtr.equals("Jeeva")){
           StringBuffer jb = new StringBuffer();
           String jsonStr = "";
           BufferedReader reader = request.getReader();   
@@ -78,12 +78,12 @@ public @ResponseBody Map<String,Object> addBooktoStore(HttpServletRequest reques
           queue.add(TaskOptions.Builder.withUrl("/adddata").param("dataMap", json));
           
         return map; 
-    }
-      else {
-          Map<String, Object> tempMap1 = new HashMap();
-          tempMap1.put("Name","User");
-          return tempMap1;  
-      }
+//    }
+      // else {
+      //     Map<String, Object> tempMap1 = new HashMap();
+      //     tempMap1.put("Name","User");
+      //     return tempMap1;  
+      // }
    }
    
 }

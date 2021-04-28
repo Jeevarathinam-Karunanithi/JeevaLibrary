@@ -24,6 +24,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="indexStyle.css">
+<script type="text/javascript" src = "Javascript.js"> </script>
 <title>Login Page</title>
 <head>
 <body align="center">
@@ -52,11 +53,12 @@
   %>
   <div class="main">
     <p align="center" class="sign">Sign in</p>
-  <form class="form1" action="/loginpage" method="post">  
+
   <input class="un" align="center" type="text" id = "n1" name="userName" placeholder="Username"><br><br>
   <input class="pass" align="center" type="password" id = "n2" name="userPass" placeholder="Password"><br><br>  
-  <input class="submit" type="submit" align="center" value="LOGIN">  
-  </form>
+  <!-- <input class="submit" type="submit" align="center" value="LOGIN">   -->
+  <button class="submit" align = "center" onclick="login()">LOGIN</button>
+  
   <h3 align="center" class="user"> New User </h3>
  <button class="register" align="center" onclick="location.href='/register.jsp'" type="button">
     REGISTER</button>

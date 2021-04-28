@@ -46,6 +46,8 @@
 		    class="com.example.appengine.java8.ReturnBook"></bean>
 		<bean id="DeleteUser"
 		    class="com.example.appengine.java8.DeleteUser"></bean>
+		<bean id="UploadPicture"
+		    class="com.example.appengine.java8.UploadPicture"></bean>
 		
 		
 		

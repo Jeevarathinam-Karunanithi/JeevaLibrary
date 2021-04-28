@@ -12,12 +12,44 @@ if(mm<10)
 } 
 today = dd+'-'+mm+'-'+yyyy;
 
+var nameObj = new Object();
+
+function login(){
+    var username = document.getElementById("n1").value;
+    var password = document.getElementById("n2").value;
+     var localOb = {
+         "name" : username,
+         "password" : password 
+     };
+    
+     var js = JSON.stringify(localOb)
+     const xht = new XMLHttpRequest();
+     xht.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            console.log(JSON.parse(this.responseText));
+            var data = JSON.parse(this.responseText);
+            console.log(data["Status"]);
+            if(data["Status"] == "failed"){
+                window.location = "/index.jsp"
+            }
+            else{
+            document.getElementById("n1").value = "";
+            document.getElementById("n2").value = "";
+            window.location = '/library.jsp';
+            }
+        }
+  }
+  xht.open("POST","/loginpage",true);
+  xht.setRequestHeader("content-type","application/json");
+  xht.send(js);
+}
 function loadDoc(){
     var bookName = document.getElementById("n1").value;
     var authorName = document.getElementById("n2").value;
     var publisherName = document.getElementById("n3").value;
     var noOfPages = document.getElementById("n4").value;
-    var bookNumber = document.getElementById("n5").value;
+    var date = new Date();
+    var bookNumber = date.getTime();
     var obj = {
       "Book Name": bookName,
       "Author Name": authorName,
@@ -31,22 +63,21 @@ function loadDoc(){
     document.getElementById("n1").value = "";
     document.getElementById("n2").value = "";
     document.getElementById("n3").value = "";
-    document.getElementById("n4").value = "";
-    document.getElementById("n5").value = "";       
+    document.getElementById("n4").value = "";     
     const jstr = JSON.stringify(obj);
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status ==200){
              var data = JSON.parse(this.responseText);
-             if(data["Name"] != "admin" ){
-                var p = document.createElement("p");
-                p.id = "paraId";
-                p.innerHTML = "";
-                p.innerHTML = "You don't have permission to Add book";
-                p.style.color = "red";
-                let div = document.getElementById("divError");
-                div.appendChild(p);
-            }  
+            //  if(data["Name"] != "admin" ){
+            //     var p = document.createElement("p");
+            //     p.id = "paraId";
+            //     p.innerHTML = "";
+            //     p.innerHTML = "You don't have permission to Add book";
+            //     p.style.color = "red";
+            //     let div = document.getElementById("divError");
+            //     div.appendChild(p);
+            // }  
         }
     }
     xhttp.open('POST','/addbook',true);
@@ -62,8 +93,16 @@ function getbook() {
     if (this.readyState == 4 && this.status == 200) {
     var res = xhttp.responseText;
     var ob = JSON.parse(res);
+    console.log("Ob",ob);
     for(var i= 0; i < ob.length; i++){
         globalObj[i] = ob[i]["Key"]["id"];
+        var name = ob[ob.length-1]["name"]
+        console.log(name);
+         if(name != "admin"){
+            var div = document.getElementById("addbook")
+            div.style.display = "none";
+            }
+
         var row = `<tr>       
         <td>${ob[i]["Book Name"]}</td>  
         <td>${ob[i]["Author Name"]}</td>

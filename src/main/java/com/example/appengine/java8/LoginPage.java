@@ -16,6 +16,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;  
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.json.JSONObject;
 
 @WebServlet(name = "LoginPage", value = "/loginpage")
 public class LoginPage extends HttpServlet{
@@ -32,11 +33,18 @@ public class LoginPage extends HttpServlet{
 
        response.setContentType("text/html");
        PrintWriter out = response.getWriter();  
-       String userName=request.getParameter("userName");  
-       String passWord =request.getParameter("userPass"); 
-       Date date = new Date();
-       long timeMilli = date.getTime();
-       String s=String.valueOf(timeMilli);
+       StringBuffer jb = new StringBuffer();
+       String jsonStr = "";
+       BufferedReader reader = request.getReader();   
+       while ((jsonStr = reader.readLine()) != null)
+          jb.append(jsonStr);
+       String js = jb.toString();
+        JSONObject jsobj = new JSONObject(js);
+        String userName =  jsobj.getString("name");
+        String passWord =  jsobj.getString("password");
+      
+        JSONObject jsob = new JSONObject();
+        jsob.put("Status","failed");
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Filter flt1 = new FilterPredicate("Username" , FilterOperator.EQUAL, userName);
@@ -51,20 +59,23 @@ public class LoginPage extends HttpServlet{
 
             session.removeAttribute("login");
             session.setAttribute("sessiontAtr",userName); 
-
-            RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
-            rd.forward(request, response);
+            // request.setAttribute("Name",userName);
+            out.println(jsobj);
+            // RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 
+            // rd.forward(request, response);
          }
           else{
+            out.println(jsob);
          //   out.println("Enter a Vallid Password or Password index");
-            RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
-            rd.forward(request, response); 
+            // RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+            // rd.forward(request, response); 
          }
    }
    else{ 
+           out.println(jsob);
         // out.println("Enter a Vallid Username or Password index");
-         RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
-         rd.forward(request, response);     
+         // RequestDispatcher rd=request.getRequestDispatcher("/index.jsp"); 
+         // rd.forward(request, response);     
        
   }
  }   

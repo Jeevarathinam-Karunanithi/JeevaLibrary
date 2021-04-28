@@ -38,7 +38,7 @@ public class DeleteUser extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         Map<String,Long> mapNew = mapper.readValue(js, Map.class); 
       
-      Long id = 5751558595674112L;
+      Long id =5639198358896640L;
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Key k = KeyFactory.createKey("User",id);
       datastore.delete(k);
