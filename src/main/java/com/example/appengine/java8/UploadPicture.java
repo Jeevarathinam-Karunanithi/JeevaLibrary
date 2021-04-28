@@ -18,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.PrintWriter;
 import java.io.IOException;
+import com.google.auth.appengine.AppEngineCredentials;
+import com.google.auth.oauth2.AccessToken;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.appengine.api.appidentity.AppIdentityService;
+import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import com.google.api.gax.paging.Page;
@@ -35,6 +40,24 @@ public class UploadPicture extends HttpServlet {
   @Override
   public void init() {
     storage = StorageOptions.getDefaultInstance().getService();
+  }
+
+  public static Storage getGCSService() {
+    ArrayList<String> scopes = new ArrayList<>();
+
+    scopes.add("https://www.googleapis.com/auth/devstorage.read_write");
+
+    final AppIdentityService appIdentity = AppIdentityServiceFactory.getAppIdentityService();
+    final AppIdentityService.GetAccessTokenResult identityAccessToken =
+        appIdentity.getAccessToken(scopes);
+    String accessTokenStr = identityAccessToken.getAccessToken();
+    AccessToken accessToken =
+        new AccessToken(accessTokenStr, identityAccessToken.getExpirationTime());
+
+    GoogleCredentials credentials =
+        AppEngineCredentials.newBuilder().setAccessToken(accessToken).build();
+
+    return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
   }
 
   @Override
