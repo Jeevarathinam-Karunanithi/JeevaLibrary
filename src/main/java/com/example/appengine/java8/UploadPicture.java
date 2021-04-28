@@ -34,7 +34,9 @@ import com.google.cloud.storage.Bucket;
 public class UploadPicture extends HttpServlet {
 
   // private static final String BUCKET_NAME = System.getenv("BUCKET_NAME");
-  private static final String BUCKET_NAME1 = "jeevatraining12.appspot.com";
+  // private static final String BUCKET_NAME = "jeevatraining12.appspot.com";
+  private static final String bucketName = "jeevatraining12.appspot.com";
+  private static final String objectName = "jeevaImage";
   private static Storage storage = null;  
 
   @Override
@@ -66,19 +68,10 @@ public class UploadPicture extends HttpServlet {
       
 
         PrintWriter out = resp.getWriter();
-        // Storage storage = StorageOptions.newBuilder().setProjectId("jeevatraining12").build().getService();
         Storage storage = getGCSService();
-        Page<Bucket> buckets = storage.list();
-    
-        for (Bucket bucket : buckets.iterateAll()) {
-             out.println(bucket.getName());
-             
-             }
-        
-    // Storage storage = StorageOptions.newBuilder().setProjectId("jeevatraining12").build().getService();
-    // BlobId blobId = BlobId.of("jeevatraining12.appspot.com", "jeevaImage");
-    // BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-    // storage.create(blobInfo, Files.readAllBytes(Paths.get("E:\\Servlets\\adddatat.PNG")));
+        BlobId blobId = BlobId.of(bucketName, objectName);
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+        storage.create(blobInfo, Files.readAllBytes(Paths.get("E:\\Servlets\\adddatat.PNG")));
 
     // System.out.println("Storage  " + storage + " BlobId " + blobId + " blofb " + blobInfo);
 

@@ -29,7 +29,8 @@ public class RegisterPage extends HttpServlet{
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       DatastoreService ds = DatastoreServiceFactory.getDatastoreService();  
-          
+      
+      
       String name=request.getParameter("name");  
       String city =request.getParameter("city"); 
       String username=request.getParameter("username");  
