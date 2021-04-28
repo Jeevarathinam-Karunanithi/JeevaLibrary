@@ -66,11 +66,13 @@ public class UploadPicture extends HttpServlet {
       
 
         PrintWriter out = resp.getWriter();
-        Storage storage = StorageOptions.newBuilder().setProjectId("jeevatraining12").build().getService();
+        // Storage storage = StorageOptions.newBuilder().setProjectId("jeevatraining12").build().getService();
+        Storage storage = getGCSService();
         Page<Bucket> buckets = storage.list();
     
         for (Bucket bucket : buckets.iterateAll()) {
              out.println(bucket.getName());
+             
              }
         
     // Storage storage = StorageOptions.newBuilder().setProjectId("jeevatraining12").build().getService();
