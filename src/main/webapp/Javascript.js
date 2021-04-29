@@ -49,7 +49,8 @@ function loadDoc(){
     var publisherName = document.getElementById("n3").value;
     var noOfPages = document.getElementById("n4").value;
     var date = new Date();
-    var bookNumber = date.getTime();
+    var time = date.getTime();
+    var bookNumber = time + "";
     var obj = {
       "Book Name": bookName,
       "Author Name": authorName,

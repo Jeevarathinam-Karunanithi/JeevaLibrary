@@ -35,7 +35,7 @@ public class GetBook extends HttpServlet {
        MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
        memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
        HttpSession session = request.getSession(false);
-       String str=(String)session.getAttribute("sessiontAtr");
+       String str=(String)session.getAttribute("name");
        List<Map> lst2 = new ArrayList<Map>();
        List<Map> ls = new ArrayList<Map>();
 
@@ -67,8 +67,16 @@ public class GetBook extends HttpServlet {
              return lst2;
          }
           else{
-              ls.add(usernameMap);
-              return ls;
+              if(ls.size() == 6){
+                    int lstIndex = ls.size() - 1;
+                    ls.remove(lstIndex);
+                    ls.add(usernameMap);
+                    return ls;
+              }
+              else{
+                  ls.add(usernameMap);
+                  return ls;
+              }
          }
 }
 }

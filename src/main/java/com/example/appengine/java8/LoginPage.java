@@ -26,6 +26,7 @@ public class LoginPage extends HttpServlet{
      // response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
        String user = null;
        String pass = null;
+       String name = null;
        Entity result = null;
  
        HttpSession session = request.getSession();
@@ -55,10 +56,12 @@ public class LoginPage extends HttpServlet{
       {
          user = result.getProperty("Username").toString();
          pass = result.getProperty("Password").toString();
+         name = result.getProperty("Name").toString();
          if(BCrypt.checkpw(passWord, pass)){
 
             session.removeAttribute("login");
-            session.setAttribute("sessiontAtr",userName); 
+            session.setAttribute("sessiontAtr",userName);
+            session.setAttribute("name",name); 
             // request.setAttribute("Name",userName);
             out.println(jsobj);
             // RequestDispatcher rd=request.getRequestDispatcher("/library.jsp"); 

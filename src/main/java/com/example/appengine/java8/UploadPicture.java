@@ -27,24 +27,54 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import com.google.api.gax.paging.Page;
 import com.google.cloud.storage.Bucket;
-// [START gae_flex_storage_app]
-@SuppressWarnings("serial")
-@WebServlet(name = "UploadPicture", value = "uploadPicture")
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import com.google.cloud.storage.StorageException;
+import java.nio.file.NoSuchFileException;
+import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;  
+
+// @SuppressWarnings("serial")
+@Controller
 @MultipartConfig()
 public class UploadPicture extends HttpServlet {
+@RequestMapping(value = "/uploadPicture")
+@Override
+public void doPost(HttpServletRequest req, HttpServletResponse resp)
+    throws IOException, ServletException {
+    //  jeevatraining12.appspot.com/Jeeva_img.jpeg
+     
+      PrintWriter out = resp.getWriter();
+   //   try{
+        Storage storage = getGCSService();
+        BlobId blobId = BlobId.of(bucketName, objectName);       
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+        storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
 
-  // private static final String BUCKET_NAME = System.getenv("BUCKET_NAME");
-  // private static final String BUCKET_NAME = "jeevatraining12.appspot.com";
-  private static final String bucketName = "jeevatraining12.appspot.com";
-  private static final String objectName = "jeevaImage";
-  private static Storage storage = null;  
+      //}
+      // catch(NoSuchFileException e){
+      //   out.println("File not found");
+      // }
 
-  @Override
-  public void init() {
-    storage = StorageOptions.getDefaultInstance().getService();
-  }
+}
+private static final String bucketName = "jeevatraining12.appspot.com";
+private static final String objectName = "New_img";
+private static final String filePath =  "E:\\FilesToCloud\\cat.png";
+private static Storage storage = null; 
 
-  public static Storage getGCSService() {
+ 
+  // @Override
+  // public void init() {
+  //   storage = StorageOptions.getDefaultInstance().getService();
+  // }
+
+  public static Storage getGCSService()  throws IOException, ServletException{
     ArrayList<String> scopes = new ArrayList<>();
 
     scopes.add("https://www.googleapis.com/auth/devstorage.read_write");
@@ -62,37 +92,6 @@ public class UploadPicture extends HttpServlet {
     return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
   }
 
-  @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws IOException, ServletException {
-      
 
-        PrintWriter out = resp.getWriter();
-        Storage storage = getGCSService();
-        BlobId blobId = BlobId.of(bucketName, objectName);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        storage.create(blobInfo, Files.readAllBytes(Paths.get("E:\\Servlets\\adddatat.PNG")));
-
-    // System.out.println("Storage  " + storage + " BlobId " + blobId + " blofb " + blobInfo);
-
-
-
-
-    // PrintWriter out = resp.getWriter();
-    // final Part filePart = req.getPart("file");
-    // final String fileName = filePart.getSubmittedFileName();
-
-    // // // Modify access list to allow all users with link to read file
-    // // List<Acl> acls = new ArrayList<>();
-    // // acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
-    // // // the inputstream is closed by default, so we don't need to close it here
-    // Blob blob =
-    //     storage.create(
-    //         BlobInfo.newBuilder(BUCKET_NAME, fileName).build());
-    
-    //         out.println(filePart + "  And  " + fileName + "Blob !!!" + storage + "  !!! " + BUCKET_NAME1 + "  Link   " + blob.getMediaLink()); 
-    // // // return the public download link
-    //  resp.getWriter().print(blob.getMediaLink());
-  }
 }
 // [END gae_flex_storage_app]
