@@ -39,8 +39,9 @@ import java.nio.file.NoSuchFileException;
 import java.io.InputStream;
 import java.io.File;
 import java.io.FileInputStream;  
+import java.lang.String;
 
-// @SuppressWarnings("serial")
+@SuppressWarnings("serial")
 @Controller
 @MultipartConfig()
 public class UploadPicture extends HttpServlet {
@@ -48,31 +49,24 @@ public class UploadPicture extends HttpServlet {
 @Override
 public void doPost(HttpServletRequest req, HttpServletResponse resp)
     throws IOException, ServletException {
-    //  jeevatraining12.appspot.com/Jeeva_img.jpeg
+      
+       final Part filePart = req.getPart("file");
+       File f = new File("cat.png");
+       String absolute = f.getAbsolutePath();
+       
      
       PrintWriter out = resp.getWriter();
-   //   try{
+      out.println("   File part and   " + absolute );
         Storage storage = getGCSService();
         BlobId blobId = BlobId.of(bucketName, objectName);       
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
-
-      //}
-      // catch(NoSuchFileException e){
-      //   out.println("File not found");
-      // }
+        storage.create(blobInfo, filePart);
 
 }
 private static final String bucketName = "jeevatraining12.appspot.com";
-private static final String objectName = "New_img";
-private static final String filePath =  "E:\\FilesToCloud\\cat.png";
+// private static final String objectName = "New_img";
+// private static final String filePath =  "E:\\FilesToCloud\\cat.png";
 private static Storage storage = null; 
-
- 
-  // @Override
-  // public void init() {
-  //   storage = StorageOptions.getDefaultInstance().getService();
-  // }
 
   public static Storage getGCSService()  throws IOException, ServletException{
     ArrayList<String> scopes = new ArrayList<>();
