@@ -60,12 +60,13 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
         Storage storage = getGCSService();
         BlobId blobId = BlobId.of(bucketName, objectName);       
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        storage.create(blobInfo, filePart);
-
+        //storage.create(blobInfo, filePart);
+        //I was not able to use this as storage.create(blobinfo , Part) is not allowed
+        storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
 }
 private static final String bucketName = "jeevatraining12.appspot.com";
-// private static final String objectName = "New_img";
-// private static final String filePath =  "E:\\FilesToCloud\\cat.png";
+private static final String objectName = "New_img";
+private static final String filePath =  "E:\\FilesToCloud\\cat.png";
 private static Storage storage = null; 
 
   public static Storage getGCSService()  throws IOException, ServletException{
