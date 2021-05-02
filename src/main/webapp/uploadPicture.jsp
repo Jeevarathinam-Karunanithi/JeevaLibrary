@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="main">
-        <form action="/uploadPicture" method="post" enctype="multipart/form-data">
+        <form action="uploadPicture" method="post" enctype="multipart/form-data">
             <input type="file" name="file" id="file">
             <input type="submit" value="Upload">
         </form>

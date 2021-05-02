@@ -67,11 +67,14 @@ dependencies {
   implementation group: 'org.json', name: 'json', version: '20210307'
   // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage
   implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '1.113.16'
+  // https://mvnrepository.com/artifact/commons-io/commons-io
+implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+  
 
   implementation group: 'com.google.api-client', name: 'google-api-client-appengine', version: '1.30.8'
     implementation group: 'com.google.auth', name: 'google-auth-library-oauth2-http', version: '0.20.0'
     implementation group: 'com.google.auth', name: 'google-auth-library-appengine', version: '0.20.0'
-
+  
  
 
   api group: 'org.springframework', name: 'spring-webmvc', version: '5.0.7.RELEASE'

@@ -20,7 +20,6 @@
             <input class="userNam" type = "text" id = "id3" name = "username" placeholder="Enter Your Username"><br><br>
             <input class="pass" type = "password" id = "id4" name = "password" placeholder="Enter Your Password"><br><br>
             <input class="submit" type="SUBMIT" value="CLICK TO REGISTER">
-            <a class="update" align="right" href="uploadPicture.jsp">Upload Picture</a><br><br>
            </form>
         </div>
         </body>

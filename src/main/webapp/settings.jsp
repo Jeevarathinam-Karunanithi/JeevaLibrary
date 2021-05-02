@@ -27,6 +27,7 @@ if(str == null)
         <input align="center" class="input" type="text" id="inputid" name="inputName"><br><br>
         <button class="update" onclick="updateName()">CONFIRM CHANGES</button><br><br>
         <button class="back" align="center" onclick="location.href='/library.jsp'" type="button">Back</button>
+        <a class="update" align="right" href="uploadPicture.jsp">Upload Picture</a><br><br>
     </div>
 </body>
 </html>
