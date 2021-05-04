@@ -48,12 +48,14 @@
 		    class="com.example.appengine.java8.DeleteUser"></bean>
 		<bean id="UploadPicture"
 		    class="com.example.appengine.java8.UploadPicture"></bean>
-		
-		
-		
-        
+		<bean id="DownloadPicture" 
+			class="com.example.appengine.java8.DownloadPicture"></bean>
 
-	<mvc:annotation-driven />
+
+
+
+
+		<mvc:annotation-driven />
 
     <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

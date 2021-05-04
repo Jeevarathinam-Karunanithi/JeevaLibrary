@@ -28,6 +28,7 @@ if(str == null)
         <button class="update" onclick="updateName()">CONFIRM CHANGES</button><br><br>
         <button class="back" align="center" onclick="location.href='/library.jsp'" type="button">Back</button>
         <a class="update" align="right" href="uploadPicture.jsp">Upload Picture</a><br><br>
+        <button class="logout" align="right" onclick="location.href='/downloadPicture'" type="button">Download Picture</button>
     </div>
 </body>
 </html>
