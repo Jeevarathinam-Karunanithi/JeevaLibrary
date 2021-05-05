@@ -48,8 +48,7 @@
 		    class="com.example.appengine.java8.DeleteUser"></bean>
 		<bean id="UploadPicture"
 		    class="com.example.appengine.java8.UploadPicture"></bean>
-		<bean id="DownloadPicture" 
-			class="com.example.appengine.java8.DownloadPicture"></bean>
+		
 
 
 

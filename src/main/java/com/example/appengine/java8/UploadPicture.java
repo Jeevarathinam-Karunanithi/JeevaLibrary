@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +38,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.apache.commons.io.IOUtils;
-import com.google.appengine.api.datastore.*; 
+import com.google.appengine.api.datastore.*;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate; 
 
 // [START gae_flex_storage_app]
 @SuppressWarnings("serial")
@@ -55,7 +60,7 @@ public class UploadPicture extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		Storage storage = getGCSService();
 		BlobId blobId = BlobId.of(bucketName,imageName);
-		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();;
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();;
 		final Part filePart = req.getPart("file");
 		// resp.getWriter().println(filePart);
 		InputStream inp = filePart.getInputStream();
@@ -64,15 +69,36 @@ public class UploadPicture extends HttpServlet {
 		storage.createAcl(blobId, Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
 		String url  = "https://storage.googleapis.com/jeevatraining12.appspot.com/"+ imageName;
         addUrlToDatastore(imageName,url);
+        RequestDispatcher rd = req.getRequestDispatcher("/library.jsp");
+        rd.forward(req, resp);
 		
 	}
 	
-	public void addUrlToDatastore(String urlKey,String url) {
+	@SuppressWarnings("unused")
+	public void addUrlToDatastore(String urlKey,String url){
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Entity ety = new Entity("profileLink");
-		ety.setProperty("urlKey", urlKey); //urlKey is the userName which is a unique identifier for  user's profile Picture link 
-		ety.setProperty("url",url);
-		datastore.put(ety);
+		Filter fl = new FilterPredicate("urlKey", FilterOperator.EQUAL,urlKey);
+		Query qry = new Query("profileLink").setFilter(fl);
+		PreparedQuery pqry = datastore.prepare(qry);
+		Entity ety = pqry.asSingleEntity();
+		if(ety != null) {
+			try {
+			 Key k = ety.getKey();
+		     Long id  = k.getId();
+			 Entity userEntity = datastore.get(KeyFactory.createKey("profileLink", id));
+	         userEntity.setProperty("url",url);
+	         datastore.put(userEntity);
+			}
+			catch(EntityNotFoundException e) {
+				
+			}
+		}
+		else {
+		Entity ety1 = new Entity("profileLink");
+		ety1.setProperty("urlKey", urlKey); //urlKey is the userName which is a unique identifier for  user's profile Picture link 
+		ety1.setProperty("url",url);
+		datastore.put(ety1);
+		}
 	}
 	public static final String bucketName = "jeevatraining12.appspot.com";
 
