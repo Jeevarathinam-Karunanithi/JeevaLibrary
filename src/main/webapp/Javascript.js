@@ -95,9 +95,23 @@ function getbook() {
     var res = xhttp.responseText;
     var ob = JSON.parse(res);
     console.log("Ob",ob);
-    for(var i= 0; i < ob.length; i++){
+     var imageUrl = ob[ob.length-1]["imageUrl"]
+      var imgId = document.getElementById("img");
+         var image = document.createElement("img");
+         image.src = imageUrl;
+         image.style = "float:right";
+         image.width = "70";
+         image.height = "70";
+         image.alt="Profile Picture";
+         var imgdiv = document.getElementById("imgdiv");
+         imgdiv.appendChild(image);
+        
+    for(var i= 0; i < ob.length-1; i++){
         globalObj[i] = ob[i]["Key"]["id"];
-        var name = ob[ob.length-1]["name"]
+        var name = ob[ob.length-1]["name"];
+        var imageUrl = ob[ob.length-1]["imageUrl"]
+        console.log("Imageurl", imageUrl);
+        
         console.log(name);
          if(name != "admin"){
             var div = document.getElementById("addbook")

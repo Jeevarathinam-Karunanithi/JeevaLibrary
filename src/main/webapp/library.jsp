@@ -45,10 +45,12 @@ if(str == null)
   
 }
 
+String url=(String)session.getAttribute("imageUrl"); 
 %>
 <body onload="getbook()">
  <% response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate"); %>
             <h2 class="title">JEEVA LIBRARY</h2>
+            <div id="imgdiv"></div>
             <a class="settings" align="right" href="settings.jsp">SETTINGS</a><br><br>
             <button class="logout" align="right" onclick="location.href='/logoutpage'" type="button">LOGOUT</button>
             <div id="addbook">

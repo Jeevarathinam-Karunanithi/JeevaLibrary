@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.apache.commons.io.IOUtils;
+import com.google.appengine.api.datastore.*; 
 
 // [START gae_flex_storage_app]
 @SuppressWarnings("serial")
@@ -49,18 +50,29 @@ public class UploadPicture extends HttpServlet {
 		
 		
 		HttpSession session = req.getSession(false);
-		String imageName =(String)session.getAttribute("name");
+		String imageName =(String)session.getAttribute("sessiontAtr");
 			
 		PrintWriter out = resp.getWriter();
 		Storage storage = getGCSService();
 		BlobId blobId = BlobId.of(bucketName,imageName);
-		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/jpeg").build();;
 		final Part filePart = req.getPart("file");
 		// resp.getWriter().println(filePart);
 		InputStream inp = filePart.getInputStream();
 		byte[] byt = IOUtils.toByteArray(inp);
 		storage.create(blobInfo, byt);
-
+		storage.createAcl(blobId, Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
+		String url  = "https://storage.googleapis.com/jeevatraining12.appspot.com/"+ imageName;
+        addUrlToDatastore(imageName,url);
+		
+	}
+	
+	public void addUrlToDatastore(String urlKey,String url) {
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Entity ety = new Entity("profileLink");
+		ety.setProperty("urlKey", urlKey); //urlKey is the userName which is a unique identifier for  user's profile Picture link 
+		ety.setProperty("url",url);
+		datastore.put(ety);
 	}
 	public static final String bucketName = "jeevatraining12.appspot.com";
 

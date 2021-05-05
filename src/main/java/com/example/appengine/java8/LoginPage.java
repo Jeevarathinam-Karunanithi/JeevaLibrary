@@ -58,8 +58,17 @@ public class LoginPage extends HttpServlet {
 			if (BCrypt.checkpw(passWord, pass)) {
 
 				session.removeAttribute("login");
-				session.setAttribute("sessiontAtr", userName);
+				session.setAttribute("sessiontAtr", userName); //unique for every user
 				session.setAttribute("name", name);
+				
+			   Filter fl = new FilterPredicate("urlKey", FilterOperator.EQUAL,userName);
+			   Query qry = new Query("profileLink").setFilter(fl);
+			   PreparedQuery pqry = datastore.prepare(qry);
+			   Entity ety = pqry.asSingleEntity();
+			   if(ety != null) {
+				  String imageUrl=ety.getProperty("url").toString();
+				  session.setAttribute("imageUrl", imageUrl);
+			   }
 				// request.setAttribute("Name",userName);
 				out.println(jsobj);
 				// RequestDispatcher rd=request.getRequestDispatcher("/library.jsp");

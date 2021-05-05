@@ -10,6 +10,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,22 +35,34 @@ public class GetBook extends HttpServlet {
     public @ResponseBody List<Map> getBookFromStore(HttpServletRequest request, HttpServletResponse response)throws IOException
    {
        String memKey = "bookList";
+       String imageUrl = null;
        MemcacheService memcache = MemcacheServiceFactory.getMemcacheService();
        memcache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
        HttpSession session = request.getSession(false);
        String str=(String)session.getAttribute("name");
+       String userName=(String)session.getAttribute("sessiontAtr");
        List<Map> lst2 = new ArrayList<Map>();
        List<Map> ls = new ArrayList<Map>();
+       
+       Filter fl = new FilterPredicate("urlKey", FilterOperator.EQUAL,userName);
+	   Query qry = new Query("profileLink").setFilter(fl);
+	   PreparedQuery pqry = datastore.prepare(qry);
+	   Entity ety = pqry.asSingleEntity();
+	   if(ety != null) {
+		  imageUrl=ety.getProperty("url").toString();
+	   }
 
        //Map to add session value(USERNAME) to response
        Map<String, Object> usernameMap = new HashMap<>(); 
        usernameMap.put("name", str);
+       usernameMap.put("imageUrl", imageUrl);
         ls = (List)memcache.get(memKey);
        // response.getWriter().println("LS" + ls);
         
        if(ls == null || ls.isEmpty())
        {
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+       
         Query q = new Query("Books").addSort("Time", SortDirection.DESCENDING);
         PreparedQuery pq = datastore.prepare(q);
         List<Entity> lst=new ArrayList<Entity>();
