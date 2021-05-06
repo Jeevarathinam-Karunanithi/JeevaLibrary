@@ -36,11 +36,11 @@ public class DeleteUser extends HttpServlet {
     public void deleteUser(@RequestBody  String js)
     throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String,Long> mapNew = mapper.readValue(js, Map.class); 
+        Map<String,String> mapNew = mapper.readValue(js, Map.class); 
       
-      Long id =5639198358896640L;
+        Long id =Long.parseLong(mapNew.get("num"));
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      Key k = KeyFactory.createKey("User",id);
+      Key k = KeyFactory.createKey("profileLink",id);
       datastore.delete(k);
    }
 }

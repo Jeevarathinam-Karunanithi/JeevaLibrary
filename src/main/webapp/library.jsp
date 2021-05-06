@@ -103,7 +103,8 @@ String url=(String)session.getAttribute("imageUrl");
             <div id="divSelect"></div><br>
             <input class="bknumcls" type="text" id="bknumber" name="bkname" placeholder="Enter Book Number"><br>
             <button class="returncls" id="returnbtn" onclick="returnBook()">RETURN BOOK</button>
-            <!-- <button class="returncls" id="returnbtn" onclick="deleteUser()">RETURN BOOK</button> -->
+       <!--  <input class="bknumcls" type="text" id="bk" name="bkname" placeholder="Enter Book Number"><br>
+            <button class="returncls" id="returnbtn" onclick="deleteUser()">DELE</button> --> 
            
             
             

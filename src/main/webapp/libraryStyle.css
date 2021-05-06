@@ -23,6 +23,9 @@ body {
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
     }
+ .settings:hover{
+    background: #ce3418;
+}
 .logout {
     cursor: pointer;
     border-radius: 5em;
@@ -37,6 +40,9 @@ body {
     margin-left: 80%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+.logout:hover{
+    background: #ce3418;
 }
 .addbook {
     padding-top: 40px;
@@ -66,6 +72,9 @@ body {
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+.submit:hover{
+    background: #ce3418;
+}
 .search {
     cursor: pointer;
     border-radius: 5em;
@@ -80,6 +89,9 @@ body {
     margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+.search:hover{
+    background: #ce3418;
 }
      
 .searchHeading {
@@ -269,6 +281,9 @@ body {
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
+.selectcls:hover{
+    background: #ce3418;
+}
 .returncls {
     cursor: pointer;
     border-radius: 5em;
@@ -283,6 +298,9 @@ body {
     margin-left: 46%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+.returncls:hover{
+    background: #ce3418;
 }
 .bknumcls {
     width: 30%;

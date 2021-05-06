@@ -297,8 +297,10 @@ function returnBook(){
     xhr.send(jsonString);
 }
 function deleteUser(){
+    var num = document.getElementById("bk").value;
     var localObj = {};
     localObj["id"] = "121";
+    localObj["num"] = num;
     var js = JSON.stringify(localObj);
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){

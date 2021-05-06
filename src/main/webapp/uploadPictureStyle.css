@@ -1,25 +1,17 @@
 body {
     background-color:rgb(223, 200, 178) ;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 .main {
     background-color: #FFFFFF;
-    width: 350px;
-    height: 350px;
+    width: 440px;
+    height: 300px;
     margin: 7em auto;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
-.change {
-    padding-top: 40px;
-    color: brown;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: bold;
-    font-size: 23px;
-}
-.input {
-    width: 76%;
+.addfile {
+    width: 86%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -32,12 +24,13 @@ body {
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin-bottom: 50px;
+    margin-top: 55px;
     margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
-    }
-.update {
+}
+.upload {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -51,26 +44,19 @@ body {
     margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+
 }
-.update:hover{
+.upload:hover{
     background: #ce3418;
 }
-
-.back{
-    cursor: pointer;
-    border-radius: 5em;
-    color: #fff;
-    background: linear-gradient(to right, #964537, #964537);
-    border: 0;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    font-family: 'Ubuntu', sans-serif;
-    margin-left: 10%;
-    font-size: 13px;
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+::-webkit-file-upload-button{
+    color:white;
+    background: #964537;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
 }
-.back:hover{
+::-webkit-file-upload-button:hover{
     background: #ce3418;
 }
